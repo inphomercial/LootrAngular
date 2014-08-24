@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="LootrApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lootr</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+  </head>
+  <body ng-controller="LootrController">
+
+  	<div class="row">
+    	<div class="col-xs-1"></div>
+    	<div class="col-xs-8">
+    		<h1>
+    			<div class="row">
+    				LOOTr! <span id="game_version" style="font-size: .5em;">v{{ Lootr.VERSION }} </span>
+    			</div>
+    			<div class="row">
+	    			<button class="button btn-default btn-xs" ng-click="startTurn(100)">Move 100</button>
+	    			<button class="button btn-default btn-xs" onclick="location.reload();">Restart</button>
+	    			<button class="button btn-default btn-xs" ng-click="start();">Auto Explore</button>
+	    			<button class="button btn-default btn-xs" ng-click="stop();">Manually Explore</button>
+	    			<button class="button btn-default btn-xs" ng-click="save();">Save</button>
+	    			<button class="button btn-default btn-xs" ng-click="load();">Load</button>
+	    		</div>
+    		</h1>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-1"></div>
+		<div class="col-xs-3" style="padding-left: 0px;">
+			<span id="player1">
+				<br>
+				<!-- <span>Game State : <span id="game_state"></span> {{ Lootr.GAME_STATES }} </span><br> -->
+				<span id="player_name">Player : Inpho </span>
+				<br>
+				<span id="player_race">Race : {{ player.race }} </span>
+				<br><br>
+				<span>Life :
+					<progressbar max="player.Health.$max_hp" style="width: 60%" class="progress-striped active" type="danger" value="player.Health.$hp">
+						<span style="white-space:nowrap;">
+							{{ player.Health.getHp() }} / {{ player.Health.getMaxHp() }}
+						</span>
+					</progressbar>
+				</span>
+
+				<span>Mana :
+					<progressbar max="100" style="width: 60%" class="progress-striped active" type="default" value="100">
+						<span style="white-space:nowrap;">
+							100 / 100
+						</span>
+					</progressbar>
+				</span>
+
+				<span>Status : <span id="player_status"></span></span> <br>
+				<span>
+					ATK :
+					<span id="player_atk"> {{ player.Atk.getStat() }}</span>
+					<span id="player_atk_indicator_pos" class="pos"> {{ player.Atk.mod_pos }}</span>
+					<span id="player_atk_indicator_neg" class="neg"> {{ player.Atk.mod_neg }}</span>
+					<br>
+				</span>
+				<span>
+					DEF :
+					<span id="player_def"> {{ player.Def.getStat() }}</span>
+					<span id="player_def_indicator_pos" class="pos"> {{ player.Def.mod_pos }}</span>
+					<span id="player_def_indicator_neg" class="neg"> {{ player.Def.mod_neg }}</span>
+					<br>
+				</span>
+				<span>
+					MAG :
+					<span id="player_mag"> {{ player.Mag.getStat() }}</span>
+					<span id="player_mag_indicator_pos" class="pos"> {{ player.Mag.mod_pos }}</span>
+					<span id="player_mag_indicator_neg" class="neg"> {{ player.Mag.mod_neg }}</span>
+					<br>
+				</span>
+
+				<br>
+				<span>
+					Level :
+					<span id="player_level">{{ player.Level.getLevel() }}</span>
+					<br>
+				</span>
+				<span>
+					Experience :
+					<progressbar max="player.Level.$exp_to_level" style="width: 60%" class="progress-striped active" type="warning" value="player.Level.$current_exp">
+						<span style="white-space:nowrap;">
+							{{ player.Level.getCurrentExp() }} / {{ player.Level.getExpToLevel() }}
+						</span>
+					</progressbar>
+				</span>
+
+				<!-- Player items -->
+				<span>Gold : <span id="player_gold" class="gold">{{ player.Gold.getGold() }}</span></span> <br>
+
+				<span>== Equipment == </span><br>
+				<div>
+					<span ng-show="player.SlotHead.highlight" class="gold">Head</span>
+					<span ng-show="player.SlotHead.highlight == null">Head</span>
+					| -
+					<span ng-repeat="head_slot in player.SlotHead.$item track by $index">
+						<!-- Shows the item button if there is something in the slot -->
+						<div id="player_slot_head" class="btn-group" ng-show="head_slot.name != 'empty'" ng-mouseleave="unHighlightStat()" ng-mouseenter="highlightStat(head_slot, true)">
+							<button ng-class="head_slot.color" class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
+								{{ head_slot.name }} <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" role="menu" style="padding: 5px;">
+							    <li ng-click="unequipItem('SlotHead', $index)" >
+							    	<button class="btn btn-default btn-xs" style="width: 100%" type="button">
+										Un-Equip
+									</button>
+							    </li>
+							    <li>Slot : {{ head_slot.type }} </li>
+							    <li>Stat Affected : {{ head_slot.stat_affected }} </li>
+							   	<li>Stats : {{ head_slot.stat_amount }} <span ng-show="head_slot.bonus > 0">[+{{head_slot.bonus}}]</span></li>
+							    <li>Rarity : {{ head_slot.rarity }} </li>
+							    <li style="padding-top: 5px;">{{ head_slot.look }} </li>
+							</ul>
+						</div>
+
+						<!-- Shows the empty slots if nothing is equip -->
+						<span id="player_slot_head" ng-show="head_slot.name == 'empty'">
+							{{ head_slot.name }}
+						</span>
+					</span>
+
+				</div>
+				<div>
+					<span ng-show="player.SlotBody.highlight" class="gold">Body</span>
+					<span ng-show="player.SlotBody.highlight == null">Body</span>
+					| -
+					<span ng-repeat="body_slot in player.SlotBody.$item track by $index">
+						<!-- Shows the item button if there is something in the slot -->
+						<div id="player_slot_head" class="btn-group" ng-show="body_slot.name != 'empty'" ng-mouseleave="unHighlightStat()" ng-mouseenter="highlightStat(body_slot, true)">
+							<button ng-class="body_slot.color" class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
+								{{ body_slot.name }} <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" role="menu" style="padding: 5px;">
+							    <li ng-click="unequipItem('SlotBody', $index)" >
+							    	<button class="btn btn-default btn-xs" style="width: 100%" type="button">
+										Un-Equip
+									</button>
+							    </li>
+							    <li>Slot : {{ body_slot.type }} </li>
+							    <li>Stat Affected : {{ body_slot.stat_affected }} </li>
+							    <li>Stats : {{ body_slot.stat_amount }} <span ng-show="body_slot.bonus > 0">[+{{finger_slot.bonus}}]</span></li>
+							    <li>Rarity : {{ body_slot.rarity }} </li>
+							    <li style="padding-top: 5px;">{{ body_slot.look }} </li>
+							</ul>
+						</div>
+
+						<!-- Shows the empty slots if nothing is equip -->
+						<span id="player_slot_head" ng-show="body_slot.name == 'empty'">
+							{{ body_slot.name }}
+						</span>
+					</span>
+
+				</div>
+				<div>
+					<span ng-show="player.SlotHand.highlight" class="gold">Hand</span>
+					<span ng-show="player.SlotHand.highlight == null">Hand</span>
+					| -
+					<span ng-repeat="hand_slot in player.SlotHand.$item track by $index">
+						<!-- Shows the item button if there is something in the slot -->
+						<div id="player_slot_head" class="btn-group" ng-show="hand_slot.name != 'empty'" ng-mouseleave="unHighlightStat()" ng-mouseenter="highlightStat(hand_slot, true)">
+							<button ng-class="hand_slot.color" class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
+								{{ hand_slot.name }} <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" role="menu" style="padding: 5px;">
+							    <li ng-click="unequipItem('SlotHand', $index)" >
+							    	<button class="btn btn-default btn-xs" style="width: 100%" type="button">
+										Un-Equip
+									</button>
+							    </li>
+							    <li>Slot : {{ hand_slot.type }} </li>
+							    <li>Stat Affected : {{ hand_slot.stat_affected }} </li>
+							   	<li>Stats : {{ hand_slot.stat_amount }} <span ng-show="hand_slot.bonus > 0">[+{{hand_slot.bonus}}]</span></li>
+							    <li>Rarity : {{ hand_slot.rarity }} </li>
+							    <li style="padding-top: 5px;">{{ hand_slot.look }} </li>
+							</ul>
+						</div>
+
+						<!-- Shows the empty slots if nothing is equip -->
+						<span id="player_slot_head" ng-show="hand_slot.name == 'empty'">
+							{{ hand_slot.name }}
+						</span>
+					</span>
+
+				</div>
+				<div>
+					<span ng-show="player.SlotFeet.highlight" class="gold">Feet</span>
+					<span ng-show="player.SlotFeet.highlight == null">Feet</span>
+					| -
+					<span ng-repeat="feet_slot in player.SlotFeet.$item track by $index">
+						<!-- Shows the item button if there is something in the slot -->
+						<div id="player_slot_head" class="btn-group" ng-show="feet_slot.name != 'empty'" ng-mouseleave="unHighlightStat()" ng-mouseenter="highlightStat(feet_slot, true)">
+							<button ng-class="feet_slot.color" class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
+								{{ feet_slot.name }} <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" role="menu" style="padding: 5px;">
+							    <li ng-click="unequipItem('SlotFeet', $index)" >
+							    	<button class="btn btn-default btn-xs" style="width: 100%" type="button">
+										Un-Equip
+									</button>
+							    </li>
+							    <li>Slot : {{ feet_slot.type }} </li>
+							    <li>Stat Affected : {{ feet_slot.stat_affected }} </li>
+							    <li>Stats : {{ feet_slot.stat_amount }} <span ng-show="feet_slot.bonus > 0">[+{{feet_slot.bonus}}]</span></li>
+							    <li>Rarity : {{ feet_slot.rarity }} </li>
+							    <li style="padding-top: 5px;">{{ feet_slot.look }} </li>
+							</ul>
+						</div>
+
+						<!-- Shows the empty slots if nothing is equip -->
+						<span id="player_slot_head" ng-show="feet_slot.name == 'empty'">
+							{{ feet_slot.name }}
+						</span>
+					</span>
+				</div>
+				<div>
+					<span ng-show="player.SlotFinger.highlight" class="gold">Finger</span>
+					<span ng-show="player.SlotFinger.highlight == null">Finger</span>
+					| -
+					<span ng-repeat="finger_slot in player.SlotFinger.$item track by $index">
+						<!-- Shows the item button if there is something in the slot -->
+						<div id="player_slot_head" class="btn-group" ng-show="finger_slot.name != 'empty'" ng-mouseleave="unHighlightStat()" ng-mouseenter="highlightStat(finger_slot, true)">
+							<button ng-class="finger_slot.color" class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
+								{{ finger_slot.name }} <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" role="menu" style="padding: 5px;">
+							    <li ng-click="unequipItem('SlotFinger', $index)" >
+							    	<button class="btn btn-default btn-xs" style="width: 100%" type="button">
+										Un-Equip
+									</button>
+							    </li>
+							    <li>Slot : {{ finger_slot.type }} </li>
+							    <li>Stat Affected : {{ finger_slot.stat_affected }} </li>
+							    <li>Stats : {{ finger_slot.stat_amount }} <span ng-show="finger_slot.bonus > 0">[+{{finger_slot.bonus}}]</span></li>
+							    <li>Rarity : {{ finger_slot.rarity }} </li>
+							    <li style="padding-top: 5px;">{{ finger_slot.look }} </li>
+							</ul>
+						</div>
+
+						<!-- Shows the empty slots if nothing is equip -->
+						<span id="player_slot_head" ng-show="finger_slot.name == 'empty'">
+							{{ finger_slot.name }}
+						</span>
+					</span>
+				</div>
+				<br>
+
+			</span>
+		</div>
+		<div class="col-xs-4">
+			<div id="log"><br></div>
+		</div>
+
+		<div class="col-xs-1" style="padding-left: 0px;">
+			<br>
+			== Actions ==
+			<br>
+			<button ng-disabled="monster_in_room" class="button btn-primary btn-block" ng-click="startTurn(1)">Move</button>
+			<button ng-disabled="!monster_in_room" class="button btn-primary btn-block" ng-click="attack();">Attack!!</button>
+			<button ng-disabled="!monster_in_room" class="button btn-primary btn-block" ng-click="flee();">Flee</button>
+			<button ng-disabled="!store_in_room" class="button btn-primary btn-block" ng-click="sell();">Sell Items</button>
+		</div>
+
+		<div class="col-xs-3" style="padding-left: 50px">
+			<br>
+			<span>== Inventory ( {{ player.Inventory.totalItems() }} ) == </span><br>
+			<ul class="list-group" style="list-style: none">
+				<li ng-repeat="inventory in player.Inventory.$items track by $index" ng-class="inventory.color">
+
+					<div class="btn-group" ng-mouseenter="highlightStat(inventory)" ng-mouseleave="unHighlightStat()">
+					  <button ng-class="inventory.color" class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
+					      {{ inventory.name }} <span class="caret"></span>
+					  </button>
+					  <ul class="dropdown-menu default" role="menu" style="padding: 5px;">
+					    <li ng-show="!inventory.Consumable.$is_consumable" ng-click="equipItem(inventory)" ng-mousedown="unHighlightStat()">
+					    	<button class="btn btn-default btn-sm" style="width: 100%" type="button">
+								Equip<br>
+							</button>
+					    </li>
+					    <li ng-show="inventory.Consumable.$is_consumable" ng-click="quaffItem(inventory)">
+					    	<button class="btn btn-default btn-sm" style="width: 100%" type="button">
+								Quaff<br>
+							</button>
+					    </li>
+					    <li ng-show="store_in_room" ng-click="sellItem(inventory)">
+					    	<button class="btn btn-default btn-sm" style="width: 100%" type="button">
+								Sell Item<br>
+							</button>
+					    </li>
+					    <li>Slot : {{ inventory.type }} </li>
+					    <li>Stat Affected : {{ inventory.stat_affected }} </li>
+					    <li>Stats : {{ inventory.stat_amount }} <span ng-show="inventory.bonus > 0">[+{{inventory.bonus}}]</span></li>
+					    <li>Rarity : {{ inventory.rarity }} </li>
+					    <li ng-show="inventory.look" style="padding-top: 5px;">{{ inventory.look }} </li>
+					  </ul>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<!-- Death Modal -->
+	<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Lootr</h4>
+	      </div>
+	      <div class="modal-body">
+	        You Have Died!
+
+	        list of neat things goes here..
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+    <script src="js/lootr.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/roller.js"></script>
+    <script src="js/mob_bag.js"></script>
+    <script src="js/battle_manager.js"></script>
+    <script src="js/draw_event.js"></script>
+	<script src="js/turn_manager.js"></script>
+
+	<!-- Events -->
+	<script src="js/events/treasure.js"></script>
+	<script src="js/events/save.js"></script>
+	<script src="js/events/trap.js"></script>
+	<script src="js/event_generator.js"></script>
+
+    <!-- Components -->
+    <script src="js/components/base/listener.js"></script>
+    <script src="js/components/base/component.js"></script>
+    <script src="js/components/health.js"></script>
+    <script src="js/components/slot.js"></script>
+    <script src="js/components/inventory.js"></script>
+    <script src="js/components/level.js"></script>
+    <script src="js/components/gold.js"></script>
+    <script src="js/components/progress.js"></script>
+    <script src="js/components/stat.js"></script>
+    <script src="js/components/consumable.js"></script>
+
+    <!-- Roll Tables -->
+    <script src="js/roll_tables/monsters_table.js"></script>
+    <script src="js/roll_tables/room_bases_table.js"></script>
+    <script src="js/roll_tables/saves_table.js"></script>
+    <script src="js/roll_tables/traps_table.js"></script>
+    <script src="js/roll_tables/consumables_table.js"></script>
+    <script src="js/roll_tables/golds_table.js"></script>
+    <script src="js/roll_tables/head_slot_table.js"></script>
+    <script src="js/roll_tables/body_slot_table.js"></script>
+    <script src="js/roll_tables/feet_slot_table.js"></script>
+    <script src="js/roll_tables/finger_slot_table.js"></script>
+    <script src="js/roll_tables/hand_slot_table.js"></script>
+    <script src="js/roll_tables/race_table.js"></script>
+
+	<!-- Entities -->
+	<script src="js/entities/base/entity.js"></script>
+	<script src="js/entities/player.js"></script>
+	<script src="js/entities/monster.js"></script>
+	<script src="js/entities/thing.js"></script>
+	<script src="js/entities/room.js"></script>
+
+	<script>
+		window.onload = function ()
+		{
+			/* game_state = Lootr.GAME_STATES.RUNNING;
+			/*
+			$("#game_state").text(game_state);
+			$("#game_version").text(Lootr.VERSION);*/
+		};
+	</script>
+
+	<!-- Angular Stuff -->
+	<script src="js/angular/angular.js"></script>
+	<script src="js/angular/angularui.min.js"></script>
+	<script src="js/angular/angular-local-storage.js"></script>
+	<script src="js/angular/bootstrap.min.js"></script>
+    <script src="js/angular/lootrapp.js"></script>
+
+  </body>
+</html>

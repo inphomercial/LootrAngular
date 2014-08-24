@@ -1,0 +1,42 @@
+
+@todo when hovering over item it's just showing the total it will add, instead have it show either the difference between current value or what it will add to the base stats
+@todo player class table
+@todo monster interaction
+@todo need to figure out how to save arrays of components (ie, Inventory.$items)
+@todo play around with room entities
+@todo allow for stats like hp & mp to be modified by items
+@todo play around with giving monsters items and allowing them to drop after a kil
+@todo have fleeing from fights actually use some metic
+@todo add rarity to gold table
+@todo come up with stats, neat things for the death popup
+@todo upon death, have the modal start a new game when closing
+@todo battleEngine - tohit needs to use real data
+@todo create css classes for different levels of battle actions (miss, normal hit, hit but no damage, critical hit, dead, etc)
+@todo fix progress bars to allow for more but remain at the 100% scale
+@todo create a name component, allowing for randomly generated names
+@todo if a monster and a save both happen, it's over writtin the what.. push into an array so we can push muptiple
+@todo store sellall seems to leave one unsold. check for a <= kinda thing
+@todo inventory compoenent, change equippingItem on to just the removeItem one. update whatever is calling that.
+@todo play with a item_rarity monster config option that depending on that number it will generate a weapon in that range to give to monster
+@todo battle logic to enable a way to do a critical attack
+@todo Make action buttons actually fade when not useable
+
+
+done
+---------------------
+@todo why wont items vary in stats?
+@todo why do items keep appending ***??!??!
+@todo flee from fights
+@todo fight messages are not just pulling a random one, they are showing all
+@todo player dying doesnt trigger anything
+@todo have attacking use actual stats
+
+@todo player race table
+@todo have player base stats not really be effected by item stats.
+@todo update Equipment slot data, to show the bonus now instead, like Inventory list.
+@todo starting to have a better method of treasure generation by type & rarity for ease of race/monster starting items.
+
+@todo enabled slots to be dynamically set in the entity constructor, easily allowing for more than one now.
+@todo figure out how to give items in the player constructor
+@todo hovering over an item is showing the right + or - amount over the stat, but it's not adding it correctly when equip/unequipped..
+@todo have the equip slot light up when hovering over an item , similarly to the stat

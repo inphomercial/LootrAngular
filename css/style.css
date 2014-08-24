@@ -1,0 +1,100 @@
+
+.room {
+	color: #98785A;
+}
+
+.room_trap {
+	color: #E3878C;
+}
+
+.room_monster {
+	color: #38585D;
+}
+
+.room_treasure {
+	color: #F3EA3E;
+}
+
+.player_good {
+	color: #55A64C;
+}
+
+.player_bad {
+	color: #C75C61;
+}
+
+.player_hit {
+	color: #CC0000;
+}
+
+.debug {
+	color: #5BE0F3;
+}
+
+#player {
+	font-size: 1em;
+}
+
+.player_level_up {
+	color: #66FF66;
+}
+
+.player_dead {
+	color: red;
+	font-size:  3em;
+}
+
+.item_common {
+	color: white;
+}
+
+.item_magical {
+	color: #6699FF;
+}
+
+.item_rare {
+	color: #FF9966;
+}
+
+.item_set {
+	color: #33CC33;
+}
+.item_unique {
+	color: orange;
+}
+
+.item_stat_amount {
+	color: #6495ED;
+}
+
+.player_stat_bonus {
+	color: #9ACD32;
+}
+
+.fight {
+	color: #880000;
+}
+
+.gold {
+	color: #FFD700;
+}
+
+.pos {
+	color: green;
+}
+
+.neg {
+	color: red;
+}
+
+
+/*
+
+#2B2C1C DARK green
+#5B5C4C LIGHTER green
+#855D65 Dark flesh
+#5A425C flesh / purple
+##3A1C3E purple
+##1C142C dark purple
+
+*/

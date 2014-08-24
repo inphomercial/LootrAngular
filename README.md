@@ -1,29 +1,11 @@
 # README #
 
-LOOTr!
+## LOOTr!  v0.21 ##
 
-### What is this repository for? ###
+* LOOTr is a work in progress javascript text rpg.
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* Initially set out with the desire to have a simple totally randomized game with everything being determined by a multitude of rolltables.
 
-### How do I get set up? ###
+* Tried to create a system that allows for unlimited items, treasures, monsters, etc to be implemented by adding to the /js/roll_tables/ files.
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+* It is in the process of being converted into an Entity / Component type system. There is still a lot of old code laying around.

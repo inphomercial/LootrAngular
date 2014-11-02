@@ -5,7 +5,7 @@ var Lootr = {
 	DEBUG: true,
 
 	// Version
-	VERSION: 0.21,
+	VERSION: 0.22,
 
 	TREASURE_TYPES: {
 

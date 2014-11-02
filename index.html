@@ -38,7 +38,7 @@
 			<span id="player1">
 				<br>
 				<!-- <span>Game State : <span id="game_state"></span> {{ Lootr.GAME_STATES }} </span><br> -->
-				<span id="player_name">Player : Inpho </span>
+				<span id="player_name">Player : {{ player.name }} </span>
 				<br>
 				<span id="player_race">Race : {{ player.race }} </span>
 				<br><br>
@@ -315,12 +315,22 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-	        <h4 class="modal-title" id="myModalLabel">Lootr</h4>
+	        <h4 class="modal-title" id="myModalLabel">Lootr - YOU HAVE DIED</h4>
 	      </div>
 	      <div class="modal-body">
-	        You Have Died!
 
-	        list of neat things goes here..
+	      	Equipment<br>
+	      	--------------<br><br>
+	      	<!-- Needs to add this -->
+
+	        Inventory<br>
+	        --------------
+	        <ul class="list-group" style="list-style: none">
+				<li ng-repeat="inventory in player.Inventory.$items track by $index" ng-class="inventory.color">
+					{{ inventory.name }}
+				</li>
+			</ul>
+
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -371,6 +381,7 @@
     <script src="js/roll_tables/finger_slot_table.js"></script>
     <script src="js/roll_tables/hand_slot_table.js"></script>
     <script src="js/roll_tables/race_table.js"></script>
+    <script src="js/roll_tables/name_table.js"></script>
 
 	<!-- Entities -->
 	<script src="js/entities/base/entity.js"></script>
@@ -389,11 +400,13 @@
 		};
 	</script>
 
-	<!-- Angular Stuff -->
+	<!-- Angular Libraries -->
 	<script src="js/angular/angular.js"></script>
 	<script src="js/angular/angularui.min.js"></script>
 	<script src="js/angular/angular-local-storage.js"></script>
 	<script src="js/angular/bootstrap.min.js"></script>
+
+	<!-- Angular App -->
     <script src="js/angular/lootrapp.js"></script>
 
   </body>

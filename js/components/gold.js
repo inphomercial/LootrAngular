@@ -31,7 +31,6 @@
  	return this.$gold;
  };
 
-
  // Should only be used by emits
  Gold.prototype._takeGold = function( amount ) {
  	this.$gold -= amount;

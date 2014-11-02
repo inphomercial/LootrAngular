@@ -40,8 +40,11 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 	// determine player race
 	var race = race_table[Math.floor(Math.random() * race_table.length)];
 
+	// determine player name
+	var name = name_table[Math.floor(Math.random() * name_table.length)];
+
 	// Initialize player object
-	$scope.player = new Lootr.entities.Player(race);
+	$scope.player = new Lootr.entities.Player(race, name);
 
 	// Lootr
 	$scope.Lootr = Lootr;

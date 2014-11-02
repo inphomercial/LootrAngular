@@ -25,8 +25,6 @@
 		this.desc = args.desc;
 		this.name = args.name;
 
-		//this.atk = args.atk;
-		//this.def = args.def;
 		this.mag = args.mag;
 		this.exp = args.exp;
 		this.level = args.level;

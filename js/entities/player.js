@@ -5,12 +5,13 @@
 	 * @class Player
 	 * @extends Entity
 	 */
-	function Player ( args ) {
+	function Player ( args, name ) {
 		Entity.call(this);
 
 		console.log(args);
 
 		this.race = args.race;
+		this.name = name;
 
 		// @todo it wont let me do args.Health.hp checks?!?
 		this.component('Health',

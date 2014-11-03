@@ -1,0 +1,96 @@
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+    <script src="js/lootr.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/roller.js"></script>
+    <script src="js/mob_bag.js"></script>
+    <script src="js/battle_manager.js"></script>
+    <script src="js/draw_event.js"></script>
+	<script src="js/turn_manager.js"></script>
+
+	<!-- Events -->
+	<script src="js/events/treasure.js"></script>
+	<script src="js/events/save.js"></script>
+	<script src="js/events/trap.js"></script>
+	<script src="js/event_generator.js"></script>
+
+    <!-- Components -->
+    <script src="js/components/base/listener.js"></script>
+    <script src="js/components/base/component.js"></script>
+    <script src="js/components/health.js"></script>
+    <script src="js/components/slot.js"></script>
+    <script src="js/components/inventory.js"></script>
+    <script src="js/components/level.js"></script>
+    <script src="js/components/gold.js"></script>
+    <script src="js/components/progress.js"></script>
+    <script src="js/components/stat.js"></script>
+    <script src="js/components/consumable.js"></script>
+
+    <!-- Roll Tables -->
+    <script src="js/roll_tables/monsters_table.js"></script>
+    <script src="js/roll_tables/room_bases_table.js"></script>
+    <script src="js/roll_tables/saves_table.js"></script>
+    <script src="js/roll_tables/traps_table.js"></script>
+    <script src="js/roll_tables/consumables_table.js"></script>
+    <script src="js/roll_tables/golds_table.js"></script>
+    <script src="js/roll_tables/head_slot_table.js"></script>
+    <script src="js/roll_tables/body_slot_table.js"></script>
+    <script src="js/roll_tables/feet_slot_table.js"></script>
+    <script src="js/roll_tables/finger_slot_table.js"></script>
+    <script src="js/roll_tables/hand_slot_table.js"></script>
+    <script src="js/roll_tables/race_table.js"></script>
+    <script src="js/roll_tables/name_table.js"></script>
+
+	<!-- Entities -->
+	<script src="js/entities/base/entity.js"></script>
+	<script src="js/entities/player.js"></script>
+	<script src="js/entities/monster.js"></script>
+	<script src="js/entities/thing.js"></script>
+    <script src="js/entities/room.js"></script>
+
+    <script>
+
+        var world = new Array();
+
+        var r1arg = {name:'room1', desc:'room 1 desc'};
+        var r1 = new Lootr.rooms.Room(r1arg);
+        var treasure = Lootr.Treasure.generate();
+
+        // check if MobBag is empty
+        if(MobBag.isBagEmpty())
+        {
+            // true - generate new bag
+            MobBag.generate( 1 );
+
+            // PluckMob
+            var monster = MobBag.pluckMob();
+        }
+        else
+        {
+            // PluckMob
+            var monster = MobBag.pluckMob();
+        }
+
+        // determine player race
+        var race = race_table[Math.floor(Math.random() * race_table.length)];
+
+        // determine player name
+        var name = name_table[Math.floor(Math.random() * name_table.length)];
+
+        // Initialize player object
+        var player = new Lootr.entities.Player(race, name);
+
+        r1.addEntity(treasure);
+        r1.addEntity(monster);
+        r1.addEntity(player);
+
+        var r2arg = {name:'room2', desc:'room 2 desc'};
+        var r2 = new Lootr.rooms.Room(r2arg);
+
+        world.push(r1);
+        world.push(r2);
+
+    </script>
+

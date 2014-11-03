@@ -1,4 +1,20 @@
 
+
+worldGeneration
+
+room
+----
+id
+exits[] (n, w, s, e, u, d)
+entities[]
+
+world.generate()
+world.loadRoom(room_id)
+room.addEntity(entitiy)
+room.removeEntitiy(entitiy)
+
+
+
 @todo when hovering over item it's just showing the total it will add, instead have it show either the difference between current value or what it will add to the base stats
 @todo player class table
 @todo monster interaction

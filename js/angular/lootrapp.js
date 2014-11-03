@@ -217,6 +217,13 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 		$scope.player[slot].unequipSlot(index);
 	}
 
+    // // Testing Room Generation and world creation
+    // $scope.generateWorld = function()
+    // {
+    //     $scope.Lootr.push(new Room('room1'));
+    //     $scope.Lootr.push(new Room('room2'));
+    // }
+
 	$scope.startTurn = function( rounds )
 	{
 		// roll and get back a table to use

@@ -58,7 +58,7 @@
     }
 
     Room.prototype.link = function(direction, room_id) {
-        if (this[direction] != false) {
+        if (this[direction]) {
             return "Already linked";
         }
 

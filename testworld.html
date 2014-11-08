@@ -50,47 +50,50 @@
 	<script src="js/entities/thing.js"></script>
     <script src="js/entities/room.js"></script>
 
+
+    <script src="world.js"></script>
     <script>
+        
+        var w = new World();
 
-        var world = new Array();
-
-        var r1arg = {name:'room1', desc:'room 1 desc'};
-        var r1 = new Lootr.rooms.Room(r1arg);
-        var treasure = Lootr.Treasure.generate();
+        // var r1arg = {name:'room1', desc:'room 1 desc'};
+        // var r1 = new Lootr.rooms.Room(r1arg);
+        // var treasure = Lootr.Treasure.generate();
 
         // check if MobBag is empty
-        if(MobBag.isBagEmpty())
-        {
-            // true - generate new bag
-            MobBag.generate( 1 );
-
-            // PluckMob
-            var monster = MobBag.pluckMob();
-        }
-        else
-        {
-            // PluckMob
-            var monster = MobBag.pluckMob();
-        }
+        // if(MobBag.isBagEmpty())
+        // {
+        //     // true - generate new bag
+        //     MobBag.generate( 1 );
+        //
+        //     // PluckMob
+        //     var monster = MobBag.pluckMob();
+        // }
+        // else
+        // {
+        //     // PluckMob
+        //     var monster = MobBag.pluckMob();
+        // }
 
         // determine player race
-        var race = race_table[Math.floor(Math.random() * race_table.length)];
+        // var race = race_table[Math.floor(Math.random() * race_table.length)];
 
         // determine player name
-        var name = name_table[Math.floor(Math.random() * name_table.length)];
+        // var name = name_table[Math.floor(Math.random() * name_table.length)];
 
         // Initialize player object
-        var player = new Lootr.entities.Player(race, name);
+        // var player = new Lootr.entities.Player(race, name);
+        //
+        // r1.addEntity(treasure);
+        // r1.addEntity(monster);
+        // r1.addEntity(player);
+        
 
-        r1.addEntity(treasure);
-        r1.addEntity(monster);
-        r1.addEntity(player);
+        // var r2arg = {name:s, desc:d};
+        // var r2 = new Lootr.rooms.Room(r2arg);
 
-        var r2arg = {name:'room2', desc:'room 2 desc'};
-        var r2 = new Lootr.rooms.Room(r2arg);
-
-        world.push(r1);
-        world.push(r2);
+        // w.addRoom(r1);
+        // w.addRoom(r2);
 
     </script>
 

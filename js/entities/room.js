@@ -33,6 +33,8 @@
         this.link_south = false;
         this.link_west = false;
         this.link_east = false;
+
+        this.randomizeExits();
 	}
 
 	Room.prototype = new Entity;
@@ -46,23 +48,31 @@
         //
     }
 
+    Room.prototype.isDirectionAvailable = function(direction) {
+        if (this["exit_" + direction] == false) {
+            return false;
+        }
+
+        return true;
+    }
+
+    Room.prototype.isDirectionLinkAvailable = function(direction) {
+        if (this["link_" + direction] != false) {
+            return false;
+        }
+
+        return true;
+    }
+
     Room.prototype.randomizeExits = function() {
        this.exit_north = (Math.random() < 0.5);
        this.exit_south = (Math.random() < 0.5);
        this.exit_west = (Math.random() < 0.5);
        this.exit_east = (Math.random() < 0.5);
 
-       if (!this.exit_north && this.exit_south && this.exit_west && this.exit_east) {
+       if (!this.exit_north && !this.exit_south && !this.exit_west && !this.exit_east) {
            console.log("NO EXITS");
        }
-    }
-
-    Room.prototype.link = function(direction, room_id) {
-        if (this[direction]) {
-            return "Already linked";
-        }
-
-        this[direction] = room_id;
     }
 
     Room.prototype.getExits = function() {

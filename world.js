@@ -1,7 +1,10 @@
 
 function World ( ) {
     this.number_of_rooms = 0;
+    this.layout = new Array();
     this.rooms = new Array();
+    this.rooms_pool = new Array();
+
 }
 
 World.prototype.addRoom = function(room) {
@@ -39,24 +42,66 @@ World.prototype.getOppositeDirection = function(direction) {
     }
 }
 
+World.prototype.printMap = function() {
+
+    console.table(this.layout);
+
+    // for (var i=0; i<this.layout.length; i++) {
+    //     for ( var j=0; j<this.layout.length; j++) {
+    //         console.log(this.layout[i][j]);
+    //     }
+    // }
+}
+
+World.prototype.printRoom = function(x, y) {
+
+    var room = this.layout[x][y];
+
+    console.log(room);
+    console.table(room);
+}
+
 World.prototype.generate = function(number_of_rooms) {
 
-    // Build entire room collection
     for (var i=0; i<number_of_rooms; i++) {
+       var container = [];
+       for (var j=0; j<number_of_rooms; j++) {
+           // Starting Room Seed
+           var name = Math.random().toString(36).substring(2);
+           var desc = Math.random().toString(36).substring(5);
 
-        // Starting Room Seed
-        var name = Math.random().toString(36).substring(2);
-        var desc = Math.random().toString(36).substring(5);
-
-        var room = new Lootr.rooms.Room({name:name, desc:desc});
-
-        this.rooms.push(room);
-        this.number_of_rooms++;
+           var room = new Lootr.rooms.Room({name:name, desc:desc});
+           container.push(room);
+           // this.number_of_rooms++;
+       }
+           // this.number_of_rooms++;
+           this.layout.push(container);
     }
 
-    // Link rooms together
-    for (var r=0; r<number_of_rooms; i++) {
-    }
+    // Build entire room collection
+    // for (var i=0; i<number_of_rooms; i++) {
+    //
+    //     // Starting Room Seed
+    //     var name = Math.random().toString(36).substring(2);
+    //     var desc = Math.random().toString(36).substring(5);
+    //
+    //     var room = new Lootr.rooms.Room({name:name, desc:desc});
+    //
+    //     this.rooms_pool.push(room);
+    //     this.number_of_rooms++;
+    // }
+    //
+    // // Link rooms together
+    // for (var r=0; r<number_of_rooms; r++) {
+    //     // console.log(this.rooms[r]);
+    //
+    //     if(this.rooms[r].exit_north == true) {
+    //         console.log("Building North Exit");
+    //     }
+    //     if(this.rooms[r].exit_south == true) {
+    //         console.log("Building South Exit");
+    //     }
+    // }
 
        //  if(room.exit_north == true) {
        //

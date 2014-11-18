@@ -2,9 +2,8 @@
 function World ( ) {
     this.number_of_rooms = 0;
     this.layout = new Array();
-    this.rooms = new Array();
-    this.rooms_pool = new Array();
-
+    // this.rooms = new Array();
+    // this.rooms_pool = new Array();
 }
 
 World.prototype.addRoom = function(room) {
@@ -25,32 +24,31 @@ World.prototype.linkRooms = function(room1, room2, direction) {
 }
 
 World.prototype.getOppositeDirection = function(direction) {
-    if( direction == "north" ) {
-        return "south";
+    if( direction == Lootr.DIRECTIONS.NORTH ) {
+        return Lootr.DIRECTIONS.SOUTH;
     }
 
-    if( direction == "south" ) {
-        return "north";
+    if( direction == Lootr.DIRECTIONS.SOUTH ) {
+        return Lootr.DIRECTIONS.NORTH;
     }
 
-    if( direction == "west" ) {
-        return "east";
+    if( direction == Lootr.DIRECTIONS.WEST ) {
+        return Lootr.DIRECTIONS.EAST;
     }
 
-    if( direction == "east" ) {
-        return "west";
+    if( direction == Lootr.DIRECTIONS.EAST ) {
+        return Lootr.DIRECTIONS.WEST;
     }
 }
 
 World.prototype.printMap = function() {
 
-    console.table(this.layout);
-
-    // for (var i=0; i<this.layout.length; i++) {
-    //     for ( var j=0; j<this.layout.length; j++) {
-    //         console.log(this.layout[i][j]);
-    //     }
-    // }
+    for (var i=0; i<this.layout.length; i++) {
+        for ( var j=0; j<this.layout.length; j++) {
+            console.log("X");
+            // console.log(this.layout[i][j]);
+        }
+    }
 }
 
 World.prototype.printRoom = function(x, y) {
@@ -59,6 +57,41 @@ World.prototype.printRoom = function(x, y) {
 
     console.log(room);
     console.table(room);
+}
+
+World.prototype.LookInDirection = function(currentX, currentY, direction) {
+
+    if(direction == Lootr.DIRECTIONS.NORTH) {
+        currentY--;
+    }
+
+    if(direction == Lootr.DIRECTIONS.SOUTH) {
+       currentY++;
+    }
+
+    if(direction == Lootr.DIRECTIONS.WEST) {
+       currentX--;
+    }
+
+    if(direction == Lootr.DIRECTIONS.EAST) {
+       currentX++;
+    }
+
+    for (var x=0; x<this.layout.length; x++) {
+        for(var y=0; y<this.layout.length; y++) {
+            if(currentX == x && currentY == y) {
+                var room = this.layout[x][y];
+
+                if(typeof room === 'undefined') {
+                    console.log(false);
+                    return false;
+                } else {
+                    console.log(room);
+                    return room;
+                }
+            }
+        }
+    }
 }
 
 World.prototype.generate = function(number_of_rooms) {
@@ -70,7 +103,7 @@ World.prototype.generate = function(number_of_rooms) {
            var name = Math.random().toString(36).substring(2);
            var desc = Math.random().toString(36).substring(5);
 
-           var room = new Lootr.rooms.Room({name:name, desc:desc});
+           var room = new Lootr.rooms.Room({name:name, desc:desc, x:i, y:j});
            container.push(room);
            // this.number_of_rooms++;
        }

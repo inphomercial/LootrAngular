@@ -8,15 +8,8 @@
 	function Room ( args ) {
 		Entity.call(this);
 
-        // Keeps track of a global unique room counter
         // And Sets the room ID
-        if(Room.counter == undefined) {
-            Room.counter = 0;
-            this.id = 0;
-        } else {
-            Room.counter++;
-            this.id = Room.counter;
-        }
+        this.setId();
 
 		this.name = args.name;
 		this.desc = args.desc;
@@ -34,10 +27,23 @@
         this.link_west = false;
         this.link_east = false;
 
+        this.x = args.x;
+        this.y = args.y;
+
         this.randomizeExits();
 	}
 
 	Room.prototype = new Entity;
+
+    Room.prototype.setId = function() {
+        if(Room.counter == undefined) {
+            Room.counter = 0;
+            this.id = 0;
+        } else {
+            Room.counter++;
+            this.id = Room.counter;
+        }
+    }
 
     // Add entity object to entities array
 	Room.prototype.addEntity = function(entity) {

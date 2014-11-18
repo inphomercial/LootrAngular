@@ -43,6 +43,13 @@ var Lootr = {
 		SAVE:     .30
 	},
 
+    DIRECTIONS: {
+        NORTH: "north",
+        SOUTH: "south",
+        WEST: "west",
+        EAST: "east"
+    },
+
 	/*
 	LOOT_CHANCE: {
 

@@ -83,10 +83,8 @@ World.prototype.LookInDirection = function(currentX, currentY, direction) {
                 var room = this.layout[x][y];
 
                 if(typeof room === 'undefined') {
-                    console.log(false);
                     return false;
                 } else {
-                    console.log(room);
                     return room;
                 }
             }
@@ -105,85 +103,16 @@ World.prototype.generate = function(number_of_rooms) {
 
            var room = new Lootr.rooms.Room({name:name, desc:desc, x:i, y:j});
            container.push(room);
-           // this.number_of_rooms++;
        }
            // this.number_of_rooms++;
            this.layout.push(container);
     }
+}
 
-    // Build entire room collection
-    // for (var i=0; i<number_of_rooms; i++) {
-    //
-    //     // Starting Room Seed
-    //     var name = Math.random().toString(36).substring(2);
-    //     var desc = Math.random().toString(36).substring(5);
-    //
-    //     var room = new Lootr.rooms.Room({name:name, desc:desc});
-    //
-    //     this.rooms_pool.push(room);
-    //     this.number_of_rooms++;
-    // }
-    //
-    // // Link rooms together
-    // for (var r=0; r<number_of_rooms; r++) {
-    //     // console.log(this.rooms[r]);
-    //
-    //     if(this.rooms[r].exit_north == true) {
-    //         console.log("Building North Exit");
-    //     }
-    //     if(this.rooms[r].exit_south == true) {
-    //         console.log("Building South Exit");
-    //     }
-    // }
+World.prototype.findStartingRoom = function() {
+    var ranX = Roller.randomNumber(0, this.layout.length);
+    var ranY = Roller.randomNumber(0, this.layout.length);
+    var startingRoom = this.layout[ranX][ranY];
 
-       //  if(room.exit_north == true) {
-       //
-       //      var name = Math.random().toString(36).substring(2);
-       //      var desc = Math.random().toString(36).substring(5);
-       //
-       //      var new_room = new Lootr.rooms.Room({name:name, desc:desc});
-       //      console.log(new_room);
-       //
-       //      room.link("link_north", new_room.id);
-       //
-       //      this.rooms.push(new_room);
-       //      this.number_of_rooms++;
-       // }
-       // if(room.exit_south == true) {
-       //
-       //      var name = Math.random().toString(36).substring(2);
-       //      var desc = Math.random().toString(36).substring(5);
-       //
-       //      var new_room = new Lootr.rooms.Room({name:name, desc:desc});
-       //
-       //      room.link("link_south", new_room.id);
-       //
-       //      this.rooms.push(new_room);
-       //      this.number_of_rooms++;
-       // }
-       // if(room.exit_west == true) {
-       //
-       //      var name = Math.random().toString(36).substring(2);
-       //      var desc = Math.random().toString(36).substring(5);
-       //
-       //      var new_room = new Lootr.rooms.Room({name:name, desc:desc});
-       //
-       //      room.link("link_west", new_room.id);
-       //
-       //      this.rooms.push(new_room);
-       //      this.number_of_rooms++;
-       // }
-       // if(room.exit_east == true) {
-       //
-       //      var name = Math.random().toString(36).substring(2);
-       //      var desc = Math.random().toString(36).substring(5);
-       //
-       //      var new_room = new Lootr.rooms.Room({name:name, desc:desc});
-       //
-       //      room.link("link_east", new_room.id);
-       //
-       //      this.rooms.push(new_room);
-       //      this.number_of_rooms++;
-       // }
-   // }
+    return startingRoom;
 }

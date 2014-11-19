@@ -15,6 +15,10 @@ var Roller = {
 		}
 	},
 
+    randomNumber: function(min, max) {
+      return Math.floor(Math.random() * (max - min)) + min;
+    },
+
 	rollDie: function( sides )
 	{
 		var result;

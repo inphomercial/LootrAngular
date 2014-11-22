@@ -25,12 +25,20 @@
 				? { gold: args.gold }
 				: { gold: 0 });
 
+        this.component('Location',
+            ((args.x && args.y) != undefined)
+                ? { x: args.x, y: args.y }
+                : { x: 0, y: 0 } );
+
 		this.component('Level',
 			((args.level && args.current_exp && args.exp_to_level) != undefined)
 				? { level: args.level, current_exp: args.current_exp, exp_to_level: args.exp_to_level}
 				: { level: 1, current_exp: 0, exp_to_level: 50 } );
 
 		this.component('Progress');
+
+		this.component('Movement');
+
 		this.component('Inventory',
 			((args.inventory) != undefined)
 				? { items: args.items }

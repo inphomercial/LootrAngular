@@ -27,6 +27,8 @@
     <script src="js/components/progress.js"></script>
     <script src="js/components/stat.js"></script>
     <script src="js/components/consumable.js"></script>
+    <script src="js/components/location.js"></script>
+    <script src="js/components/movement.js"></script>
 
     <!-- Roll Tables -->
     <script src="js/roll_tables/monsters_table.js"></script>
@@ -55,6 +57,10 @@
     <script>
 
         var w = new World();
+
+        w.generate(5);
+
+        w.findStartingRoom();
 
         // var r1arg = {name:'room1', desc:'room 1 desc'};
         // var r1 = new Lootr.rooms.Room(r1arg);

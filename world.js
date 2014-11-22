@@ -10,18 +10,18 @@ World.prototype.addRoom = function(room) {
     this.rooms.push(room);
 }
 
-World.prototype.linkRooms = function(room1, room2, direction) {
-    if( room1.isDirectionAvailable(direction)
-        && room1.isDirectionLinkAvailable(direction)
-        && room2.isDirectionAvailable(this.getOppositeDirection(direction))
-        && room2.isDirectionLinkAvailable(this.getOppositeDirection(direction))
-    ) {
-      room1["link_" + direction] = room2.id;
-      room2["link_" + this.getOppositeDirection(direction)] = room1.id;
-    } else {
-      console.log("cannot link rooms " + direction);
-    }
-}
+// World.prototype.linkRooms = function(room1, room2, direction) {
+//     if( room1.isDirectionAvailable(direction)
+//         && room1.isDirectionLinkAvailable(direction)
+//         && room2.isDirectionAvailable(this.getOppositeDirection(direction))
+//         && room2.isDirectionLinkAvailable(this.getOppositeDirection(direction))
+//     ) {
+//       room1["link_" + direction] = room2.id;
+//       room2["link_" + this.getOppositeDirection(direction)] = room1.id;
+//     } else {
+//       console.log("cannot link rooms " + direction);
+//     }
+// }
 
 World.prototype.getOppositeDirection = function(direction) {
     if( direction == Lootr.DIRECTIONS.NORTH ) {
@@ -41,15 +41,15 @@ World.prototype.getOppositeDirection = function(direction) {
     }
 }
 
-World.prototype.printMap = function() {
-
-    for (var i=0; i<this.layout.length; i++) {
-        for ( var j=0; j<this.layout.length; j++) {
-            console.log("X");
-            // console.log(this.layout[i][j]);
-        }
-    }
-}
+// World.prototype.printMap = function() {
+//
+//     for (var i=0; i<this.layout.length; i++) {
+//         for ( var j=0; j<this.layout.length; j++) {
+//             console.log("X");
+//             // console.log(this.layout[i][j]);
+//         }
+//     }
+// }
 
 World.prototype.printRoom = function(x, y) {
 
@@ -113,6 +113,19 @@ World.prototype.findStartingRoom = function() {
     var ranX = Roller.randomNumber(0, this.layout.length);
     var ranY = Roller.randomNumber(0, this.layout.length);
     var startingRoom = this.layout[ranX][ranY];
+
+	// determine player race
+	var race = race_table[Math.floor(Math.random() * race_table.length)];
+	// determine player name
+	var name = name_table[Math.floor(Math.random() * name_table.length)];
+
+    race.x = ranX;
+    race.y = ranY;
+
+	// Initialize player object
+	var player = new Lootr.entities.Player(race, name);
+
+    startingRoom.addEntity(player);
 
     return startingRoom;
 }

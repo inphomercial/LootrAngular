@@ -51,7 +51,14 @@
 	}
 
     Room.prototype.removeEntity = function(entity) {
-        //
+        for(var i=0; i<this.entities; i++) {
+           if(this.entities[i] instanceof Player) {
+           // if(this.entities[i] == entity) {
+              console.log("Player FOUND ENTITIY IN ROOM");
+           } else {
+              console.log("COULDNT FIND ENTITIY IN ROOM");
+           }
+        }
     }
 
     Room.prototype.isDirectionAvailable = function(direction) {

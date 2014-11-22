@@ -37,7 +37,10 @@
 
 		this.component('Progress');
 
-		this.component('Movement');
+		this.component('Movement',
+            ((args.moveable) != undefined)
+                ? { moveable: args.moveable }
+                : { moveable: false });
 
 		this.component('Inventory',
 			((args.inventory) != undefined)

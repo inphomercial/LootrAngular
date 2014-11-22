@@ -22,6 +22,7 @@ World.prototype.addRoom = function(room) {
 //       console.log("cannot link rooms " + direction);
 //     }
 // }
+//
 
 World.prototype.getOppositeDirection = function(direction) {
     if( direction == Lootr.DIRECTIONS.NORTH ) {

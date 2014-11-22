@@ -15,6 +15,9 @@ var race_table = [
 		current_exp: 0,
 		exp_to_level: 70,
 
+        // Movement Component
+        moveable: true,
+
 		// Stats Components
 		atk: 1,
 		def: 1,
@@ -42,6 +45,8 @@ var race_table = [
 		level: 1,
 		current_exp: 0,
 		exp_to_level: 200,
+        // Movement Component
+        moveable: true,
 		atk: 3,
 		def: 3,
 		mag: 0,
@@ -64,6 +69,8 @@ var race_table = [
 		level: 1,
 		current_exp: 0,
 		exp_to_level: 220,
+        // Movement Component
+        moveable: true,
 		atk: 1,
 		def: 1,
 		mag: 1,
@@ -86,6 +93,8 @@ var race_table = [
 		level: 1,
 		current_exp: 0,
 		exp_to_level: 75,
+        // Movement Component
+        moveable: true,
 		atk: 0,
 		def: 0,
 		mag: 2,
@@ -108,6 +117,8 @@ var race_table = [
 		level: 1,
 		current_exp: 0,
 		exp_to_level: 100,
+        // Movement Component
+        moveable: true,
 		atk: 1,
 		def: 1,
 		mag: 1,
@@ -130,6 +141,8 @@ var race_table = [
 		level: 1,
 		current_exp: 0,
 		exp_to_level: 100,
+        // Movement Component
+        moveable: true,
 		atk: 1,
 		def: 1,
 		mag: 1,

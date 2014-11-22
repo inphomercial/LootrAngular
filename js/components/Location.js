@@ -15,16 +15,31 @@ function Location (entity, args) {
 	this.$y = args.y;
 
 	// What ever entity this component is on
-	// It will be looking for a generic giveDamage string
-	this.$entity.on('Location.update', function ( x, y ) {
-		location._update(x, y);
+	this.$entity.on('Location.update', function ( direction ) {
+		location._update( direction );
 	});
 }
 
 Location.prototype = new Component;
 
-Location.prototype._update = function (x, y) {
-    this.$x = x;
-    this.$y = y;
-	console.log("Location updated to %x %y", x, y);
+Location.prototype._update = function ( direction ) {
+	console.log("Location updated from X:" + this.$x + " Y: " + this.$y);
+
+    if(direction == Lootr.DIRECTIONS.NORTH) {
+        this.$y--;
+    }
+
+    if(direction == Lootr.DIRECTIONS.SOUTH) {
+        this.$y++;
+    }
+
+    if(direction == Lootr.DIRECTIONS.WEST) {
+        this.$x--;
+    }
+
+    if(direction == Lootr.DIRECTIONS.EAST) {
+        this.$x++;
+    }
+
+   console.log("Location updated to X:" + this.$x + " Y: " + this.$y);
 };

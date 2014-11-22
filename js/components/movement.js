@@ -19,7 +19,7 @@ function Movement (entity, args) {
         if( this.$moveable == true ) {
 		    movement._moveDirection( direction );
         } else {
-            console.log(this.$entity + " Object is not moveable");
+            console.log(this.$entity.className + " Object is not moveable");
         }
 	});
 }
@@ -27,7 +27,15 @@ function Movement (entity, args) {
 Movement.prototype = new Component;
 
 Movement.prototype._moveDirection = function ( direction ) {
+    var room = w.layout[this.$entity.Location.$x][this.$entity.Location.$y];
 
+    console.log("Am I the right room?");
+    console.log(room);
     console.log("Attempting to move " + direction);
 	this.$entity.emit("Location.update", [direction]);
+
+    console.log("who is this entity");
+    console.log(this.$entity);
+
+    room.removeEntity(this.$entity);
 };

@@ -10,6 +10,9 @@
 
 		console.log(args);
 
+        // Hacky?
+        this.className = "Player";
+
 		this.race = args.race;
 		this.name = name;
 

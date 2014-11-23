@@ -27,15 +27,17 @@ function Movement (entity, args) {
 Movement.prototype = new Component;
 
 Movement.prototype._moveDirection = function ( direction ) {
+
+    // Get the current room
     var room = w.layout[this.$entity.Location.$x][this.$entity.Location.$y];
 
-    console.log("Am I the right room?");
-    console.log(room);
-    console.log("Attempting to move " + direction);
+    // Update entities Location
 	this.$entity.emit("Location.update", [direction]);
 
-    console.log("who is this entity");
-    console.log(this.$entity);
-
+    // Remove the entity from the room
     room.removeEntity(this.$entity);
+
+    // Get the moved to room and add the Entity to it.
+    var new_room = w.layout[this.$entity.Location.$x][this.$entity.Location.$y];
+    new_room.addEntity(this.$entity);
 };

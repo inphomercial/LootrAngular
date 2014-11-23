@@ -17,20 +17,10 @@
         // Container for objects (players, things, monsters)
         this.entities = [];
 
-        // Testing
-        this.exit_north = false;
-        this.exit_south = false;
-        this.exit_west  = false;
-        this.exit_east  = false;
-        this.link_north = false;
-        this.link_south = false;
-        this.link_west = false;
-        this.link_east = false;
-
         this.x = args.x;
         this.y = args.y;
 
-        this.randomizeExits();
+        // this.randomizeExits();
 	}
 
 	Room.prototype = new Entity;
@@ -53,52 +43,63 @@
     Room.prototype.removeEntity = function(entity) {
         console.log("Room entities list:");
         console.log(this.entities);
-        for(var i=0; i<this.entities; i++) {
-           if(this.entities[i].className == "Player") {
-              console.log("Player FOUND ENTITIY IN ROOM");
-           } else {
-              console.log("COULDNT FIND ENTITIY IN ROOM");
-           }
+
+        for(var i=0; i<this.entities.length; i++) {
+            if (this.entities[i].className == "Player" && entity.className == "Player") {
+                console.log("Player FOUND ENTITIY IN ROOM");
+                // Remove the Player from the room entities container
+                this.entities.splice(i, 1);
+            }
+            else if (this.entities[i].className == "Mob" && entity.className == "Mob") {
+                console.log("Mob FOUND ENTITY IN ROOM");
+            }
+            else if (this.entities[i].className == "Object" && entity.className == "Object") {
+                console.log("Object Found in Room");
+            }
+            else
+            {
+                console.log("COULDNT FIND ENTITIY IN ROOM");
+            }
         }
     }
 
-    Room.prototype.isDirectionAvailable = function(direction) {
-        if (this["exit_" + direction] == false) {
-            return false;
-        }
+    // Room.prototype.isDirectionAvailable = function(direction) {
+    //     if (this["exit_" + direction] == false) {
+    //         return false;
+    //     }
+    //
+    //     return true;
+    // }
+    //
+    // Room.prototype.isDirectionLinkAvailable = function(direction) {
+    //     if (this["link_" + direction] != false) {
+    //         return false;
+    //     }
+    //
+    //     return true;
+    // }
 
-        return true;
-    }
+    // Room.prototype.randomizeExits = function() {
+    //    this.exit_north = (Math.random() < 0.5);
+    //    this.exit_south = (Math.random() < 0.5);
+    //    this.exit_west = (Math.random() < 0.5);
+    //    this.exit_east = (Math.random() < 0.5);
+    //
+    //    if (!this.exit_north && !this.exit_south && !this.exit_west && !this.exit_east) {
+    //        console.log("NO EXITS");
+    //    }
+    // }
 
-    Room.prototype.isDirectionLinkAvailable = function(direction) {
-        if (this["link_" + direction] != false) {
-            return false;
-        }
-
-        return true;
-    }
-
-    Room.prototype.randomizeExits = function() {
-       this.exit_north = (Math.random() < 0.5);
-       this.exit_south = (Math.random() < 0.5);
-       this.exit_west = (Math.random() < 0.5);
-       this.exit_east = (Math.random() < 0.5);
-
-       if (!this.exit_north && !this.exit_south && !this.exit_west && !this.exit_east) {
-           console.log("NO EXITS");
-       }
-    }
-
-    Room.prototype.getExits = function() {
-        var exits = {
-            north: this.exit_north,
-            south: this.exit_south,
-            west:  this.exit_west,
-            east:  this.exit_east
-        };
-
-        return exits;
-    }
+    // Room.prototype.getExits = function() {
+    //     var exits = {
+    //         north: this.exit_north,
+    //         south: this.exit_south,
+    //         west:  this.exit_west,
+    //         east:  this.exit_east
+    //     };
+    //
+    //     return exits;
+    // }
 
     Room.prototype.displayContents = function() {
         for(var i=0; i<=this.entities.length; i++) {

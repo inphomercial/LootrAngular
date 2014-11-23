@@ -8,8 +8,6 @@
 	function Player ( args, name ) {
 		Entity.call(this);
 
-		console.log(args);
-
         // Hacky?
         this.className = "Player";
 

@@ -95,14 +95,21 @@ World.prototype.LookInDirection = function(currentX, currentY, direction) {
 
 World.prototype.generate = function(number_of_rooms) {
 
+    console.log("Generating World!");
     for (var i=0; i<number_of_rooms; i++) {
        var container = [];
        for (var j=0; j<number_of_rooms; j++) {
+
            // Starting Room Seed
            var name = Math.random().toString(36).substring(2);
            var desc = Math.random().toString(36).substring(5);
 
            var room = new Lootr.rooms.Room({name:name, desc:desc, x:i, y:j});
+
+           // Randomize Events/Treasures/Mobs here and add them to the room Entities if any
+           var treasure = Lootr.Treasure.generate();
+           room.addEntity(treasure);
+
            container.push(room);
        }
            // this.number_of_rooms++;
@@ -111,6 +118,8 @@ World.prototype.generate = function(number_of_rooms) {
 }
 
 World.prototype.findStartingRoom = function() {
+
+    console.log("Locating Starting Room");
     var ranX = Roller.randomNumber(0, this.layout.length);
     var ranY = Roller.randomNumber(0, this.layout.length);
     var startingRoom = this.layout[ranX][ranY];
@@ -128,5 +137,7 @@ World.prototype.findStartingRoom = function() {
 
     startingRoom.addEntity(player);
 
-    return startingRoom;
+    return player;
+
+    // return startingRoom;
 }

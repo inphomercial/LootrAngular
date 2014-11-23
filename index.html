@@ -270,6 +270,11 @@
 			<button ng-disabled="!monster_in_room" class="button btn-primary btn-block" ng-click="attack();">Attack!!</button>
 			<button ng-disabled="!monster_in_room" class="button btn-primary btn-block" ng-click="flee();">Flee</button>
 			<button ng-disabled="!store_in_room" class="button btn-primary btn-block" ng-click="sell();">Sell Items</button>
+
+			<button ng-disabled="" class="button btn-primary btn-block" ng-click="moveNorth();">Move North</button>
+			<button ng-disabled="" class="button btn-primary btn-block" ng-click="moveWest();">Move West</button>
+			<button ng-disabled="" class="button btn-primary btn-block" ng-click="moveSouth();">Move South</button>
+			<button ng-disabled="" class="button btn-primary btn-block" ng-click="moveEast();">Move East</button>
 		</div>
 
 		<div class="col-xs-3" style="padding-left: 50px">
@@ -344,6 +349,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
     <script src="js/lootr.js"></script>
+    <script src="js/world.js"></script>
     <script src="js/ui.js"></script>
     <script src="js/roller.js"></script>
     <script src="js/mob_bag.js"></script>
@@ -369,6 +375,7 @@
     <script src="js/components/stat.js"></script>
     <script src="js/components/consumable.js"></script>
     <script src="js/components/location.js"></script>
+    <script src="js/components/movement.js"></script>
 
     <!-- Roll Tables -->
     <script src="js/roll_tables/monsters_table.js"></script>
@@ -395,6 +402,7 @@
 	<script>
 		window.onload = function ()
 		{
+			//var world = new World();
 			/* game_state = Lootr.GAME_STATES.RUNNING;
 			/*
 			$("#game_state").text(game_state);
@@ -403,10 +411,10 @@
 	</script>
 
 	<!-- Angular Libraries -->
-	<script src="js/angular/angular.js"></script>
-	<script src="js/angular/angularui.min.js"></script>
-	<script src="js/angular/angular-local-storage.js"></script>
-	<script src="js/angular/bootstrap.min.js"></script>
+	<script src="js/angular/vendors/angular.js"></script>
+	<script src="js/angular/vendors/angularui.min.js"></script>
+	<script src="js/angular/vendors/angular-local-storage.js"></script>
+	<script src="js/angular/vendors/bootstrap.min.js"></script>
 
 	<!-- Angular App -->
     <script src="js/angular/lootrapp.js"></script>

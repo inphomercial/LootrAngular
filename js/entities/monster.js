@@ -25,6 +25,8 @@
 		this.desc = args.desc;
 		this.name = args.name;
 
+		this.className = "Monster";
+
 		this.mag = args.mag;
 		this.exp = args.exp;
 		this.level = args.level;

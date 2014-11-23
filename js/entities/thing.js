@@ -12,6 +12,9 @@
 
 		this.name = args.name;
 		this.desc = args.desc;
+
+		this.className = "Thing";
+
 		this.equip = args.equip;
 		this.unequip = args.unequip;
 		this.use = args.use || "";

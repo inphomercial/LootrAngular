@@ -61,6 +61,10 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 
 	var init = function()
 	{
+       /* world.generateMap(5);
+
+        $scope.player = world.findStartingRoom();*/
+
 		UI.log("You desend a stair way into a dark abyss....", UI.COLORS.ROOM_NORMAL, 2000);
 		UI.logSpace();
 
@@ -187,6 +191,16 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 		$scope.monster_in_room = false;
 
 		return
+	}
+
+	$scope.moveNorth = function() {
+
+		$scope.player.Movement._moveDirection("north");
+	}
+
+	$scope.moveSouth = function() {
+
+		$scope.player.Movement._moveDirection("south");
 	}
 
 	$scope.sell = function() {

@@ -1,30 +1,79 @@
 
 function World ( ) {
-    this.number_of_rooms = 0;
     this.layout = new Array();
-    // this.rooms = new Array();
-    // this.rooms_pool = new Array();
 }
 
 World.prototype.addRoom = function(room) {
     this.rooms.push(room);
 }
 
-// World.prototype.linkRooms = function(room1, room2, direction) {
-//     if( room1.isDirectionAvailable(direction)
-//         && room1.isDirectionLinkAvailable(direction)
-//         && room2.isDirectionAvailable(this.getOppositeDirection(direction))
-//         && room2.isDirectionLinkAvailable(this.getOppositeDirection(direction))
-//     ) {
-//       room1["link_" + direction] = room2.id;
-//       room2["link_" + this.getOppositeDirection(direction)] = room1.id;
-//     } else {
-//       console.log("cannot link rooms " + direction);
-//     }
-// }
-//
+World.prototype.generateMap = function(number_of_rooms) {
 
-World.prototype.getOppositeDirection = function(direction) {
+    UI.logDebug("Generating World!");
+    for (var i=0; i<number_of_rooms; i++) {
+       var container = [];
+       for (var j=0; j<number_of_rooms; j++) {
+
+           // Starting Room Seed
+           var name = Math.random().toString(36).substring(2);
+           var desc = Math.random().toString(36).substring(5);
+
+           var room = new Lootr.rooms.Room({name:name, desc:desc, x:i, y:j});
+
+           // #### EVENTS PER ROOM ####
+           // # Randomize Treasures
+           var treasure = Lootr.Treasure.generate();
+           room.addEntity(treasure);
+           
+           // # Mobs
+           // check if MobBag is empty
+           if(MobBag.isBagEmpty())
+           {
+               // true - generate new bag
+               MobBag.generate( 1 );
+            }
+          
+           // PluckMob
+           var monster = MobBag.pluckMob();
+           room.addEntity(monster);
+           // #########################
+
+           container.push(room);
+       }
+           // this.number_of_rooms++;
+           this.layout.push(container);
+    }
+}
+
+World.prototype.findStartingRoom = function() {
+
+    UI.logDebug("Locating Starting Room");
+    var ranX = Roller.randomNumber(0, this.layout.length);
+    var ranY = Roller.randomNumber(0, this.layout.length);
+    var startingRoom = this.layout[ranX][ranY];
+
+	  // determine player race
+	  var race = race_table[Math.floor(Math.random() * race_table.length)];
+	  // determine player name
+	  var name = name_table[Math.floor(Math.random() * name_table.length)];
+
+    race.x = ranX;
+    race.y = ranY;
+
+	  // Initialize player object
+	  var player = new Lootr.entities.Player(race, name);
+
+    startingRoom.addEntity(player);
+
+    return player;
+
+    // return startingRoom;
+}
+
+
+
+
+/*World.prototype.getOppositeDirection = function(direction) {
     if( direction == Lootr.DIRECTIONS.NORTH ) {
         return Lootr.DIRECTIONS.SOUTH;
     }
@@ -40,7 +89,21 @@ World.prototype.getOppositeDirection = function(direction) {
     if( direction == Lootr.DIRECTIONS.EAST ) {
         return Lootr.DIRECTIONS.WEST;
     }
-}
+}*/
+
+// World.prototype.linkRooms = function(room1, room2, direction) {
+//     if( room1.isDirectionAvailable(direction)
+//         && room1.isDirectionLinkAvailable(direction)
+//         && room2.isDirectionAvailable(this.getOppositeDirection(direction))
+//         && room2.isDirectionLinkAvailable(this.getOppositeDirection(direction))
+//     ) {
+//       room1["link_" + direction] = room2.id;
+//       room2["link_" + this.getOppositeDirection(direction)] = room1.id;
+//     } else {
+//       console.log("cannot link rooms " + direction);
+//     }
+// }
+//
 
 // World.prototype.printMap = function() {
 //
@@ -52,7 +115,7 @@ World.prototype.getOppositeDirection = function(direction) {
 //     }
 // }
 
-World.prototype.printRoom = function(x, y) {
+/*World.prototype.printRoom = function(x, y) {
 
     var room = this.layout[x][y];
 
@@ -91,53 +154,4 @@ World.prototype.LookInDirection = function(currentX, currentY, direction) {
             }
         }
     }
-}
-
-World.prototype.generate = function(number_of_rooms) {
-
-    console.log("Generating World!");
-    for (var i=0; i<number_of_rooms; i++) {
-       var container = [];
-       for (var j=0; j<number_of_rooms; j++) {
-
-           // Starting Room Seed
-           var name = Math.random().toString(36).substring(2);
-           var desc = Math.random().toString(36).substring(5);
-
-           var room = new Lootr.rooms.Room({name:name, desc:desc, x:i, y:j});
-
-           // Randomize Events/Treasures/Mobs here and add them to the room Entities if any
-           var treasure = Lootr.Treasure.generate();
-           room.addEntity(treasure);
-
-           container.push(room);
-       }
-           // this.number_of_rooms++;
-           this.layout.push(container);
-    }
-}
-
-World.prototype.findStartingRoom = function() {
-
-    console.log("Locating Starting Room");
-    var ranX = Roller.randomNumber(0, this.layout.length);
-    var ranY = Roller.randomNumber(0, this.layout.length);
-    var startingRoom = this.layout[ranX][ranY];
-
-	// determine player race
-	var race = race_table[Math.floor(Math.random() * race_table.length)];
-	// determine player name
-	var name = name_table[Math.floor(Math.random() * name_table.length)];
-
-    race.x = ranX;
-    race.y = ranY;
-
-	// Initialize player object
-	var player = new Lootr.entities.Player(race, name);
-
-    startingRoom.addEntity(player);
-
-    return player;
-
-    // return startingRoom;
-}
+}*/

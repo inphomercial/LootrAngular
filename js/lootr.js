@@ -2,10 +2,10 @@
 var Lootr = {
 
 	// Global debug switch
-	DEBUG: true,
+	DEBUG: false,
 
 	// Version
-	VERSION: 0.22,
+	VERSION: 0.25,
 
 	TREASURE_TYPES: {
 

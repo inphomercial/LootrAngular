@@ -23,8 +23,6 @@ function Location (entity, args) {
 Location.prototype = new Component;
 
 Location.prototype._update = function ( direction ) {
-	console.log("Location updated from X:" + this.$x + " Y: " + this.$y);
-
     if(direction == Lootr.DIRECTIONS.NORTH) {
         this.$y--;
     }
@@ -40,6 +38,4 @@ Location.prototype._update = function ( direction ) {
     if(direction == Lootr.DIRECTIONS.EAST) {
         this.$x++;
     }
-
-   console.log("Location updated to X:" + this.$x + " Y: " + this.$y);
 };

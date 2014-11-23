@@ -29,7 +29,13 @@ Movement.prototype = new Component;
 Movement.prototype._moveDirection = function ( direction ) {
 
     // Get the current room
-    var room = w.layout[this.$entity.Location.$x][this.$entity.Location.$y];
+    var room = world.layout[this.$entity.Location.$x][this.$entity.Location.$y];
+
+    // Check if direction leads to a room
+    if(room.canMoveInDirection(direction) == false) {
+        console.log("You bump into a wall..");
+        return;
+    }
 
     // Update entities Location
 	this.$entity.emit("Location.update", [direction]);
@@ -38,6 +44,9 @@ Movement.prototype._moveDirection = function ( direction ) {
     room.removeEntity(this.$entity);
 
     // Get the moved to room and add the Entity to it.
-    var new_room = w.layout[this.$entity.Location.$x][this.$entity.Location.$y];
+    var new_room = world.layout[this.$entity.Location.$x][this.$entity.Location.$y];
     new_room.addEntity(this.$entity);
+
+    // Say what's in the new room.
+    new_room.displayContents();
 };

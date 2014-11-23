@@ -53,39 +53,14 @@
     <script src="js/entities/room.js"></script>
 
 
-    <script src="world.js"></script>
+    <script src="js/world.js"></script>
     <script>
 
-        var w = new World();
+        var world = new World();
 
-        w.generate(5);
+        world.generateMap(5);
 
-        var player = w.findStartingRoom();
-
-        // var r1arg = {name:'room1', desc:'room 1 desc'};
-        // var r1 = new Lootr.rooms.Room(r1arg);
-        // var treasure = Lootr.Treasure.generate();
-
-        // check if MobBag is empty
-        // if(MobBag.isBagEmpty())
-        // {
-        //     // true - generate new bag
-        //     MobBag.generate( 1 );
-        //
-        //     // PluckMob
-        //     var monster = MobBag.pluckMob();
-        // }
-        // else
-        // {
-        //     // PluckMob
-        //     var monster = MobBag.pluckMob();
-        // }
-
-        // var r2arg = {name:s, desc:d};
-        // var r2 = new Lootr.rooms.Room(r2arg);
-
-        // w.addRoom(r1);
-        // w.addRoom(r2);
-
+        var player = world.findStartingRoom();
+        
     </script>
 

@@ -5,8 +5,8 @@
 
 		/**
 		 * Generates a Thing entity Item
-		 * Type: a roll table type {required}
-		 * Rarity: Lootr.ITEM_RARITY.level {optional}
+		 * Type: a roll table type { optional }
+		 * Rarity: Lootr.ITEM_RARITY.level { optional }
 		 **/
 		generate: function ( type, rarity ) {
 

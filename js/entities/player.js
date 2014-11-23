@@ -97,6 +97,10 @@
 
 	Player.prototype = new Entity;
 
+	Player.prototype.tick = function() {
+		console.log(this.name + " is standing waiting for action.");
+	}
+
 	// Save the player object to a localStorage cookie
 	Player.prototype.save = function() {
 		var cache = {};

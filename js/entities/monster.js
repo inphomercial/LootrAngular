@@ -11,9 +11,14 @@
 		this.component('Health', { hp: args.max_hp, max_hp: args.max_hp });
 		this.component('Atk', { value: args.atk });
 		this.component('Def', { value: args.def });
+
+		this.component('Location', { x: args.x, y: args.y });
+
+		this.component('Movement', { moveable: args.moveable });
+
 		//this.component('SlotHand', { slot_type: Lootr.PLAYER_SLOTS.HAND });
 		/*this.component('Gold', { gold: 10 });
-		this.component('Level', { level: 1, current_exp: 0, exp_to_level: 50 });
+		
 		this.component('Progress');
 		this.component('Inventory');
 		this.component('Mag', { value: 1 });
@@ -29,6 +34,8 @@
 
 		this.mag = args.mag;
 		this.exp = args.exp;
+
+		//this.component('Level', { level: 1, current_exp: 0, exp_to_level: 50 });
 		this.level = args.level;
 
 		this.attack_messages = args.attack_messages;
@@ -36,6 +43,10 @@
 	}
 
 	Monster.prototype = new Entity;
+
+	Monster.prototype.tick = function() {
+		console.log("A " + this.name + " is thinking what to do..");
+	}
 
 	namespace.Monster = Monster;
 })(Lootr.entities, Lootr);

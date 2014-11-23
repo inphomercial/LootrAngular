@@ -9,6 +9,7 @@ var event_monster = [
 		mag: 5,
 		spd: 4,
 		level: 4,
+		moveable: false,
 		attack_messages : [
 			"The dragon whips you with its tail.",
 			"You compress under the dragons strike",
@@ -27,6 +28,7 @@ var event_monster = [
 		mag: 1,
 		spd: 5,
 		level: 3,
+		moveable: true,
 		attack_messages : [
 			"You feel a quick strike on your body.",
 			"The serpant strikes, leaving puncture wounds.",
@@ -45,6 +47,7 @@ var event_monster = [
 		mag: 1,
 		spd: 4,
 		level: 2,
+		moveable: true,
 		attack_messages : [
 			"You take a hard blow.",
 			"You get slamed."
@@ -62,6 +65,7 @@ var event_monster = [
 		mag: 2,
 		spd: 2,
 		level: 1,
+		moveable: true,
 		attack_messages : [
 			"The Beast Bites you hard.",
 			"You are gnawed on."
@@ -79,6 +83,7 @@ var event_monster = [
 		mag: 0,
 		spd: 1,
 		level: 1,
+		moveable: true,
 		attack_messages : [
 			"*Squeeak.",
 			"You are bit."

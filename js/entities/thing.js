@@ -33,5 +33,9 @@
 
 	Thing.prototype = new Entity;
 
+	Thing.prototype.tick = function() {
+		console.log("A " + this.name + " sits on the floor.");
+	}
+
 	namespace.Thing = Thing;
 })(Lootr.entities, Lootr);

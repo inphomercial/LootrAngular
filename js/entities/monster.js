@@ -13,12 +13,11 @@
 		this.component('Def', { value: args.def });
 
 		this.component('Location', { x: args.x, y: args.y });
-
 		this.component('Movement', { moveable: args.moveable });
 
 		//this.component('SlotHand', { slot_type: Lootr.PLAYER_SLOTS.HAND });
 		/*this.component('Gold', { gold: 10 });
-		
+
 		this.component('Progress');
 		this.component('Inventory');
 		this.component('Mag', { value: 1 });
@@ -46,6 +45,9 @@
 
 	Monster.prototype.tick = function() {
 		console.log("A " + this.name + " is thinking what to do..");
+
+        var dir = this.Movement.generateRandomDirection();
+        this.Movement._moveDirection(dir);
 	}
 
 	namespace.Monster = Monster;

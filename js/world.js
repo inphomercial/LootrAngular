@@ -24,20 +24,22 @@ World.prototype.generateMap = function(number_of_rooms) {
            // # Randomize Treasures
            var treasure = Lootr.Treasure.generate();
            room.addEntity(treasure);
-           
-           // # Mobs
-           // check if MobBag is empty
-           if(MobBag.isBagEmpty())
-           {
-               // true - generate new bag
-               MobBag.generate( 1 );
-            }
-          
-           // PluckMob
-           var monster = MobBag.pluckMob();
-           monster.Location.$x = i;
-           monster.Location.$y = j;
-           room.addEntity(monster);
+
+           if(Roller.roll(.20)) {
+               // # Mobs
+               // check if MobBag is empty
+               if(MobBag.isBagEmpty())
+               {
+                   // true - generate new bag
+                   MobBag.generate( 1 );
+                }
+
+               // PluckMob
+               var monster = MobBag.pluckMob();
+               monster.Location.$x = i;
+               monster.Location.$y = j;
+               room.addEntity(monster);
+           }
            // #########################
 
            container.push(room);
@@ -50,20 +52,22 @@ World.prototype.generateMap = function(number_of_rooms) {
 World.prototype.findStartingRoom = function() {
 
     UI.logDebug("Locating Starting Room");
+
     var ranX = Roller.randomNumber(0, this.layout.length);
     var ranY = Roller.randomNumber(0, this.layout.length);
     var startingRoom = this.layout[ranX][ranY];
 
-	  // determine player race
-	  var race = race_table[Math.floor(Math.random() * race_table.length)];
-	  // determine player name
-	  var name = name_table[Math.floor(Math.random() * name_table.length)];
+	// determine player race
+	var race = race_table[Math.floor(Math.random() * race_table.length)];
+
+    // determine player name
+	var name = name_table[Math.floor(Math.random() * name_table.length)];
 
     race.x = ranX;
     race.y = ranY;
 
-	  // Initialize player object
-	  var player = new Lootr.entities.Player(race, name);
+    // Initialize player object
+    var player = new Lootr.entities.Player(race, name);
 
     startingRoom.addEntity(player);
 
@@ -71,26 +75,45 @@ World.prototype.findStartingRoom = function() {
 }
 
 // Main game loop
-World.prototype.tick = function() {
+World.prototype.tick = function(action) {
 
     var entities = this._getAllEntities();
 
     for (var i = 0; i < entities.length; i++) {
-      entities[i].tick();
+      entities[i].tick(action);
     }
 }
 
 World.prototype._getAllEntities = function() {
+
+  var dirty = [];
   var en = [];
+  var player;
 
   for (var i=0; i<this.layout.length; i++) {
       for (var j=0; j<this.layout.length; j++) {
 
           for(var a=0; a<this.layout[i][j].entities.length; a++) {
+
+              // Pulling out player to put him first in the array
+              if(this.layout[i][j].entities[a].className == "Player") {
+
+                  player = this.layout[i][j].entities[a];
+
+                  // Remove player from pool to prevent dup copies in array
+                  this.layout[i][j].entities.splice(this.layout[i][j].entities[a], 1);
+
+                  continue;
+              }
+
               en.push(this.layout[i][j].entities[a]);
-          }  
+          }
       }
   }
+
+  // Throw player at the start of the array so player has the first move.
+  // @todo Make it so that instead of the player always going first, have everything have a speed. Order by quickest first.
+  en.unshift(player);
 
   return en;
 }

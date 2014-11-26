@@ -13,13 +13,10 @@ world.loadRoom(room_id)
 room.addEntity(entitiy)
 room.removeEntitiy(entitiy)
 
-
-
 @todo when hovering over item it's just showing the total it will add, instead have it show either the difference between current value or what it will add to the base stats
 @todo player class table
 @todo monster interaction
 @todo need to figure out how to save arrays of components (ie, Inventory.$items)
-@todo play around with room entities
 @todo allow for stats like hp & mp to be modified by items
 @todo play around with giving monsters items and allowing them to drop after a kil
 @todo have fleeing from fights actually use some metic
@@ -40,6 +37,8 @@ room.removeEntitiy(entitiy)
 
 done
 ---------------------
+@todo play around with room entities
+
 @todo why wont items vary in stats?
 @todo why do items keep appending ***??!??!
 @todo flee from fights

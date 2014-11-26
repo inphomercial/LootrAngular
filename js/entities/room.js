@@ -1,6 +1,8 @@
 (function (namespace, Lootr) {
 	'use strict';
 
+    var room_id_counter = 0;
+
 	/**
 	 * @class Room
 	 * @extends Entity
@@ -35,20 +37,21 @@
     Room.prototype.removeEntity = function(entity) {
 
         for(var i=0; i<this.entities.length; i++) {
-            if (this.entities[i].className == "Player" && entity.className == "Player") {
-                // Remove the Player from the room entities container
-                this.entities.splice(i, 1);
-            }
-            else if (this.entities[i].className == "Monster" && entity.className == "Monster") {
-                console.log("Mob FOUND ENTITY IN ROOM");
-            }
-            else if (this.entities[i].className == "Thing" && entity.className == "Thing") {
-                console.log("Thing Found in Room");
-            }
-            else
-            {
-                //console.log("COULDNT FIND ENTITIY IN ROOM");
-            }
+            this.entities.splice(i, 1);
+            // if (this.entities[i].className == "Player" && entity.className == "Player") {
+            //     // Remove the Player from the room entities container
+            //     this.entities.splice(i, 1);
+            // }
+            // else if (this.entities[i].className == "Monster" && entity.className == "Monster") {
+            //     this.entities.splice(i, 1);
+            // }
+            // else if (this.entities[i].className == "Thing" && entity.className == "Thing") {
+            //     this.entities.splice(i, 1);
+            // }
+            // else
+            // {
+            //     console.log("Nothing in the room");
+            // }
         }
     }
 
@@ -81,7 +84,7 @@
         if(world.layout[x][y] != undefined && world.layout[x][y].className == "Room") {
             return true;
         }
-    
+
         return false;
     }
 
@@ -108,18 +111,13 @@
 
     }
 
-    Room.prototype._setId = function() {
-        if(Room.counter == undefined) {
-            Room.counter = 0;
-            this.id = 0;
-        } else {
-            Room.counter++;
-            this.id = Room.counter;
-        }
-    }
+    Room.prototype._setId = function () {
+        this.id = ++room_id_counter;
+    };
 
 	namespace.Room = Room;
 })(Lootr.rooms, Lootr);
+
 
 
     // Room.prototype.isDirectionLinkAvailable = function(direction) {

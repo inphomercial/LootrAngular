@@ -26,6 +26,30 @@ function Movement (entity, args) {
 
 Movement.prototype = new Component;
 
+Movement.prototype.generateRandomDirection = function() {
+
+    var direction;
+    var roll = Roller.randomNumber(1, 4);
+
+    if(roll == 1) {
+        direction = Lootr.DIRECTIONS.NORTH;
+    }
+
+    if(roll == 2) {
+        direction = Lootr.DIRECTIONS.SOUTH;
+    }
+
+    if(roll == 3) {
+        direction = Lootr.DIRECTIONS.WEST;
+    }
+
+    if(roll == 4) {
+        direction = Lootr.DIRECTIONS.EAST;
+    }
+
+    return direction;
+}
+
 Movement.prototype._moveDirection = function ( direction ) {
 
     // Get the current room
@@ -33,7 +57,7 @@ Movement.prototype._moveDirection = function ( direction ) {
 
     // Check if direction leads to a room
     if(room.canMoveInDirection(direction) == false) {
-        console.log("You bump into a wall..");
+        console.log("There is a wall..");
         return;
     }
 
@@ -47,6 +71,9 @@ Movement.prototype._moveDirection = function ( direction ) {
     var new_room = world.layout[this.$entity.Location.$x][this.$entity.Location.$y];
     new_room.addEntity(this.$entity);
 
+    // Show what dir a mob moves
+    console.log(this.$entity.name + " moves " + direction);
+
     // Say what's in the new room.
-    new_room.displayContents();
+    // new_room.displayContents();
 };

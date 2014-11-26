@@ -37,14 +37,20 @@ LootrApp.factory('StorageService', function(localStorageService) {
 
 LootrApp.controller('LootrController', function ($scope, Lootr, $interval, StorageService) {
 
+    $scope.world = new World();
+
+    $scope.world.generateMap(5);
+
+    $scope.player = $scope.world.findStartingRoom();
+
 	// determine player race
-	var race = race_table[Math.floor(Math.random() * race_table.length)];
-
-	// determine player name
-	var name = name_table[Math.floor(Math.random() * name_table.length)];
-
-	// Initialize player object
-	$scope.player = new Lootr.entities.Player(race, name);
+	// var race = race_table[Math.floor(Math.random() * race_table.length)];
+    //
+	// // determine player name
+	// var name = name_table[Math.floor(Math.random() * name_table.length)];
+    //
+	// // Initialize player object
+	// $scope.player = new Lootr.entities.Player(race, name);
 
 	// Lootr
 	$scope.Lootr = Lootr;
@@ -230,13 +236,6 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 		UI.logDebug("Unequiping item from ", slot);
 		$scope.player[slot].unequipSlot(index);
 	}
-
-    // // Testing Room Generation and world creation
-    // $scope.generateWorld = function()
-    // {
-    //     $scope.Lootr.push(new Room('room1'));
-    //     $scope.Lootr.push(new Room('room2'));
-    // }
 
 	$scope.startTurn = function( rounds )
 	{

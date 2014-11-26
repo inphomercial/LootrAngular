@@ -97,9 +97,23 @@
 
 	Player.prototype = new Entity;
 
-	Player.prototype.tick = function() {
+	Player.prototype.tick = function( action ) {
+
 		console.log(this.name + " is standing waiting for action.");
+
+        if( action == Lootr.DIRECTIONS.NORTH || action == Lootr.DIRECTIONS.SOUTH || action == Lootr.DIRECTIONS.WEST || action == Lootr.DIRECTIONS.EAST) {
+            // Update entities Location
+            this.Movement._moveDirection(action);
+        }
 	}
+
+    Player.prototype.look = function() {
+
+        // Get the current room
+        var room = world.layout[this.Location.$x][this.Location.$y];
+
+        room.displayContents();
+    }
 
 	// Save the player object to a localStorage cookie
 	Player.prototype.save = function() {

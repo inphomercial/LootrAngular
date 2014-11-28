@@ -62,8 +62,15 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 	$scope.monster_in_room = false;
 	$scope.monster = {};
 
+	$scope.monsters_in_room = [];
+
 	// If a store is present
 	$scope.store_in_room = false;
+
+	// Keep an instance of the current room we are in
+	var x = $scope.player.Location.$x;
+	var y = $scope.player.Location.$y;
+	$scope.current_room = $scope.world.layout[x][y];
 
 	var init = function()
 	{
@@ -79,33 +86,6 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 	}
 
 	init();
-
-	// Starts the Auto Explore
-	$scope.start = function()
-	{
-		$scope.interval = setInterval(function() { $scope.startTurn(1);}, 4000);
-	}
-
-	// Stops the Auto Explore
-	$scope.stop = function()
-	{
-		clearInterval($scope.interval);
-	}
-
-	$scope.save = function()
-	{
-		console.log("in save");
-		StorageService.save('Lootr.player', $scope.player.save());
-	}
-
-	$scope.load = function()
-	{
-		console.log("Loading");
-
-		var player_obj = StorageService.get('Lootr.player');
-
-		$scope.player = new Lootr.entities.Player(player_obj);
-	}
 
 	$scope.highlightStat = function( item, mood )
 	{
@@ -199,14 +179,26 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 		return
 	}
 
-	$scope.moveNorth = function() {
+	$scope.move = function( direction ) {
+		$scope.world.tick(direction);
 
-		$scope.player.Movement._moveDirection("north");
+		$scope.current_room = $scope.world.layout[$scope.player.Location.$x][$scope.player.Location.$y];
+		$scope.current_room.displayContents();
+
+		if($scope.current_room.hasEntityType("Monster")) {
+			$scope.monsters_in_room = $scope.current_room.getEntityType("Monster");
+			$scope.monster_in_room = true;
+		}
+
+
+
+		/*if($scope.world.)
+		$scope.monster = what;
+		$scope.monster_in_room = true;*/
 	}
 
-	$scope.moveSouth = function() {
-
-		$scope.player.Movement._moveDirection("south");
+	$scope.look = function() {
+		$scope.player.look();
 	}
 
 	$scope.sell = function() {
@@ -284,6 +276,34 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 			UI.logDebug("==============");
 		}
 	}
+
+	/*
+	// Starts the Auto Explore
+	$scope.start = function()
+	{
+		$scope.interval = setInterval(function() { $scope.startTurn(1);}, 4000);
+	}
+
+	// Stops the Auto Explore
+	$scope.stop = function()
+	{
+		clearInterval($scope.interval);
+	}
+
+	$scope.save = function()
+	{
+		console.log("in save");
+		StorageService.save('Lootr.player', $scope.player.save());
+	}
+
+	$scope.load = function()
+	{
+		console.log("Loading");
+
+		var player_obj = StorageService.get('Lootr.player');
+
+		$scope.player = new Lootr.entities.Player(player_obj);
+	}*/
 
 	/*$interval(function() {
 		$scope.player.emit('Gold.giveGold', [2]);

@@ -7,7 +7,7 @@
 	 * @class Room
 	 * @extends Entity
 	 */
-	function Room ( args ) {
+	function Room ( args, world ) {
 		Entity.call(this);
 
         // And Sets the room ID
@@ -15,6 +15,7 @@
 
 		this.name = args.name;
 		this.desc = args.desc;
+        this.world = world;
 
         this.className = "Room";
 
@@ -38,20 +39,6 @@
 
         for(var i=0; i<this.entities.length; i++) {
             this.entities.splice(i, 1);
-            // if (this.entities[i].className == "Player" && entity.className == "Player") {
-            //     // Remove the Player from the room entities container
-            //     this.entities.splice(i, 1);
-            // }
-            // else if (this.entities[i].className == "Monster" && entity.className == "Monster") {
-            //     this.entities.splice(i, 1);
-            // }
-            // else if (this.entities[i].className == "Thing" && entity.className == "Thing") {
-            //     this.entities.splice(i, 1);
-            // }
-            // else
-            // {
-            //     console.log("Nothing in the room");
-            // }
         }
     }
 
@@ -77,37 +64,71 @@
         }
 
         // Some strange and annoying bug if x is negative or over postitive... not sure why.
-        if(x < 0 || x > world.layout.length - 1) {
+        if(x < 0 || x > this.world.layout.length - 1) {
             return false;
         }
 
-        if(world.layout[x][y] != undefined && world.layout[x][y].className == "Room") {
+        if(this.world.layout[x][y] != undefined && this.world.layout[x][y].className == "Room") {
             return true;
         }
 
         return false;
     }
 
-    Room.prototype.displayContents = function() {
-        for(var i=0; i<=this.entities.length; i++) {
-            if(this.entities[i] instanceof Lootr.entities.Player) {
-                console.log("A Player stands here.");
-            }
+    Room.prototype.hasEntityType = function( type ) {
+        
+        var result = false;        
 
-            if(this.entities[i] instanceof Lootr.entities.Monster) {
-                console.log("MOB: " + this.entities[i].desc);
-            }
-
-            if(this.entities[i] instanceof Lootr.entities.Thing) {
-                console.log("On Floor: " + this.entities[i].desc);
+        if(this.entities.length > 0) {
+            for (var i = 0; i < this.entities.length; i++) {
+                if(this.entities[i].className == type) {
+                    result = true;
+                }
             }
         }
 
-        console.log("Room Stats ======");
-        console.log("name: " + this.name);
-        console.log("desc: " + this.desc);
-        console.log("x: " + this.x);
-        console.log("y: " + this.y);
+        return result;
+    }
+
+    Room.prototype.getEntityType = function ( type ) {
+
+        var entities = [];
+        for (var i = 0; i < this.entities.length; i++) {
+            if(this.entities[i].className == type) {
+                entities.push(this.entities[i]);
+            }
+        }
+
+        return entities;
+    }
+
+    Room.prototype.displayContents = function() {
+
+        UI.logSpace();
+
+        for(var i=0; i<=this.entities.length; i++) {
+            if(this.entities[i] instanceof Lootr.entities.Player) {
+                UI.log(this.entities[i].name + " is here."); //@todo have a player.visualDesc based on health percentages for better descriptions
+                UI.logSpace();
+            }
+
+            if(this.entities[i] instanceof Lootr.entities.Monster) {
+                UI.log(this.entities[i].desc);
+                UI.logSpace();
+            }
+
+            if(this.entities[i] instanceof Lootr.entities.Thing) {
+                UI.log(this.entities[i].desc);
+                UI.logSpace();
+            }
+        }
+
+        console.log("## Room Stats ##");
+        console.log("# Entities : " + this.entities.length);
+        console.log("# Name: " + this.name);
+        console.log("# Desc: " + this.desc);
+        console.log("# X: " + this.x);
+        console.log("# Y: " + this.y);
 
     }
 

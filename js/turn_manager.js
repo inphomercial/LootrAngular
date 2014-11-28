@@ -63,25 +63,6 @@
 
 			player.emit("Progress.move", []);
 
-			// Player Action
-			//player.action();
-
-			// Update Player UI
-			//UI.logUpdatePlayer();
-
-			//UI.logSpace();
-
-			// Check if player still alive
-			/*if(player.status == Lootr.PLAYER_STATUS.DEAD)
-			{
-				UI.logDead();
-			}*/
-
-			/*if(game_state == Lootr.GAME_STATES.DEAD)
-			{
-				UI.logDead();
-			}*/
-
 			return what;
 		}
 	}

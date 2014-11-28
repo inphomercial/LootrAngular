@@ -38,6 +38,7 @@ World.prototype.generateMap = function(number_of_rooms) {
                var monster = MobBag.pluckMob();
                monster.Location.$x = i;
                monster.Location.$y = j;
+               monster.world = this;
                room.addEntity(monster);
            }
            // #########################
@@ -46,6 +47,16 @@ World.prototype.generateMap = function(number_of_rooms) {
        }
            // this.number_of_rooms++;
            this.layout.push(container);
+    }
+
+    this.addWorldToAllRooms();
+}
+
+World.prototype.addWorldToAllRooms = function() {
+    for (var i=0; i<this.layout.length; i++) {
+        for (var j=0; j<this.layout.length; j++) {
+            this.layout[i][j].world = this;
+        }
     }
 }
 
@@ -67,7 +78,7 @@ World.prototype.findStartingRoom = function() {
     race.y = ranY;
 
     // Initialize player object
-    var player = new Lootr.entities.Player(race, name);
+    var player = new Lootr.entities.Player(race, name, this);
 
     startingRoom.addEntity(player);
 

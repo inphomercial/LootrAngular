@@ -53,7 +53,7 @@ Movement.prototype.generateRandomDirection = function() {
 Movement.prototype._moveDirection = function ( direction ) {
 
     // Get the current room
-    var room = world.layout[this.$entity.Location.$x][this.$entity.Location.$y];
+    var room = this.$entity.world.layout[this.$entity.Location.$x][this.$entity.Location.$y];
 
     // Check if direction leads to a room
     if(room.canMoveInDirection(direction) == false) {
@@ -68,12 +68,16 @@ Movement.prototype._moveDirection = function ( direction ) {
     room.removeEntity(this.$entity);
 
     // Get the moved to room and add the Entity to it.
-    var new_room = world.layout[this.$entity.Location.$x][this.$entity.Location.$y];
+    var new_room = this.$entity.world.layout[this.$entity.Location.$x][this.$entity.Location.$y];
     new_room.addEntity(this.$entity);
 
     // Show what dir a mob moves
     console.log(this.$entity.name + " moves " + direction);
 
-    // Say what's in the new room.
-    // new_room.displayContents();
+    // Show new room contents for player only. {HACKY}
+    if(this.$entity.className == "Player") {
+        // Say what's in the new room.
+        new_room.displayContents();    
+    }
+    
 };

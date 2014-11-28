@@ -20,7 +20,7 @@
     			<div class="row">
     				LOOTr! <span id="game_version" style="font-size: .5em;">v{{ Lootr.VERSION }} </span>
     			</div>
-    			<div class="row">
+    			<!-- <div class="row">
 	    			<button class="button btn-default btn-xs" ng-click="startTurn(100)">Move 100</button>
 	    			<button class="button btn-default btn-xs" onclick="location.reload();">Restart</button>
 	    			<button class="button btn-default btn-xs" ng-click="start();">Auto Explore</button>
@@ -28,7 +28,7 @@
 	    			<button class="button btn-default btn-xs" ng-click="save();">Save</button>
 	    			<button class="button btn-default btn-xs" ng-click="load();">Load</button>
 	    			<button class="button btn-default btn-xs" ng-click="generateWorld();">Generate World</button>
-	    		</div>
+	    		</div> -->
     		</h1>
 		</div>
 	</div>
@@ -266,15 +266,21 @@
 			<br>
 			== Actions ==
 			<br>
-			<button ng-disabled="monster_in_room" class="button btn-primary btn-block" ng-click="startTurn(1)">Move</button>
-			<button ng-disabled="!monster_in_room" class="button btn-primary btn-block" ng-click="attack();">Attack!!</button>
-			<button ng-disabled="!monster_in_room" class="button btn-primary btn-block" ng-click="flee();">Flee</button>
-			<button ng-disabled="!store_in_room" class="button btn-primary btn-block" ng-click="sell();">Sell Items</button>
+			<button ng-hide="monster_in_room" class="button btn-primary btn-block" ng-click="startTurn(1)">Move</button>
+			<button ng-hide="!monster_in_room" class="button btn-primary btn-block" ng-click="attack();">Attack!!</button>
+			<button ng-hide="!monster_in_room" class="button btn-primary btn-block" ng-click="flee();">Flee</button>
+			<button ng-hide="!store_in_room" class="button btn-primary btn-block" ng-click="sell();">Sell Items</button>
 
-			<button ng-disabled="" class="button btn-primary btn-block" ng-click="moveNorth();">Move North</button>
-			<button ng-disabled="" class="button btn-primary btn-block" ng-click="moveWest();">Move West</button>
-			<button ng-disabled="" class="button btn-primary btn-block" ng-click="moveSouth();">Move South</button>
-			<button ng-disabled="" class="button btn-primary btn-block" ng-click="moveEast();">Move East</button>
+			<button ng-disabled="" class="button btn-primary btn-block" ng-click="move('north');">Move North</button>
+			<button ng-disabled="" class="button btn-primary btn-block" ng-click="move('west');">Move West</button>
+			<button ng-disabled="" class="button btn-primary btn-block" ng-click="move('south');">Move South</button>
+			<button ng-disabled="" class="button btn-primary btn-block" ng-click="move('east');">Move East</button>
+
+			<button ng-disabled="" class="button btn-primary btn-block" ng-click="look();">Look in room</button>
+			<br>
+			<span ng-repeat="monster in monsters_in_room">
+				{{ monster.name }}
+			</span>
 		</div>
 
 		<div class="col-xs-3" style="padding-left: 50px">

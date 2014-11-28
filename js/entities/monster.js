@@ -5,7 +5,7 @@
 	 * @class Monster
 	 * @extends Entity
 	 */
-	function Monster ( args ) {
+	function Monster ( args, world ) {
 		Entity.call(this);
 
 		this.component('Health', { hp: args.max_hp, max_hp: args.max_hp });
@@ -28,6 +28,7 @@
 
 		this.desc = args.desc;
 		this.name = args.name;
+		this.world = world;
 
 		this.className = "Monster";
 

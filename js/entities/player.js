@@ -5,7 +5,7 @@
 	 * @class Player
 	 * @extends Entity
 	 */
-	function Player ( args, name ) {
+	function Player ( args, name, world ) {
 		Entity.call(this);
 
         // Hacky?
@@ -13,6 +13,7 @@
 
 		this.race = args.race;
 		this.name = name;
+		this.world = world;
 
 		// @todo it wont let me do args.Health.hp checks?!?
 		this.component('Health',
@@ -101,16 +102,25 @@
 
 		console.log(this.name + " is standing waiting for action.");
 
+		// 1 Possible action per player tick
+
+		// MOVE
         if( action == Lootr.DIRECTIONS.NORTH || action == Lootr.DIRECTIONS.SOUTH || action == Lootr.DIRECTIONS.WEST || action == Lootr.DIRECTIONS.EAST) {
             // Update entities Location
             this.Movement._moveDirection(action);
         }
+
+        // CONSUME
+
+        // WAIT
+
+        // EQUIP/REMOVE
 	}
 
     Player.prototype.look = function() {
 
         // Get the current room
-        var room = world.layout[this.Location.$x][this.Location.$y];
+        var room = this.world.layout[this.Location.$x][this.Location.$y];
 
         room.displayContents();
     }

@@ -32,13 +32,27 @@
 
     // Add entity object to entities array
 	Room.prototype.addEntity = function(entity) {
+
+        console.log("Added to room");
+        console.log(entity);
+
         this.entities.push(entity);
 	}
 
     Room.prototype.removeEntity = function(entity) {
 
         for(var i=0; i<this.entities.length; i++) {
-            this.entities.splice(i, 1);
+            
+            // Only a single ID & ClassName match
+            if(entity.id == this.entities[i].id && entity.className == this.entities[i].className) {
+
+                var removed = this.entities.splice(i, 1);    
+                console.log("Removed entity :");            
+                console.log(removed[0]);
+            }
+            else {
+                continue;
+            }
         }
     }
 

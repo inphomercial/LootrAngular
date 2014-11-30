@@ -1,3 +1,20 @@
+// A real recursive array clone that can handle 2d arrays
+//http://stackoverflow.com/questions/2294703/multidimensional-array-cloning-using-javascript
+Array.prototype.clone = function() {
+    var isArr = function(elm){
+        return String(elm.constructor).match(/array/i) ? true : false;
+    }
+    var cloner = function(arr){
+        var arr2 = arr.slice(0), len = arr2.length;
+        for(var i=0; i < len; i++){
+            if( isArr(arr2[i]) )
+               arr2[i]=cloner( arr2[i] );
+        }
+        return arr2;
+    }
+    return cloner(this);
+}
+
 var LootrApp = angular.module('LootrApp', ['ui.bootstrap', 'LocalStorageModule'])
 	.value('Lootr', Lootr);
 
@@ -189,16 +206,11 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 			$scope.monsters_in_room = $scope.current_room.getEntityType("Monster");
 			$scope.monster_in_room = true;
 		}
-
-
-
-		/*if($scope.world.)
-		$scope.monster = what;
-		$scope.monster_in_room = true;*/
 	}
 
 	$scope.look = function() {
 		$scope.player.look();
+		$scope.world.tick();
 	}
 
 	$scope.sell = function() {

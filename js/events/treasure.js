@@ -13,7 +13,6 @@
 			// The ability to manually pass in the type of treasure to generate
 			if(type && rarity) {
 				var item = Treasure._rollOnTypeTable( type, rarity );
-				UI.logDebug(item);
 			}
 			else if(type) {
 				var item = Treasure._rollOnTypeTable( type );
@@ -26,11 +25,11 @@
 			}
 
 			// Build Thing Entity
-			var thing_item = new Lootr.entities.Thing(item);
+			var complete_item = new Lootr.entities.Thing(item);
 
-			UI.logDebug("Generated Treasure", thing_item);
+			UI.logDebug("Generated Treasure", complete_item);
 
-			return thing_item;
+			return complete_item;
 		},
 
 		_buildLocalLootTable: function() {
@@ -224,6 +223,7 @@
 				break;
 			}
 
+			// Check for item bonuses & perfect roll chance
 			// if item is not common
 			if(item.rarity != Lootr.ITEM_RARITY.COMMON)
 			{

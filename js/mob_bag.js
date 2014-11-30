@@ -57,35 +57,6 @@ var MobBag = {
 		return false;
 	},
 
-	/*// Passes in the JSON object to populate Monster options for components and values
-	_constructOptions: function( m ) {
-
-		console.log(m);
-
-		var options = {
-			desc: m.desc,
-			atk: m.atk,
-			def: m.def,
-			mag: m.mag,
-			max_hp: m.max_hp,
-			hp: m.max_hp,
-			level: m.level,
-			attack_messages: m.attack_messages,
-			death_message: m.death_message,
-			name: m.name
-		}
-
-		return options;
-	},*/
-
-	/*// Grab a single monster
-	// @todo Implement so this actually uses the player_level, ref events/monster.js
-	_grabEventMonster: function( player_level ) {
-		var monster = event_monster[Math.floor(Math.random()*event_monster.length)];
-
-		return monster;
-	},*/
-
 	// Grab lots of monsters
 	_generateAmountByLevel: function( amount, level ) {
 

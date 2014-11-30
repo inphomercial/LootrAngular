@@ -1,12 +1,17 @@
 (function (namespace, Lootr) {
 	'use strict';
 
+	var monster_id_counter = 0;
+
 	/**
 	 * @class Monster
 	 * @extends Entity
 	 */
 	function Monster ( args, world ) {
 		Entity.call(this);
+
+		// And Sets the Monster UniqueID
+        this._setId();
 
 		this.component('Health', { hp: args.max_hp, max_hp: args.max_hp });
 		this.component('Atk', { value: args.atk });
@@ -50,6 +55,10 @@
         var dir = this.Movement.generateRandomDirection();
         this.Movement._moveDirection(dir);
 	}
+
+	Monster.prototype._setId = function () {
+        this.id = ++monster_id_counter;
+    };
 
 	namespace.Monster = Monster;
 })(Lootr.entities, Lootr);

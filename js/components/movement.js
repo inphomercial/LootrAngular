@@ -75,9 +75,9 @@ Movement.prototype._moveDirection = function ( direction ) {
     console.log(this.$entity.name + " moves " + direction);
 
     // Show new room contents for player only. {HACKY}
-    if(this.$entity.className == "Player") {
-        // Say what's in the new room.
-        new_room.displayContents();    
-    }
+    // if(this.$entity.className == "Player") {
+    //     // Say what's in the new room.
+    //     new_room.displayContents();    
+    // }
     
 };

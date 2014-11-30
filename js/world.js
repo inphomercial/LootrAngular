@@ -25,7 +25,7 @@ World.prototype.generateMap = function(number_of_rooms) {
            var treasure = Lootr.Treasure.generate();
            room.addEntity(treasure);
 
-           if(Roller.roll(.20)) {
+           if(Roller.roll(.40)) {
                // # Mobs
                // check if MobBag is empty
                if(MobBag.isBagEmpty())
@@ -68,11 +68,11 @@ World.prototype.findStartingRoom = function() {
     var ranY = Roller.randomNumber(0, this.layout.length);
     var startingRoom = this.layout[ranX][ranY];
 
-	// determine player race
-	var race = race_table[Math.floor(Math.random() * race_table.length)];
+	  // determine player race
+	  var race = race_table[Math.floor(Math.random() * race_table.length)];
 
     // determine player name
-	var name = name_table[Math.floor(Math.random() * name_table.length)];
+	  var name = name_table[Math.floor(Math.random() * name_table.length)];
 
     race.x = ranX;
     race.y = ranY;
@@ -97,7 +97,6 @@ World.prototype.tick = function(action) {
 
 World.prototype._getAllEntities = function() {
 
-  var dirty = [];
   var en = [];
   var player;
 
@@ -107,15 +106,14 @@ World.prototype._getAllEntities = function() {
           for(var a=0; a<this.layout[i][j].entities.length; a++) {
 
               // Pulling out player to put him first in the array
-              if(this.layout[i][j].entities[a].className == "Player") {
+             /* if(this.layout[i][j].entities[a].className == "Player") {
 
-                  player = this.layout[i][j].entities[a];
-
-                  // Remove player from pool to prevent dup copies in array
-                  this.layout[i][j].entities.splice(this.layout[i][j].entities[a], 1);
+                  if(player === undefined) {
+                      player = this.layout[i][j].entities[a];
+                  }
 
                   continue;
-              }
+              }*/
 
               en.push(this.layout[i][j].entities[a]);
           }
@@ -124,7 +122,7 @@ World.prototype._getAllEntities = function() {
 
   // Throw player at the start of the array so player has the first move.
   // @todo Make it so that instead of the player always going first, have everything have a speed. Order by quickest first.
-  en.unshift(player);
+  //en.unshift(player);
 
   return en;
 }

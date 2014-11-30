@@ -122,7 +122,7 @@
         // Get the current room
         var room = this.world.layout[this.Location.$x][this.Location.$y];
 
-        room.displayContents();
+        // room.displayContents();
     }
 
 	// Save the player object to a localStorage cookie

@@ -42,12 +42,12 @@
     Room.prototype.removeEntity = function(entity) {
 
         for(var i=0; i<this.entities.length; i++) {
-            
+
             // Only a single ID & ClassName match
             if(entity.id == this.entities[i].id && entity.className == this.entities[i].className) {
 
-                var removed = this.entities.splice(i, 1);    
-                console.log("Removed entity :");            
+                var removed = this.entities.splice(i, 1);
+                console.log("Removed entity :");
                 console.log(removed[0]);
             }
             else {
@@ -90,8 +90,8 @@
     }
 
     Room.prototype.hasEntityType = function( type ) {
-        
-        var result = false;        
+
+        var result = false;
 
         if(this.entities.length > 0) {
             for (var i = 0; i < this.entities.length; i++) {

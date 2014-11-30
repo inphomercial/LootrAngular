@@ -35,7 +35,7 @@
 
 	<div class="row">
 		<div class="col-xs-1"></div>
-		<div class="col-xs-3" style="padding-left: 0px;">
+		<div class="col-xs-2" style="padding-left: 0px;">
 			<span id="player1">
 				<br>
 				<!-- <span>Game State : <span id="game_state"></span> {{ Lootr.GAME_STATES }} </span><br> -->
@@ -258,11 +258,11 @@
 
 			</span>
 		</div>
-		<div class="col-xs-4">
+		<div class="col-xs-3">
 			<div id="log"><br></div>
 		</div>
 
-		<div class="col-xs-1" style="padding-left: 0px;">
+		<div class="col-xs-2" style="padding-left: 0px;">
 			<br>
 			== Actions ==
 			<br>
@@ -277,10 +277,32 @@
 			<button ng-disabled="" class="button btn-primary btn-block" ng-click="move('east');">Move East</button>
 
 			<button ng-disabled="" class="button btn-primary btn-block" ng-click="look();">Look in room</button>
-			<br>
-			<span ng-repeat="monster in monsters_in_room">
-				{{ monster.name }}
-			</span>
+            <br>
+
+            Monsters #<br>
+            <span ng-repeat="entity in current_room.entities">
+                <span ng-show="entity.className == 'Monster'">
+                    {{ entity.name }}<br>
+                </span>
+            </span>
+            <br><br>
+            Things #<br>
+            <span ng-repeat="entity in current_room.entities">
+                <span ng-show="entity.className == 'Thing'" ng-mouseenter="highlightStat(entity)" ng-mouseleave="unHighlightStat()">
+                    <!-- <button class="btn btn&#45;default btn&#45;sm btn&#45;xs dropdown&#45;toggle entity.color" style="width: 100%" type="button" data&#45;toggle="dropdown"> -->
+                    <button ng-class="entity.color" class="btn btn-default btn-xs dropdown-toggle" style="width: 100%" type="button" data-toggle="dropdown">
+					    {{ entity.name }} <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu default" role="menu" style="padding: 5px;">
+					    <li ng-show="!inventory.Consumable.$is_consumable" ng-click="pickupItem(entity)" ng-mouseleave="unHighlightStat()">
+					    	<button class="btn btn-default btn-sm" style="width: 100%" type="button">
+								Pick Up<br>
+							</button>
+					    </li>
+                    </ul>
+                </span>
+            </span>
+
 		</div>
 
 		<div class="col-xs-3" style="padding-left: 50px">
@@ -307,6 +329,12 @@
 					    <li ng-show="store_in_room" ng-click="sellItem(inventory)">
 					    	<button class="btn btn-default btn-sm" style="width: 100%" type="button">
 								Sell Item<br>
+							</button>
+					    </li>
+					    <!-- <li ng&#45;show="inventory.Droppable.$is_droppable" ng&#45;click="dropItem(inventory)"> -->
+					    <li ng-show="true" ng-click="dropItem(inventory)">
+					    	<button class="btn btn-default btn-sm" style="width: 100%" type="button">
+								Drop<br>
 							</button>
 					    </li>
 					    <li>Slot : {{ inventory.type }} </li>

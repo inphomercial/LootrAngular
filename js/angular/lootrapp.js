@@ -76,18 +76,18 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 	$scope.total_rounds = 0;
 
 	// Keeps track if a monster is in the room
-	$scope.monster_in_room = false;
-	$scope.monster = {};
+	// $scope.monster_in_room = false;
+	// $scope.monster = {};
 
-	$scope.monsters_in_room = [];
+	// $scope.monsters_in_room = [];
 
 	// If a store is present
 	$scope.store_in_room = false;
 
 	// Keep an instance of the current room we are in
-	var x = $scope.player.Location.$x;
-	var y = $scope.player.Location.$y;
-	$scope.current_room = $scope.world.layout[x][y];
+	// var x = $scope.player.Location.$x;
+	// var y = $scope.player.Location.$y;
+	// $scope.current_room = $scope.world.layout[x][y];
 
 	var init = function()
 	{
@@ -103,6 +103,15 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 	}
 
 	init();
+
+    $scope.updateRoom = function() {
+
+        // Keep an instance of the current room we are in
+        var x = $scope.player.Location.$x;
+        var y = $scope.player.Location.$y;
+        $scope.current_room = $scope.world.layout[x][y];
+        $scope.current_room.displayContents();
+    }
 
 	$scope.highlightStat = function( item, mood )
 	{
@@ -199,18 +208,20 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 	$scope.move = function( direction ) {
 		$scope.world.tick(direction);
 
-		$scope.current_room = $scope.world.layout[$scope.player.Location.$x][$scope.player.Location.$y];
-		$scope.current_room.displayContents();
+		// $scope.current_room = $scope.world.layout[$scope.player.Location.$x][$scope.player.Location.$y];
+		// $scope.current_room.displayContents();
+        $scope.updateRoom();
 
-		if($scope.current_room.hasEntityType("Monster")) {
-			$scope.monsters_in_room = $scope.current_room.getEntityType("Monster");
-			$scope.monster_in_room = true;
-		}
+		// if($scope.current_room.hasEntityType("Monster")) {
+		// 	$scope.monsters_in_room = $scope.current_room.getEntityType("Monster");
+		// 	$scope.monster_in_room = true;
+		// }
 	}
 
 	$scope.look = function() {
 		$scope.player.look();
 		$scope.world.tick();
+        $scope.updateRoom();
 	}
 
 	$scope.sell = function() {
@@ -233,6 +244,40 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 		// Test
 		$scope.player.Atk.mod_pos = "";
 	}
+
+    $scope.pickupItem = function( item )
+    {
+        UI.logDebug("Picking up ", item);
+        $scope.player.emit('Inventory.giveItem', [item]);
+
+        // remove item from room
+        $scope.current_room.removeEntity(item);
+
+        // Update display
+        UI.log("You pick up a " + item.name);
+        UI.logSpace();
+
+        // Clear highlights
+        $scope.unHighlightStat();
+    }
+
+    $scope.dropItem = function( item )
+    {
+        UI.logDebug("Dropping item ", item);
+
+        // Remove from player.inventory
+        $scope.player.emit('Inventory.removeItem', [item]);
+
+        // add item to room
+        $scope.current_room.addEntity(item);
+
+        // Update display
+        UI.log("You drop a " + item.name);
+        UI.logSpace();
+
+        // Clear highlight from interactin with item
+        $scope.unhighlightStat();
+    }
 
 	$scope.unequipItem = function( slot, index )
 	{

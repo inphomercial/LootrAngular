@@ -266,9 +266,9 @@
 			<br>
 			== Actions ==
 			<br>
-			<button ng-hide="monster_in_room" class="button btn-primary btn-block" ng-click="startTurn(1)">Move</button>
-			<button ng-hide="!monster_in_room" class="button btn-primary btn-block" ng-click="attack();">Attack!!</button>
-			<button ng-hide="!monster_in_room" class="button btn-primary btn-block" ng-click="flee();">Flee</button>
+			<!-- <button ng&#45;hide="monster_in_room" class="button btn&#45;primary btn&#45;block" ng&#45;click="startTurn(1)">Move</button> -->
+			<!-- <button ng&#45;hide="!monster_in_room" class="button btn&#45;primary btn&#45;block" ng&#45;click="attack();">Attack!!</button> -->
+			<!-- <button ng&#45;hide="!monster_in_room" class="button btn&#45;primary btn&#45;block" ng&#45;click="flee();">Flee</button> -->
 			<button ng-hide="!store_in_room" class="button btn-primary btn-block" ng-click="sell();">Sell Items</button>
 
 			<button ng-disabled="" class="button btn-primary btn-block" ng-click="move('north');">Move North</button>
@@ -282,24 +282,38 @@
             Monsters #<br>
             <span ng-repeat="entity in current_room.entities">
                 <span ng-show="entity.className == 'Monster'">
-                    {{ entity.name }}<br>
+                    <div class="btn-group">
+                        <button ng-class="entity.color" class="btn btn-default dropdown-toggle" style="width: 100%" type="button" data-toggle="dropdown">
+                            {{ entity.name }} <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu default" role="menu" style="padding: 5px;">
+                            <li ng-show="true" ng-click="attack(entity)">
+                                <button class="btn btn-default btn-sm" style="width: 100%" type="button">
+                                    Attack<br>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
                 </span>
             </span>
+
             <br><br>
+
             Things #<br>
             <span ng-repeat="entity in current_room.entities">
                 <span ng-show="entity.className == 'Thing'" ng-mouseenter="highlightStat(entity)" ng-mouseleave="unHighlightStat()">
-                    <!-- <button class="btn btn&#45;default btn&#45;sm btn&#45;xs dropdown&#45;toggle entity.color" style="width: 100%" type="button" data&#45;toggle="dropdown"> -->
-                    <button ng-class="entity.color" class="btn btn-default btn-xs dropdown-toggle" style="width: 100%" type="button" data-toggle="dropdown">
-					    {{ entity.name }} <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu default" role="menu" style="padding: 5px;">
-					    <li ng-show="!inventory.Consumable.$is_consumable" ng-click="pickupItem(entity)" ng-mouseleave="unHighlightStat()">
-					    	<button class="btn btn-default btn-sm" style="width: 100%" type="button">
-								Pick Up<br>
-							</button>
-					    </li>
-                    </ul>
+                    <div class="btn-group">
+                        <button ng-class="entity.color" class="btn btn-default dropdown-toggle" style="width: 100%" type="button" data-toggle="dropdown">
+                            {{ entity.name }} <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu default" role="menu" style="padding: 5px;">
+                            <li ng-show="!inventory.Consumable.$is_consumable" ng-click="pickupItem(entity)" ng-mouseleave="unHighlightStat()">
+                                <button class="btn btn-default btn-sm" style="width: 100%" type="button">
+                                    Pick Up<br>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
                 </span>
             </span>
 
@@ -452,6 +466,7 @@
 
 	<!-- Angular App -->
     <script src="js/angular/lootrapp.js"></script>
+    <script src="js/angular/storageservice.js"></script>
 
   </body>
 </html>

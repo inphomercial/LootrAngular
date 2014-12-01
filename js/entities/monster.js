@@ -52,6 +52,17 @@
 	Monster.prototype.tick = function() {
 		console.log("A " + this.name + " is thinking what to do..");
 
+
+        // if there a player in the room
+        var current_room = this.world.layout[this.Location.$x][this.Location.$y];
+        if(current_room.hasEntityType("Player")) {
+            var player = current_room.getEntityType("Player");
+            var battle = new BattleEngine(this, player);
+            var results = battle.fight();
+
+            console.log(results);
+        }
+
         var dir = this.Movement.generateRandomDirection();
         this.Movement._moveDirection(dir);
 	}

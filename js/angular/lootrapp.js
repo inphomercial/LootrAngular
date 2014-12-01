@@ -18,91 +18,27 @@ Array.prototype.clone = function() {
 var LootrApp = angular.module('LootrApp', ['ui.bootstrap', 'LocalStorageModule'])
 	.value('Lootr', Lootr);
 
-LootrApp.factory('StorageService', function(localStorageService) {
-
-    var StorageService = {
-
-        save: function( key, data )
-        {
-            localStorageService.set(key, data);
-        },
-
-        get: function( key )
-        {
-            var result = localStorageService.get(key);
-
-            if(result === null || result.length < 0)
-            {
-                return [];
-            }
-            else
-            {
-                return result;
-            }
-        },
-
-        clear: function()
-        {
-            console.log("clear");
-
-            localStorageService.clearAll();
-        }
-    };
-
-    return StorageService;
-});
-
 LootrApp.controller('LootrController', function ($scope, Lootr, $interval, StorageService) {
 
     $scope.world = new World();
-
     $scope.world.generateMap(5);
 
     $scope.player = $scope.world.findStartingRoom();
 
-	// determine player race
-	// var race = race_table[Math.floor(Math.random() * race_table.length)];
-    //
-	// // determine player name
-	// var name = name_table[Math.floor(Math.random() * name_table.length)];
-    //
-	// // Initialize player object
-	// $scope.player = new Lootr.entities.Player(race, name);
+    // Lootr
+    $scope.Lootr = Lootr;
 
-	// Lootr
-	$scope.Lootr = Lootr;
+    // Keeps track of total rounds
+    $scope.total_rounds = 0;
 
-	// Keeps track of total rounds
-	$scope.total_rounds = 0;
+    // If a store is present
+    $scope.store_in_room = false;
 
-	// Keeps track if a monster is in the room
-	// $scope.monster_in_room = false;
-	// $scope.monster = {};
+    UI.log("You desend a stair way into a dark abyss....", UI.COLORS.ROOM_NORMAL, 2000);
+    UI.logSpace();
 
-	// $scope.monsters_in_room = [];
-
-	// If a store is present
-	$scope.store_in_room = false;
-
-	// Keep an instance of the current room we are in
-	// var x = $scope.player.Location.$x;
-	// var y = $scope.player.Location.$y;
-	// $scope.current_room = $scope.world.layout[x][y];
-
-	var init = function()
-	{
-       /* world.generateMap(5);
-
-        $scope.player = world.findStartingRoom();*/
-
-		UI.log("You desend a stair way into a dark abyss....", UI.COLORS.ROOM_NORMAL, 2000);
-		UI.logSpace();
-
-		UI.log("You light your torch.", UI.COLORS.ROOM_TREASURE, 10000);
-		UI.logSpace();
-	}
-
-	init();
+    UI.log("You light your torch.", UI.COLORS.ROOM_TREASURE, 10000);
+    UI.logSpace();
 
     $scope.updateRoom = function() {
 
@@ -165,7 +101,7 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 		$scope.player.emit("Inventory.removeItem", [consumable]);
 	}
 
-	$scope.attack = function() {
+	$scope.attack = function(monster) {
 
 		if($scope.player.Health.isDead())
 		{
@@ -175,15 +111,15 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 		}
 
 		console.log("attacking!!");
-		var battle = new BattleEngine($scope.monster, $scope.player);
+		var battle = new BattleEngine(monster, $scope.player);
 
 		var results = battle.fight();
 
-		if(!$scope.player.Health.isDead() && results)
-		{
-			$scope.monster = {};
-			$scope.monster_in_room = false;
-		}
+		// if(!$scope.player.Health.isDead() && results)
+		// {
+			// $scope.monster = {};
+			// $scope.monster_in_room = false;
+		// }
 
 		if($scope.player.Health.isDead())
 		{
@@ -208,14 +144,7 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 	$scope.move = function( direction ) {
 		$scope.world.tick(direction);
 
-		// $scope.current_room = $scope.world.layout[$scope.player.Location.$x][$scope.player.Location.$y];
-		// $scope.current_room.displayContents();
         $scope.updateRoom();
-
-		// if($scope.current_room.hasEntityType("Monster")) {
-		// 	$scope.monsters_in_room = $scope.current_room.getEntityType("Monster");
-		// 	$scope.monster_in_room = true;
-		// }
 	}
 
 	$scope.look = function() {

@@ -13,8 +13,8 @@
         // And Sets the room ID
         this._setId();
 
-		this.name = args.name;
-		this.desc = args.desc;
+		this.standing_desc = args.standing_desc;
+		this.enter_desc = args.enter_desc;
         this.world = world;
 
         this.className = "Room";
@@ -118,6 +118,8 @@
 
     Room.prototype.displayContents = function() {
 
+        UI.logSpace();
+        UI.log(this.standing_desc);
         UI.logSpace();
 
         for(var i=0; i<=this.entities.length; i++) {

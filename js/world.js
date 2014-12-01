@@ -15,10 +15,11 @@ World.prototype.generateMap = function(number_of_rooms) {
        for (var j=0; j<number_of_rooms; j++) {
 
            // Starting Room Seed
-           var name = Math.random().toString(36).substring(2);
-           var desc = Math.random().toString(36).substring(5);
+	       var room_cfg = room_base[Math.floor(Math.random() * room_base.length)];
+           // var name = Math.random().toString(36).substring(2);
+           // var desc = Math.random().toString(36).substring(5);
 
-           var room = new Lootr.rooms.Room({name:name, desc:desc, x:i, y:j});
+           var room = new Lootr.rooms.Room({name:room_cfg.name, desc:room_cfg.desc, x:i, y:j});
 
            // #### EVENTS PER ROOM ####
            // # Randomize Treasures
@@ -80,6 +81,8 @@ World.prototype.findStartingRoom = function() {
     var player = new Lootr.entities.Player(race, name, this);
 
     startingRoom.addEntity(player);
+
+    startingRoom.displayContents();
 
     return player;
 }

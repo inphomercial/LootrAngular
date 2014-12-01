@@ -45,7 +45,6 @@ World.prototype.generateMap = function(number_of_rooms) {
 
            container.push(room);
        }
-           // this.number_of_rooms++;
            this.layout.push(container);
     }
 
@@ -127,87 +126,3 @@ World.prototype._getAllEntities = function() {
   return en;
 }
 
-
-
-/*World.prototype.getOppositeDirection = function(direction) {
-    if( direction == Lootr.DIRECTIONS.NORTH ) {
-        return Lootr.DIRECTIONS.SOUTH;
-    }
-
-    if( direction == Lootr.DIRECTIONS.SOUTH ) {
-        return Lootr.DIRECTIONS.NORTH;
-    }
-
-    if( direction == Lootr.DIRECTIONS.WEST ) {
-        return Lootr.DIRECTIONS.EAST;
-    }
-
-    if( direction == Lootr.DIRECTIONS.EAST ) {
-        return Lootr.DIRECTIONS.WEST;
-    }
-}*/
-
-// World.prototype.linkRooms = function(room1, room2, direction) {
-//     if( room1.isDirectionAvailable(direction)
-//         && room1.isDirectionLinkAvailable(direction)
-//         && room2.isDirectionAvailable(this.getOppositeDirection(direction))
-//         && room2.isDirectionLinkAvailable(this.getOppositeDirection(direction))
-//     ) {
-//       room1["link_" + direction] = room2.id;
-//       room2["link_" + this.getOppositeDirection(direction)] = room1.id;
-//     } else {
-//       console.log("cannot link rooms " + direction);
-//     }
-// }
-//
-
-// World.prototype.printMap = function() {
-//
-//     for (var i=0; i<this.layout.length; i++) {
-//         for ( var j=0; j<this.layout.length; j++) {
-//             console.log("X");
-//             // console.log(this.layout[i][j]);
-//         }
-//     }
-// }
-
-/*World.prototype.printRoom = function(x, y) {
-
-    var room = this.layout[x][y];
-
-    console.log(room);
-    console.table(room);
-}
-
-World.prototype.LookInDirection = function(currentX, currentY, direction) {
-
-    if(direction == Lootr.DIRECTIONS.NORTH) {
-        currentY--;
-    }
-
-    if(direction == Lootr.DIRECTIONS.SOUTH) {
-       currentY++;
-    }
-
-    if(direction == Lootr.DIRECTIONS.WEST) {
-       currentX--;
-    }
-
-    if(direction == Lootr.DIRECTIONS.EAST) {
-       currentX++;
-    }
-
-    for (var x=0; x<this.layout.length; x++) {
-        for(var y=0; y<this.layout.length; y++) {
-            if(currentX == x && currentY == y) {
-                var room = this.layout[x][y];
-
-                if(typeof room === 'undefined') {
-                    return false;
-                } else {
-                    return room;
-                }
-            }
-        }
-    }
-}*/

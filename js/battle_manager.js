@@ -1,13 +1,13 @@
 
-function BattleEngine( monster, entitiy ) {
+function BattleEngine( attacker, foe ) {
 
-	this.m = monster;
-	this.e = entitiy;
+	this.attacker = attacker;
+	this.foe = foe;
 }
 
 BattleEngine.prototype.fight = function() {
 
-	if(!(this.m.Health.isDead() && this.e.Health.isDead()))
+	if(!(this.attacker.Health.isDead() && this.foe.Health.isDead()))
 	{
 		console.log("everyone is alive");
 
@@ -20,31 +20,31 @@ BattleEngine.prototype.fight = function() {
 			UI.logDebug("++++ ENTITY ATTACK ++++");
 			// Find out how much damage you will do
 			// random damage from 1-atk.$stat
-			var e_atk_amount = Math.floor(Math.random() * this.e.Atk.$stat + 1);
-			UI.logDebug("entity attack amount ", e_atk_amount);
+			var attacker_atk_amount = Math.floor(Math.random() * this.attacker.Atk.$stat + 1);
+			UI.logDebug(this.attacker.name + " attack amount ", attacker_atk_amount);
 
 			// random def from 0-def.$stat
-			var m_def_amount = Math.floor(Math.random() * this.m.Def.$stat);
-			UI.logDebug("monster def amount ", m_def_amount);
+			var foe_def_amount = Math.floor(Math.random() * this.foe.Def.$stat);
+			UI.logDebug(this.foe.name + " def amount ", foe_def_amount);
 
 			// If atkamount > defamount apply damage
-			var remaining = e_atk_amount - m_def_amount;
+			var remaining = attacker_atk_amount - foe_def_amount;
 			UI.logDebug("actual damage ", remaining);
 			if(remaining > 0)
 			{
 				// Apply damage
-				this.m.Health._giveDamage(remaining);
+				this.foe.Health._giveDamage(remaining);
 
 				// Display hit message
 				UI.logSpace();
-				UI.log("You hit the " + this.m.name + " for [" + remaining + "]", UI.COLORS.FIGHT);
+				UI.log("The " + this.attacker.name + " hits " + this.foe.name + " for [" + remaining + "]", UI.COLORS.FIGHT);
 				UI.logSpace();
 			}
 			else
 			{
 				// Display hit but no damage message
 				UI.logSpace();
-				UI.log("Your hit didnt even phase the " + this.m.name, UI.COLORS.FIGHT);
+				UI.log("Your hit didnt even phase the " + this.foe.name, UI.COLORS.FIGHT);
 				UI.logSpace();
 			}
 		}
@@ -59,77 +59,22 @@ BattleEngine.prototype.fight = function() {
 		UI.logDebug("++++++++++++++++");
 
 		// Check for death
-		if(this.e.Health.isDead())
+		if(this.foe.Health.isDead())
 		{
-			console.log("player died");
-		}
+			console.log(this.foe.name + " has died..");
 
-		// Determine if they hit
-		var hit = Math.floor(Math.random() * 100);
-		if(hit > 50)
-		{
-			UI.logDebug("++++ MONSTER ATTACK ++++");
-			var m_atk_amount = Math.floor(Math.random() * this.m.Atk.$stat + 1);
-			var e_def_amount = Math.floor(Math.random() * this.e.Def.$stat);
-			var remaining = m_atk_amount - e_def_amount;
+			UI.logSpace();
+			UI.log(this.foe.death_message, UI.COLORS.FIGHT);
+			UI.logSpace();
 
-			UI.logDebug("monster atk amount ", m_atk_amount);
-			UI.logDebug("entity def amount ", e_def_amount);
-			UI.logDebug("actual damage ", remaining);
-
-			if(remaining > 0)
-			{
-				// Apply damage
-				this.e.Health._giveDamage(remaining);
-
-				var msg = this.m.attack_messages[Math.floor(Math.random()*this.m.attack_messages.length)];
-
-				// Display hit message
-				UI.logSpace();
-				UI.log(msg + "   [" + remaining + "]", UI.COLORS.FIGHT);
-				UI.logSpace();
+			if(this.attacker.has('Level')) {
+				this.attacker.emit("Level.giveExp", [this.foe.exp]);	
+				return true;
 			}
-			else
-			{
-				// Display hit but no damage message
-				UI.logSpace();
-				UI.log("The " + this.m.name + "'s hit bounced right off you.", UI.COLORS.FIGHT);
-				UI.logSpace();
-			}
-		}
-		else
-		{
-			// Display missed message
-			UI.logSpace();
-			UI.log("The " + this.m.name + " misses its attack!", UI.COLORS.FIGHT);
-			UI.logSpace();
-		}
-
-		UI.logDebug("++++++++++++++++");
-
-		// Check for death
-		if(this.m.Health.isDead())
-		{
-			console.log("monster died");
-
-			UI.logSpace();
-			UI.log(this.m.death_message, UI.COLORS.FIGHT);
-			UI.logSpace();
-
-			this.e.emit("Level.giveExp", [this.m.exp]);
-			return true;
 		}
 	}
 
 	return false;
-}
-
-// @todo this should probably use a real stat to see who goes first
-BattleEngine.prototype._determineFirstAction = function() {
-	var first = Math.random() * 100;
-	var second = Math.random() * 100;
-
-	return first > second;
 }
 
 

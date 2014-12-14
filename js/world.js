@@ -37,8 +37,8 @@ World.prototype.generateMap = function(number_of_rooms) {
 
                // PluckMob
                var monster = MobBag.pluckMob();
-               monster.Location.$x = i;
-               monster.Location.$y = j;
+               monster.Location.setX(i);
+               monster.Location.setY(j);
                monster.world = this;
                room.addEntity(monster);
            }
@@ -49,6 +49,7 @@ World.prototype.generateMap = function(number_of_rooms) {
            this.layout.push(container);
     }
 
+    // Gives each room object a world object to reference
     this.addWorldToAllRooms();
 }
 
@@ -60,13 +61,18 @@ World.prototype.addWorldToAllRooms = function() {
     }
 }
 
+World.prototype.getRandomRoom = function() {
+    var ranX = Roller.randomNumber(0, this.layout.length);
+    var ranY = Roller.randomNumber(0, this.layout.length);
+    
+    return randomRoom = this.layout[ranX][ranY];  
+}
+
 World.prototype.findStartingRoom = function() {
 
     UI.logDebug("Locating Starting Room");
 
-    var ranX = Roller.randomNumber(0, this.layout.length);
-    var ranY = Roller.randomNumber(0, this.layout.length);
-    var startingRoom = this.layout[ranX][ranY];
+    var startingRoom = this.getRandomRoom();
 
 	  // determine player race
 	  var race = race_table[Math.floor(Math.random() * race_table.length)];
@@ -74,8 +80,8 @@ World.prototype.findStartingRoom = function() {
     // determine player name
 	  var name = name_table[Math.floor(Math.random() * name_table.length)];
 
-    race.x = ranX;
-    race.y = ranY;
+    race.x = startingRoom.getX();
+    race.y = startingRoom.getY();
 
     // Initialize player object
     var player = new Lootr.entities.Player(race, name, this);

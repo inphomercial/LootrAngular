@@ -30,6 +30,14 @@
 
 	Room.prototype = new Entity;
 
+    Room.prototype.getX = function() {
+        return this.x;
+    };
+
+    Room.prototype.getY = function() {
+        return this.y;
+    }
+
     // Add entity object to entities array
 	Room.prototype.addEntity = function(entity) {
 
@@ -91,29 +99,37 @@
 
     Room.prototype.hasEntityType = function( type ) {
 
-        var result = false;
-
         if(this.entities.length > 0) {
             for (var i = 0; i < this.entities.length; i++) {
                 if(this.entities[i].className == type) {
-                    result = true;
+                    return true;
                 }
             }
         }
 
-        return result;
+        return false;
     }
 
     Room.prototype.getEntityType = function ( type ) {
 
-        var entities = [];
-        for (var i = 0; i < this.entities.length; i++) {
-            if(this.entities[i].className == type) {
-                entities.push(this.entities[i]);
+        // Used to return player directly instead of inside array
+        if(type === "Player") {
+            for (var i = 0; i < this.entities.length; i++) {
+                if(this.entities[i].className == type) {
+                    return this.entities[i];
+                }
+            }    
+        // Otherwise return array of entities found, excluding Player
+        } else {
+            var entities = [];
+            for (var i = 0; i < this.entities.length; i++) {
+                if(this.entities[i].className == type) {
+                    entities.push(this.entities[i]);
+                }
             }
-        }
 
-        return entities;
+            return entities;    
+        }        
     }
 
     Room.prototype.displayContents = function() {
@@ -143,8 +159,8 @@
         console.log("# Entities : " + this.entities.length);
         console.log("# Name: " + this.name);
         console.log("# Desc: " + this.desc);
-        console.log("# X: " + this.x);
-        console.log("# Y: " + this.y);
+        console.log("# X: " + this.getX());
+        console.log("# Y: " + this.getY());
 
     }
 
@@ -154,35 +170,3 @@
 
 	namespace.Room = Room;
 })(Lootr.rooms, Lootr);
-
-
-
-    // Room.prototype.isDirectionLinkAvailable = function(direction) {
-    //     if (this["link_" + direction] != false) {
-    //         return false;
-    //     }
-    //
-    //     return true;
-    // }
-
-    // Room.prototype.randomizeExits = function() {
-    //    this.exit_north = (Math.random() < 0.5);
-    //    this.exit_south = (Math.random() < 0.5);
-    //    this.exit_west = (Math.random() < 0.5);
-    //    this.exit_east = (Math.random() < 0.5);
-    //
-    //    if (!this.exit_north && !this.exit_south && !this.exit_west && !this.exit_east) {
-    //        console.log("NO EXITS");
-    //    }
-    // }
-
-    // Room.prototype.getExits = function() {
-    //     var exits = {
-    //         north: this.exit_north,
-    //         south: this.exit_south,
-    //         west:  this.exit_west,
-    //         east:  this.exit_east
-    //     };
-    //
-    //     return exits;
-    // }

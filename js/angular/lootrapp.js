@@ -43,8 +43,8 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
     $scope.updateRoom = function() {
 
         // Keep an instance of the current room we are in
-        var x = $scope.player.Location.$x;
-        var y = $scope.player.Location.$y;
+        var x = $scope.player.Location.getX();
+        var y = $scope.player.Location.getY();
         $scope.current_room = $scope.world.layout[x][y];
         $scope.current_room.displayContents();
     }
@@ -111,7 +111,7 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 		}
 
 		console.log("attacking!!");
-		var battle = new BattleEngine(monster, $scope.player);
+		var battle = new BattleEngine($scope.player, monster);
 
 		var results = battle.fight();
 

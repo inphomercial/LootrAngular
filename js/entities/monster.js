@@ -20,17 +20,6 @@
 		this.component('Location', { x: args.x, y: args.y });
 		this.component('Movement', { moveable: args.moveable });
 
-		//this.component('SlotHand', { slot_type: Lootr.PLAYER_SLOTS.HAND });
-		/*this.component('Gold', { gold: 10 });
-
-		this.component('Progress');
-		this.component('Inventory');
-		this.component('Mag', { value: 1 });
-		this.component('SlotHead', { slot_type: Lootr.PLAYER_SLOTS.HEAD });
-		this.component('SlotBody', { slot_type: Lootr.PLAYER_SLOTS.BODY });
-		this.component('SlotFinger', { slot_type: Lootr.PLAYER_SLOTS.FINGER });
-		this.component('SlotFeet', { slot_type: Lootr.PLAYER_SLOTS.FEET });*/
-
 		this.desc = args.desc;
 		this.name = args.name;
 		this.world = world;
@@ -39,10 +28,7 @@
 
 		this.mag = args.mag;
 		this.exp = args.exp;
-
-		//this.component('Level', { level: 1, current_exp: 0, exp_to_level: 50 });
 		this.level = args.level;
-
 		this.attack_messages = args.attack_messages;
 		this.death_message = args.death_message;
 	}
@@ -54,7 +40,7 @@
 
 
         // if there a player in the room
-        var current_room = this.world.layout[this.Location.$x][this.Location.$y];
+        var current_room = this.world.layout[this.Location.getX()][this.Location.getY()];
         if(current_room.hasEntityType("Player")) {
             var player = current_room.getEntityType("Player");
             var battle = new BattleEngine(this, player);

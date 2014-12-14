@@ -22,6 +22,22 @@ function Location (entity, args) {
 
 Location.prototype = new Component;
 
+Location.prototype.getX = function() {
+    return this.$x;
+};
+
+Location.prototype.getY = function() {
+    return this.$y;
+};
+
+Location.prototype.setX = function(x) {
+    this.$x = x;
+};
+
+Location.prototype.setY = function(y) {
+    this.$y = y;
+};
+
 Location.prototype._update = function ( direction ) {
     if(direction == Lootr.DIRECTIONS.NORTH) {
         this.$y--;

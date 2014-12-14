@@ -8,13 +8,13 @@
 	function Player ( args, name, world ) {
 		Entity.call(this);
 
-        // Hacky?
-        this.className = "Player";
-
-		this.race = args.race;
-		this.name = name;
 		this.world = world;
 
+        // Hacky?
+        this.className = "Player";
+		this.race = args.race;
+		this.name = name;
+		
 		// @todo it wont let me do args.Health.hp checks?!?
 		this.component('Health',
 			//(args.Health.hp && args.Health.max_hp)
@@ -120,7 +120,7 @@
     Player.prototype.look = function() {
 
         // Get the current room
-        var room = this.world.layout[this.Location.$x][this.Location.$y];
+        var room = this.world.layout[this.Location.getX()][this.Location.getY()];
 
         // room.displayContents();
     }

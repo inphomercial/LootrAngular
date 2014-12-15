@@ -37,14 +37,14 @@ BattleEngine.prototype.fight = function() {
 
 				// Display hit message
 				UI.logSpace();
-				UI.log("The " + this.attacker.name + " hits " + this.foe.name + " for [" + remaining + "]", UI.COLORS.FIGHT);
+				UI.log(this.attacker.name + " hits " + this.foe.name + " for [" + remaining + "]", UI.COLORS.FIGHT);
 				UI.logSpace();
 			}
 			else
 			{
 				// Display hit but no damage message
 				UI.logSpace();
-				UI.log("Your hit didnt even phase the " + this.foe.name, UI.COLORS.FIGHT);
+				UI.log(this.attacker.name + "'s hit didnt even phase the " + this.foe.name, UI.COLORS.FIGHT);
 				UI.logSpace();
 			}
 		}
@@ -52,7 +52,7 @@ BattleEngine.prototype.fight = function() {
 		{
 			// Display missed message
 			UI.logSpace();
-			UI.log("You miss your attack!", UI.COLORS.FIGHT);
+			UI.log(this.attacker.name + " misses its attack!", UI.COLORS.FIGHT);
 			UI.logSpace();
 		}
 

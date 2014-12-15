@@ -38,19 +38,19 @@
 	Monster.prototype.tick = function() {
 		console.log("A " + this.name + " is thinking what to do..");
 
+        // Get the current mobs room
+        var current_room = this.world.getRoomByLocation(this.Location.getX(), this.Location.getY());
 
-        // if there a player in the room
-        var current_room = this.world.layout[this.Location.getX()][this.Location.getY()];
+        // If room has Player in it, we attack!
         if(current_room.hasEntityType("Player")) {
             var player = current_room.getEntityType("Player");
             var battle = new BattleEngine(this, player);
-            var results = battle.fight();
-
-            console.log(results);
-        }
-
-        var dir = this.Movement.generateRandomDirection();
-        this.Movement._moveDirection(dir);
+            battle.fight();
+        // Else we move
+        } else {
+        	var dir = this.Movement.generateRandomDirection();
+        	this.Movement._moveDirection(dir);	
+        }        
 	}
 
 	Monster.prototype._setId = function () {

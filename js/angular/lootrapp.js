@@ -32,7 +32,7 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
     $scope.total_rounds = 0;
 
     // If a store is present
-    $scope.store_in_room = false;
+    //$scope.store_in_room = false;
 
     UI.log("You desend a stair way into a dark abyss....", UI.COLORS.ROOM_NORMAL, 2000);
     UI.logSpace();
@@ -40,14 +40,17 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
     UI.log("You light your torch.", UI.COLORS.ROOM_TREASURE, 10000);
     UI.logSpace();
 
+
     $scope.updateRoom = function() {
 
         // Keep an instance of the current room we are in
         var x = $scope.player.Location.getX();
         var y = $scope.player.Location.getY();
-        $scope.current_room = $scope.world.layout[x][y];
+        $scope.current_room = $scope.world.getRoomByLocation(x, y);
         $scope.current_room.displayContents();
     }
+
+    $scope.updateRoom();
 
 	$scope.highlightStat = function( item, mood )
 	{
@@ -103,53 +106,24 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 
 	$scope.attack = function(monster) {
 
-		if($scope.player.Health.isDead())
-		{
-			UI.logDebug("Player Dead");
-			$('#modal').modal('show')
-			return;
-		}
+		console.log("Player is attacking!!");
 
-		console.log("attacking!!");
-		var battle = new BattleEngine($scope.player, monster);
-
-		var results = battle.fight();
-
-		// if(!$scope.player.Health.isDead() && results)
-		// {
-			// $scope.monster = {};
-			// $scope.monster_in_room = false;
-		// }
-
-		if($scope.player.Health.isDead())
-		{
-			UI.logDebug("Player Dead");
-			$('#modal').modal('show')
-			return;
-		}
-	}
-
-	$scope.flee = function() {
-
-		UI.logSpace();
-		UI.log("You get away!");
-		UI.logSpace();
-
-		$scope.monster = {};
-		$scope.monster_in_room = false;
-
-		return
+		$scope.world.tick('attack', monster);
+		$scope.updateRoom();
 	}
 
 	$scope.move = function( direction ) {
-		$scope.world.tick(direction);
+		
+		UI.logDebug("Player is moving");
 
+		$scope.world.tick(direction);
         $scope.updateRoom();
 	}
 
 	$scope.look = function() {
-		$scope.player.look();
-		$scope.world.tick();
+
+		UI.logDebug("Player is looking");
+
         $scope.updateRoom();
 	}
 
@@ -158,6 +132,10 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 		$scope.player.emit('Inventory.sellItems', []);
 
 		$scope.store_in_room = false;
+
+		// Always tick work and update room
+        //$scope.world.tick();
+        //$scope.updateRoom();
 	}
 
 	$scope.sellItem = function( item ) {
@@ -172,6 +150,10 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 
 		// Test
 		$scope.player.Atk.mod_pos = "";
+
+		// Always tick work and update room
+        //$scope.world.tick();
+        //$scope.updateRoom();
 	}
 
     $scope.pickupItem = function( item )
@@ -188,6 +170,10 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 
         // Clear highlights
         $scope.unHighlightStat();
+
+        // Always tick work and update room
+        //$scope.world.tick();
+        //$scope.updateRoom();
     }
 
     $scope.dropItem = function( item )
@@ -206,6 +192,10 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 
         // Clear highlight from interactin with item
         $scope.unhighlightStat();
+
+        // Always tick work and update room
+        //$scope.world.tick();
+        //$scope.updateRoom();
     }
 
 	$scope.unequipItem = function( slot, index )
@@ -213,6 +203,10 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 		console.log(index);
 		UI.logDebug("Unequiping item from ", slot);
 		$scope.player[slot].unequipSlot(index);
+
+		// Always tick work and update room
+        $scope.world.tick();
+        $scope.updateRoom();
 	}
 
 	$scope.startTurn = function( rounds )
@@ -231,14 +225,7 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 			$scope.total_rounds++;
 
 			// Clear store in room.
-			$scope.store_in_room = false;
-
-			/*// If the room has a monster in it, dont generate a new turn
-			if($scope.monster_in_room)
-			{
-				console.log("nothing can happen till monster is dead");
-				return;
-			}*/
+			//$scope.store_in_room = false;
 
 			UI.logDebug("==============");
 			UI.logDebug("Start Round : " + $scope.total_rounds);
@@ -291,13 +278,17 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 		$scope.player = new Lootr.entities.Player(player_obj);
 	}*/
 
-	/*$interval(function() {
-		$scope.player.emit('Gold.giveGold', [2]);
-	}, 500);
+	//$scope.interval = setInterval(function() { $scope.startTurn(1);}, 100000);
 
 	$interval(function() {
+		// Always tick work and update room
+        $scope.world.tick();
+        $scope.updateRoom();
+	}, 5000);
+
+	/*$interval(function() {
 		$scope.player.emit('Health.giveDamage', [2]);
-	}, 700);
-*/
+	}, 700);*/
+
 	window.scope = $scope;
 });

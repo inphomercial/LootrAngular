@@ -7,7 +7,7 @@
 	 * @class Room
 	 * @extends Entity
 	 */
-	function Room ( args, world ) {
+	function Room ( args ) {
 		Entity.call(this);
 
         // And Sets the room ID
@@ -15,15 +15,17 @@
 
 		this.standing_desc = args.standing_desc;
 		this.enter_desc = args.enter_desc;
-        this.world = world;
+        this.world = args.world;
 
         this.className = "Room";
 
         // Container for objects (players, things, monsters)
         this.entities = [];
 
-        this.x = args.x;
-        this.y = args.y;
+        this.component('Location', { x: args.x, y: args.y });
+
+        /*this.x = args.x;
+        this.y = args.y;*/
 
         // this.randomizeExits();
 	}
@@ -31,11 +33,11 @@
 	Room.prototype = new Entity;
 
     Room.prototype.getX = function() {
-        return this.x;
+        return this.Location.getX();
     };
 
     Room.prototype.getY = function() {
-        return this.y;
+        return this.Location.getY();
     }
 
     // Add entity object to entities array
@@ -66,8 +68,8 @@
 
     Room.prototype.canMoveInDirection = function(direction) {
 
-        var x = this.x;
-        var y = this.y;
+        var x = this.Location.getX();
+        var y = this.Location.getY();
 
         if(direction == Lootr.DIRECTIONS.NORTH) {
             y--;

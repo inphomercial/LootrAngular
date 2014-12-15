@@ -98,16 +98,30 @@
 
 	Player.prototype = new Entity;
 
-	Player.prototype.tick = function( action ) {
+	Player.prototype.tick = function( action, entity ) {
 
-		console.log(this.name + " is standing waiting for action.");
+		// Is player dead?
+		if(this.Health.isDead())
+		{
+			UI.logDebug("Player Dead");
+			$('#modal').modal('show')
+			// @todo figure out a way to clear interval
+			//clearInterval(window.scope.$interval);
+			return;
+		}
 
 		// 1 Possible action per player tick
 
-		// MOVE
+		// Player is attempting to move
         if( action == Lootr.DIRECTIONS.NORTH || action == Lootr.DIRECTIONS.SOUTH || action == Lootr.DIRECTIONS.WEST || action == Lootr.DIRECTIONS.EAST) {
             // Update entities Location
             this.Movement._moveDirection(action);
+        }
+
+        // Player is attacking
+        if( action == "attack" && entity) {
+        	var battle = new BattleEngine(this, entity);
+			var results = battle.fight();
         }
 
         // CONSUME
@@ -116,14 +130,6 @@
 
         // EQUIP/REMOVE
 	}
-
-    Player.prototype.look = function() {
-
-        // Get the current room
-        var room = this.world.layout[this.Location.getX()][this.Location.getY()];
-
-        // room.displayContents();
-    }
 
 	// Save the player object to a localStorage cookie
 	Player.prototype.save = function() {

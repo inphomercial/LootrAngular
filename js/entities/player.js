@@ -131,6 +131,12 @@
         // EQUIP/REMOVE
 	}
 
+	Player.prototype.getDescription = function() {
+		var desc = this.name + " the " + this.race + " stands here.";
+
+		return desc;
+	};
+
 	// Save the player object to a localStorage cookie
 	Player.prototype.save = function() {
 		var cache = {};

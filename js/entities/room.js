@@ -22,10 +22,10 @@
         // Container for objects (players, things, monsters)
         this.entities = [];
 
+        if(args.x == undefined || args.y == undefined) {
+            throw new Error("No x, y for room template!");
+        }
         this.component('Location', { x: args.x, y: args.y });
-
-        /*this.x = args.x;
-        this.y = args.y;*/
 
         // this.randomizeExits();
 	}
@@ -142,7 +142,7 @@
 
         for(var i=0; i<=this.entities.length; i++) {
             if(this.entities[i] instanceof Lootr.entities.Player) {
-                UI.log(this.entities[i].name + " is here."); //@todo have a player.visualDesc based on health percentages for better descriptions
+                UI.log(this.entities[i].getDescription()); //@todo have a player.visualDesc based on health percentages for better descriptions
                 UI.logSpace();
             }
 
@@ -157,12 +157,12 @@
             }
         }
 
-        console.log("## Room Stats ##");
-        console.log("# Entities : " + this.entities.length);
-        console.log("# Name: " + this.name);
-        console.log("# Desc: " + this.desc);
-        console.log("# X: " + this.getX());
-        console.log("# Y: " + this.getY());
+        UI.logDebug("## Room Stats ##");
+        UI.logDebug("# Entities : " + this.entities.length);
+        UI.logDebug("# Name: " + this.name);
+        UI.logDebug("# Desc: " + this.desc);
+        UI.logDebug("# X: " + this.getX());
+        UI.logDebug("# Y: " + this.getY());
 
     }
 

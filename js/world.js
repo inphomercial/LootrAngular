@@ -19,7 +19,10 @@ World.prototype.generateMap = function(number_of_rooms) {
            // Give each room a generated name
            room_template.name = Math.random().toString(36).substring(2);
            // Give each room object a world object to reference
-           room_template.wold = this;
+           room_template.world = this;
+           // Set room X & Y
+           room_template.x = i;
+           room_template.y = j;
 
            var room = new Lootr.rooms.Room(room_template);
 

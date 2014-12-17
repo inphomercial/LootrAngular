@@ -60,10 +60,55 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 
 		console.log(item);
 
-     	var sa = item.stat_affected.charAt(0).toUpperCase() + item.stat_affected.slice(1);
-     	var total = item.stat_amount + item.bonus;
+     	// New STAT STUFF
+		$scope.player[item.slot].highlight = true;
+		var stats = item.getStats();
 
-     	$scope.player[item.slot].highlight = true;
+     	if(stats[Lootr.PLAYER_STATS.ATK] > 0 && !mood) {	     		
+     		$scope.player.Atk.mod_pos = "+" + stats.atk;	
+     	}		
+     	else if (stats[Lootr.PLAYER_STATS.ATK] == 0) {
+			// do nothing
+		}
+		else if (stats[Lootr.PLAYER_STATS.ATK] > 0 && mood) {
+			$scope.player.Atk.mod_neg = "-" + stats.atk;
+		}
+		else if (stats[Lootr.PLAYER_STATS.ATK] < 0) {
+			$scope.player.Atk.mod_neg = "-" + stats.atk;
+		}
+
+		if(stats[Lootr.PLAYER_STATS.DEF] > 0 && !mood) {	     		
+     		$scope.player.Def.mod_pos = "+" + stats.def;	
+     	}	
+     	else if (stats[Lootr.PLAYER_STATS.DEF] == 0) {
+     		// do nothing
+     	}	
+     	else if (stats[Lootr.PLAYER_STATS.DEF] > 0 && mood) {
+			$scope.player.Def.mod_neg = "-" + stats.def;
+		}
+		else if (stats[Lootr.PLAYER_STATS.DEF] < 0) {
+			$scope.player.Def.mod_neg = "-" + stats.def;
+		}
+
+		if(stats[Lootr.PLAYER_STATS.MAG] > 0 && !mood) {	     		
+     		$scope.player.Mag.mod_pos = "+" + stats.mag;	
+     	}		
+     	else if (stats[Lootr.PLAYER_STATS.MAG] == 0) {
+     		// do nothing
+ 		} else if (stats[Lootr.PLAYER_STATS.MAG] > 0 && mood) {
+			$scope.player.Mag.mod_neg = "-" + stats.mag;
+		} 
+		else if (stats[Lootr.PLAYER_STATS.MAG] < 0) {
+			$scope.player.Mag.mod_neg = "-" + stats.mag;
+		}
+			
+			
+
+     	// OLD STAT STUFF
+     	/*var sa = item.stat_affected.charAt(0).toUpperCase() + item.stat_affected.slice(1);
+     	var total = item.stat_amount + item.bonus;*/
+
+     	/*$scope.player[item.slot].highlight = true;
 
 		if(mood)
 		{
@@ -72,7 +117,7 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 		else
 		{
 			$scope.player[sa].mod_pos = "+" + total;
-		}
+		}*/
 	}
 
 	$scope.unHighlightStat = function()

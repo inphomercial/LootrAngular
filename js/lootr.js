@@ -74,7 +74,8 @@ var Lootr = {
 		ATK: "atk",
 		DEF: "def",
 		MAG: "mag",
-		HP:  "max_hp"
+		HP:  "hp",
+		MP:  "mp"
 	},
 
 	PLAYER_STATUS: {

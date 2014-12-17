@@ -9,6 +9,12 @@ var body_table = [
 		stat_affected: Lootr.PLAYER_STATS.DEF,
 		stat_amount: 7,
 		stat_magical_amount : 5,
+
+		// New stat system test
+		atk : 1,
+		def : 2,
+		hp: 100,	
+
 		value: 500,
 		slot: Lootr.PLAYER_SLOTS.BODY,
 		type: Lootr.TREASURE_TYPES.BODY,
@@ -21,9 +27,17 @@ var body_table = [
 		equip: "You slip the cool shirt on.",
 		unequip: "You throw the shirt off.",
 		use: "Does nothing..",
+
+		// Old Stat Systaem (Deprecation in the works)
 		stat_affected: Lootr.PLAYER_STATS.DEF,
 		stat_amount: 1,
 		stat_magical_amount : 0,
+
+		// New stat system test
+		atk : 1,
+		def : 2,	
+		hp: 100,	
+
 		value: 10,
 		slot: Lootr.PLAYER_SLOTS.BODY,
 		type: Lootr.TREASURE_TYPES.BODY,
@@ -39,6 +53,12 @@ var body_table = [
 		stat_affected: Lootr.PLAYER_STATS.DEF,
 		stat_amount: 1,
 		stat_magical_amount : 0,
+
+		// New stat system test
+		atk : 1,
+		def : 2,	
+		hp: 100,
+
 		value: 10,
 		slot: Lootr.PLAYER_SLOTS.BODY,
 		type: Lootr.TREASURE_TYPES.BODY,
@@ -54,6 +74,12 @@ var body_table = [
 		stat_affected: Lootr.PLAYER_STATS.DEF,
 		stat_amount: 2,
 		stat_magical_amount : 0,
+
+		// New stat system test
+		atk : 1,
+		def : 2,	
+		hp: 100,
+
 		value: 25,
 		slot: Lootr.PLAYER_SLOTS.BODY,
 		type: Lootr.TREASURE_TYPES.BODY,
@@ -69,6 +95,12 @@ var body_table = [
 		stat_affected: Lootr.PLAYER_STATS.DEF,
 		stat_amount: 4,
 		stat_magical_amount : 0,
+
+		// New stat system test
+		atk : 1,
+		def : 2,	
+		hp: 100,
+
 		value: 70,
 		slot: Lootr.PLAYER_SLOTS.BODY,
 		type: Lootr.TREASURE_TYPES.BODY,

@@ -40,7 +40,7 @@ World.prototype.generateMap = function(number_of_rooms) {
 
     // Add random entities and items to map
     // 5 monsters
-    for(var i=0; i<5; i++) {
+    for(var i=0; i<1; i++) {
         
         // check if MobBag is empty
         if(MobBag.isBagEmpty())
@@ -57,7 +57,7 @@ World.prototype.generateMap = function(number_of_rooms) {
     }
 
     // 5 treasures
-    for(var i=0; i<5; i++) {
+    for(var i=0; i<25; i++) {
       // Add Random Treasure
       var treasure = Lootr.Treasure.generate();
       this.addEntityAtRandomRoom(treasure);

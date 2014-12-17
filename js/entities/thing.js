@@ -21,9 +21,19 @@
 		this.equip = args.equip;
 		this.unequip = args.unequip;
 		this.use = args.use || "";
+
+		// New Stat System
+		this[Lootr.PLAYER_STATS.ATK] = args[Lootr.PLAYER_STATS.ATK] || 0;
+		this[Lootr.PLAYER_STATS.DEF] = args[Lootr.PLAYER_STATS.DEF] || 0;
+		this[Lootr.PLAYER_STATS.MAG] = args[Lootr.PLAYER_STATS.MAG] || 0;
+		this[Lootr.PLAYER_STATS.HP]  = args[Lootr.PLAYER_STATS.HP]  || 0;
+		this[Lootr.PLAYER_STATS.MP]  = args[Lootr.PLAYER_STATS.MP]  || 0;
+
+		// Old Stat System (deprecation in the works)
 		this.stat_affected = args.stat_affected;
 		this.stat_amount = args.stat_amount;
 		this.stat_magical_amount  = args.stat_magical_amount;
+
 		this.value = args.value;
 		this.slot = args.slot || "";
 		this.type = args.type;
@@ -42,9 +52,22 @@
 		console.log("A " + this.name + " sits on the floor.");
 	}
 
-	Thing.prototype._setId = function () {
+	Thing.prototype._setId = function() {
         this.id = ++thing_id_counter;
+    };
+
+    Thing.prototype.getStats = function() {
+    	var stats =  {
+    		"atk": this[Lootr.PLAYER_STATS.ATK],
+    		"def": this[Lootr.PLAYER_STATS.DEF],
+    		"mag": this[Lootr.PLAYER_STATS.MAG],
+    		"hp":  this[Lootr.PLAYER_STATS.HP],
+    		"mp":  this[Lootr.PLAYER_STATS.MP]
+    	}
+
+    	return stats;
     };
 
 	namespace.Thing = Thing;
 })(Lootr.entities, Lootr);
+

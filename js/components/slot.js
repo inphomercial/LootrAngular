@@ -74,7 +74,14 @@ Slot.prototype.equipSlot = function( item ) {
 	this.$entity.emit('Inventory.equippingItem', [item]);
 
 	// Update Affected Stat value
-	this.$entity.emit('Stat.giveStat', [item.stat_affected, item.stat_amount]);
+	//this.$entity.emit('Stat.giveStat', [item.stat_affected, item.stat_amount]);
+
+	// New Stat System
+	this.$entity.emit('Stat.giveStat', [Lootr.PLAYER_STATS.ATK, item.atk]);
+	this.$entity.emit('Stat.giveStat', [Lootr.PLAYER_STATS.DEF, item.def]);
+	this.$entity.emit('Stat.giveStat', [Lootr.PLAYER_STATS.MAG, item.mag]);
+	this.$entity.emit('Stat.giveStat', [Lootr.PLAYER_STATS.HP, item.hp]);
+	this.$entity.emit('Stat.giveStat', [Lootr.PLAYER_STATS.MP, item.mp]);
 };
 
 Slot.prototype.unequipSlot = function( index ) {
@@ -93,7 +100,14 @@ Slot.prototype.unequipSlot = function( index ) {
 		this.$entity.emit('Inventory.giveItem', [this.$item[index]]);
 
 		// Update Affected Stat Value by removing removed item value
-		this.$entity.emit('Stat.takeStat', [this.$item[index].stat_affected, this.$item[index].stat_amount]);
+		//this.$entity.emit('Stat.takeStat', [this.$item[index].stat_affected, this.$item[index].stat_amount]);
+
+		// New Stat System
+		this.$entity.emit('Stat.takeStat', [Lootr.PLAYER_STATS.ATK, this.$item[index][Lootr.PLAYER_STATS.ATK]]);
+		this.$entity.emit('Stat.takeStat', [Lootr.PLAYER_STATS.DEF, this.$item[index][Lootr.PLAYER_STATS.DEF]]);
+		this.$entity.emit('Stat.takeStat', [Lootr.PLAYER_STATS.MAG, this.$item[index][Lootr.PLAYER_STATS.MAG]]);
+		this.$entity.emit('Stat.takeStat', [Lootr.PLAYER_STATS.HP,  this.$item[index][Lootr.PLAYER_STATS.HP]]);
+		this.$entity.emit('Stat.takeStat', [Lootr.PLAYER_STATS.MP,  this.$item[index][Lootr.PLAYER_STATS.MP]]);
 
 		// Clear the slot
 		this.$item[index] = { name: "empty" };

@@ -24,6 +24,14 @@ function Health (entity, args) {
 		health._giveHp(hp);
 	});
 
+	this.$entity.on('Health.increaseMaxHp', function ( amount ) {
+		health._increaseMaxHp(amount);
+	});
+
+	this.$entity.on('Health.decreaseMaxHp', function ( amount ) {
+		health._decreaseMaxHp(amount);
+	});
+
 	this.$entity.on('Health.fullHp', function() {
 		health._fullHeal();
 	});
@@ -38,6 +46,18 @@ Health.prototype.getHp = function () {
 Health.prototype.getMaxHp = function () {
 	return this.$max_hp;
 };
+
+Health.prototype._increaseMaxHp = function( amount ) {
+	this.$max_hp += amount;
+}
+
+Health.prototype._decreaseMaxHp = function( amount ) {
+	this.$max_hp -= amount;
+
+	if(this.$hp > this.$max_hp) {
+		this.$hp = this.$max_hp;
+	}
+}
 
 Health.prototype._giveHp = function( hp ) {
 	this.$hp += hp;

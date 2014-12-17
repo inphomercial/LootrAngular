@@ -18,6 +18,25 @@ function Stat( entity, args ) {
 		this.$entity.on('Stat.giveStat', function ( stat_affected, amount ) {
 			if(stat_affected === stat.$type) {
 				stat._giveStat(amount);
+			// Special Case for HP since it's a non-stat compoment				
+			} else if (stat_affected === Lootr.PLAYER_STATS.HP) {
+				this.emit('Health.increaseMaxHp', [ amount ]);					
+			}
+		});
+
+		this.$entity.on('Stat.takeStat', function ( stat_affected, amount ) {
+			if(stat_affected === stat.$type) {	
+				stat._takeStat(amount);
+			// Special Case for HP since it's a non-stat compoment			
+			} else if (stat_affected === Lootr.PLAYER_STATS.HP) {
+				this.emit('Health.decreaseMaxHp', [ amount ]);					
+			}
+		});
+
+		// OLD STAT SYSTEM
+		/*this.$entity.on('Stat.giveStat', function ( stat_affected, amount ) {
+			if(stat_affected === stat.$type) {
+				stat._giveStat(amount);
 			}
 		});
 
@@ -25,7 +44,7 @@ function Stat( entity, args ) {
 			if(stat_affected === stat.$type) {
 				stat._takeStat(amount);
 			}
-		});
+		});*/
 	}
 };
 

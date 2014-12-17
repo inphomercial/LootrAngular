@@ -45,9 +45,21 @@
 	Listener.prototype.emit = function (ev, args) {
 		var i, len;
 
+		// Stupid special case for HP
+		if(this.$listeners[ ev ] && ev == 'Stat.takeStat' && args[0] == Lootr.PLAYER_STATS.HP) {
+			this.$listeners[ ev ][0].apply(this, args || []);			
+			return;
+		}
+		// Stupid special case for HP
+		if(this.$listeners[ ev ] && ev == 'Stat.giveStat' && args[0] == Lootr.PLAYER_STATS.HP) {
+			this.$listeners[ ev ][0].apply(this, args || []);			
+			return;
+		}
+
+		// Everything else...
 		if (this.$listeners[ ev ]) {
-			for (i = 0, len = this.$listeners[ ev ].length; i < len; i++) {
-				this.$listeners[ ev ][ i ].apply(this, args || []);
+			for (i = 0, len = this.$listeners[ ev ].length; i < len; i++) {				
+				this.$listeners[ ev ][ i ].apply(this, args || []);				
 			}
 		}
 	};

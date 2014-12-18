@@ -1,4 +1,19 @@
-// Body Slot Table
+
+// Body Slot Template Available Options
+//
+// ** name
+// ** desc
+// ** equip  
+// ** unequip
+// ** atk
+// ** def
+// ** mag
+// ** hp
+// ** mp
+// ** slot
+// ** rarity
+// ** color
+
 var body_table = [
 	{
 		name: "Immortal King's Eternal Reign",

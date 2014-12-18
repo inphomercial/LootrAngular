@@ -301,7 +301,7 @@
 
             Things #<br>
             <span ng-repeat="entity in current_room.entities">
-                <span ng-show="entity.className == 'Thing'" ng-mouseenter="highlightStat(entity)" ng-mouseleave="unHighlightStat()">
+                <span ng-show="entity.className == 'Thing'" ng-mouseover="highlightStat(entity)" ng-mouseleave="unHighlightStat()">
                     <div class="btn-group">
                         <button ng-class="entity.color" class="btn btn-default dropdown-toggle" style="width: 100%" type="button" data-toggle="dropdown">
                             {{ entity.name }} <span class="caret"></span>

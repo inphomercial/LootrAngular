@@ -159,7 +159,10 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 
 		console.log("Player is attacking!!");
 
-		$scope.world.tick('attack', monster);
+		var battle = new BattleEngine($scope.player, monster);
+		var results = battle.fight();
+
+		//$scope.world.tick('attack', monster);
 		//$scope.updateRoom();
 	}
 
@@ -198,9 +201,6 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 	{
 		UI.logDebug("Equipeding item", item);
 		$scope.player[item.slot].equipSlot(item);
-
-		// Test
-		$scope.player.Atk.mod_pos = "";
 
 		// Always tick work and update room
         //$scope.world.tick();
@@ -256,11 +256,11 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 		$scope.player[slot].unequipSlot(index);
 
 		// Always tick work and update room
-        $scope.world.tick();
-        $scope.updateRoom();
+        //$scope.world.tick();
+        //$scope.updateRoom();
 	}
 
-	$scope.startTurn = function( rounds )
+	/*$scope.startTurn = function( rounds )
 	{
 		// roll and get back a table to use
 		for(var i=1; i<=rounds; i++)
@@ -299,7 +299,7 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 			UI.logDebug("End Round : " + $scope.total_rounds);
 			UI.logDebug("==============");
 		}
-	}
+	}*/
 
 	/*
 	// Starts the Auto Explore

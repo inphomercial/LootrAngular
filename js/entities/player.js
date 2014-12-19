@@ -135,7 +135,7 @@
 	}
 
 	Player.prototype.getDescription = function() {
-		var desc = this.name + " the " + this.race + " stands here.";
+		var desc = this.name + " the " + this.race + " stands here in ";
 
 		return desc;
 	};

@@ -23,7 +23,7 @@ var hand_table = [
 	{
 		name: "Skull Mace",
 		desc: "Leaning against the wall, a skull tied to a club lies.",
-		equip: "You put the power mace in your hands.",
+		equip: "You put the powerful mace in your hands.",
 		unequip: "You stop using the Skull Mace.",
 		look: "A heafty knotty mace, resembling a skull on top.",
 		

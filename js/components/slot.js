@@ -32,6 +32,13 @@ Slot.prototype = new Component;
 
 Slot.prototype.equipSlot = function( item ) {
 
+	if(!item.Equipable.isEquipable()) {
+		UI.logSpace();
+		UI.log("You cannot equip that.");
+		UI.logSpace();
+		return;
+	}
+
     var slot = this;
 
     // To tell if equip was success or not.

@@ -11,7 +11,7 @@ var event_monster = [
 		level: 4,
 		moveable: false,
 		attack_messages : [
-			"The dragon whips you with its tail.",
+			"The dragon whips you with its tail",
 			"You compress under the dragons strike",
 			"You cry in pain."
 		],
@@ -30,16 +30,16 @@ var event_monster = [
 		level: 3,
 		moveable: true,
 		attack_messages : [
-			"You feel a quick strike on your body.",
-			"The serpant strikes, leaving puncture wounds.",
-			"SSSSsss...You are bit."
+			"You feel a quick strike on your body",
+			"The serpant strikes, leaving puncture wounds",
+			"SSSSsss...You are bit"
 		],
 		death_message : "The serpent coils into a motionless pile as it fades.",
 		drop_level: 90,
 		exp: 20
 	},
 	{
-		desc: "You hear a clattering of bones.",
+		desc: "You hear a clattering of bones",
 		name: "Skeleton",
 		max_hp: 60,
 		atk: 3,
@@ -49,10 +49,10 @@ var event_monster = [
 		level: 2,
 		moveable: true,
 		attack_messages : [
-			"You take a hard blow.",
-			"You get slamed."
+			"You take a hard blow",
+			"You get slamed"
 		],
-		death_message : "A clanging of bone falls to the ground.",
+		death_message : "A clanging of bone falls to the ground",
 		drop_level: 90,
 		exp: 10
 	},
@@ -67,10 +67,10 @@ var event_monster = [
 		level: 1,
 		moveable: true,
 		attack_messages : [
-			"The Beast Bites you hard.",
-			"You are gnawed on."
+			"The Beast Bites you hard",
+			"You are gnawed on"
 		],
-		death_message : "The beasts heavy breathing comes to an end as it collapses.",
+		death_message : "The beasts heavy breathing comes to an end as it collapses",
 		drop_level: 90,
 		exp: 5
 	},
@@ -85,8 +85,8 @@ var event_monster = [
 		level: 1,
 		moveable: true,
 		attack_messages : [
-			"*Squeeak.",
-			"You are bit."
+			"*Squeeak",
+			"You are bit"
 		],
 		death_message : "The corpse stops moving.",
 		drop_level: 90,

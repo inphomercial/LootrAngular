@@ -219,6 +219,22 @@
 					var item = $.extend({}, temp_item);
 					break;
 
+					case Lootr.TREASURE_TYPES.MISC:
+					if(rarity)
+					{
+						while(temp_item.rarity != rarity)
+						{
+							temp_item = misc_items[Math.floor(Math.random()*misc_items.length)];
+						}
+					}
+					else
+					{
+						temp_item = misc_items[Math.floor(Math.random()*misc_items.length)];
+					}
+
+					var item = $.extend({}, temp_item);
+					break;
+
 				default:
 				break;
 			}

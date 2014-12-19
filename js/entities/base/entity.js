@@ -27,7 +27,8 @@ Entity.components = {
 	Consumable: Consumable,
     Location: Location,
     Movement: Movement,
-    Message: Message
+    Message: Message,
+    Equipable: Equipable
 };
 
 Entity.prototype.component = function (name, args) {

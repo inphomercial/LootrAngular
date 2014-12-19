@@ -69,5 +69,10 @@
         this.id = ++monster_id_counter;
     };
 
+    Monster.prototype.getRandomAttackMessage = function() {
+    	var num = Roller.randomNumber(0, this.attack_messages.length);
+    	return this.attack_messages[num];
+    }
+
 	namespace.Monster = Monster;
 })(Lootr.entities, Lootr);

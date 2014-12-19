@@ -308,7 +308,7 @@
             <span ng-repeat="entity in current_room.entities">
                 <span ng-show="entity.className == 'Thing'" ng-mouseover="highlightStats(entity)" ng-mouseleave="unHighlightStats()">
                     <div class="btn-group">
-                        <button ng-class="entity.color" class="btn btn-default dropdown-toggle" style="width: 100%" type="button" data-toggle="dropdown">
+                        <button ng-class="entity.color" class="btn btn-default dropdown-toggle" style="width: 100%" type="button" data-toggle="dropdown">                            
                             {{ entity.name }} <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu default" role="menu" style="padding: 5px;">
@@ -340,9 +340,14 @@
 								Equip<br>
 							</button>
 					    </li>
-					    <li ng-show="inventory.Consumable.$is_consumable" ng-click="quaffItem(inventory)">
+					    <li ng-show="inventory.Consumable.$is_consumable && inventory.Consumable.$sips > 0" ng-click="quaffItem(inventory)">
 					    	<button class="btn btn-default btn-sm" style="width: 100%" type="button">
 								Quaff<br>
+							</button>
+					    </li>
+					    <li ng-show="inventory.Consumable.$sips <= 0">
+					    	<button class="btn btn-default btn-sm" style="width: 100%" type="button" ng-click="quaffItem(inventory)">
+								Empty<br>
 							</button>
 					    </li>
 					    <li ng-show="store_in_room" ng-click="sellItem(inventory)">
@@ -451,6 +456,7 @@
     <script src="js/components/location.js"></script>
     <script src="js/components/movement.js"></script>
     <script src="js/components/message.js"></script>
+    <script src="js/components/equipable.js"></script>
 
     <!-- Roll Tables -->
     <script src="js/roll_tables/actors/monsters_table.js"></script>
@@ -465,6 +471,7 @@
     <script src="js/roll_tables/items/feet_slot_table.js"></script>
     <script src="js/roll_tables/items/finger_slot_table.js"></script>
     <script src="js/roll_tables/items/hand_slot_table.js"></script>
+    <script src="js/roll_tables/items/misc_table.js"></script>
     
     <!-- Name Tables -->
     <script src="js/roll_tables/names/name_table.js"></script>

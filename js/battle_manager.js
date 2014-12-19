@@ -37,7 +37,8 @@ BattleEngine.prototype.fight = function() {
 
 				// Display hit message
 				UI.logSpace();
-				UI.log(this.attacker.name + " hits " + this.foe.name + " for [" + remaining + "]", UI.COLORS.FIGHT);
+				UI.log(this.attacker.getRandomAttackMessage() + " for [" + remaining + "]", UI.COLORS.FIGHT);
+				//UI.log(this.attacker.name + " hits " + this.foe.name + " for [" + remaining + "]", UI.COLORS.FIGHT);
 				UI.logSpace();
 			}
 			else

@@ -11,8 +11,9 @@
 // ** hp
 // ** mp
 // ** slot
-// ** rarity
-// ** color
+// ** rarity  Lootr.ITEM_RARITY_COLORS.(COMMON, MAGICAL, SET, UNIQUE)
+// ** color   Lootr.ITEM_RARITY.(COMMON, MAGICAL, SET, UNIQUE)
+// ** equipable true/false (default: true)
 
 var body_table = [
 	{

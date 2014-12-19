@@ -15,7 +15,8 @@ var Lootr = {
 		BODY		: "body",
 		FINGER      : "finger",
 		CONSUMABLE  : "consumable",
-		HEAD        : "head"
+		HEAD        : "head",
+		MISC        : 'misc'
 	},
 
 	ITEM_RARITY_COLORS: {

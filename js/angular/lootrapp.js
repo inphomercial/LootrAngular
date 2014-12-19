@@ -144,15 +144,27 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 		
 	}
 
-	$scope.quaffItem = function( consumable ) {
+	$scope.quaffItem = function( item ) {
 
-		UI.logDebug("Quaffing ", consumable);
+		if(item.Consumable.isConsumable() && item.has('Consumable')) {
 
-		// emit health give life
-		$scope.player.emit("Health.giveHp", [consumable.stat_amount]);
+			if(item.Consumable.hasSipsLeft()) {
+				// emit health give life
+				$scope.player.emit("Health.giveHp", [item.Consumable.takeSip()]);
+				UI.logSpace();
+				UI.log("You take a sip of " + item.name);
+				UI.logSpace();
+				return;
+			} else {
+				UI.logSpace();
+				UI.log("It's empty.");
+				UI.logSpace();
+				return;
+			}
+		}
 
-		// emit removal from inventory
-		$scope.player.emit("Inventory.removeItem", [consumable]);
+		UI.logDebug("Item is not consumable");
+		return;
 	}
 
 	$scope.attack = function(monster) {

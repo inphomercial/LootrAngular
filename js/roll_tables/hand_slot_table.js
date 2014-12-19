@@ -6,9 +6,12 @@ var hand_table = [
 		equip: "You take the sword into your hand.",
 		unequip: "You pack away your sword.",
 		look: "Looks to be a simple silver sword.",
-		stat_affected: Lootr.PLAYER_STATS.ATK,
-		stat_amount: 2,
-		stat_magical_amount : 0,
+		
+		//stat_affected: Lootr.PLAYER_STATS.ATK,
+		//stat_amount: 2,
+		//stat_magical_amount : 0,
+		atk: 2,
+
 		value: 25,
 		slot: Lootr.PLAYER_SLOTS.HAND,
 		type: Lootr.TREASURE_TYPES.HAND,
@@ -23,9 +26,13 @@ var hand_table = [
 		equip: "You put the power mace in your hands.",
 		unequip: "You stop using the Skull Mace.",
 		look: "A heafty knotty mace, resembling a skull on top.",
-		stat_affected: Lootr.PLAYER_STATS.ATK,
-		stat_amount: 4,
-		stat_magical_amount : 3,
+		
+		//stat_affected: Lootr.PLAYER_STATS.ATK,
+		//stat_amount: 4,
+		//stat_magical_amount : 3,
+		atk: 4,
+		mag: 1,
+
 		value: 55,
 		slot: Lootr.PLAYER_SLOTS.HAND,
 		type: Lootr.TREASURE_TYPES.HAND,

@@ -223,7 +223,7 @@
 				break;
 			}
 
-			// Check for item bonuses & perfect roll chance
+			/*// Check for item bonuses & perfect roll chance
 			// if item is not common
 			if(item.rarity != Lootr.ITEM_RARITY.COMMON)
 			{
@@ -247,7 +247,7 @@
 
 					}
 				}
-			}
+			}*/
 
 			return item;
 		}

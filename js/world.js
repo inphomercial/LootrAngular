@@ -7,19 +7,34 @@ World.prototype.addRoom = function(room) {
     this.rooms.push(room);
 }
 
-World.prototype.generateMap = function(number_of_rooms) {
+World.prototype.getWidth = function() {
+  return this.width;
+}
+
+World.prototype.getHeight = function() {
+  return this.height;
+}
+
+World.prototype.generateMap = function(number_of_rooms_x, number_of_rooms_y) {
 
     UI.logDebug("Generating World!");
-    for (var i=0; i<number_of_rooms; i++) {
+
+    this.width = number_of_rooms_x;
+    this.height = number_of_rooms_y;
+
+    for (var i=0; i<number_of_rooms_x; i++) {
        var container = [];
-       for (var j=0; j<number_of_rooms; j++) {
+       for (var j=0; j<number_of_rooms_y; j++) {
 
            // Starting Room Seed
 	         var room_template = room_base[Math.floor(Math.random() * room_base.length)];
-           // Give each room a generated name
+
+           // Give each room a generated name @todo make a room name list to generate from
            room_template.name = Math.random().toString(36).substring(2);
+
            // Give each room object a world object to reference
            room_template.world = this;
+
            // Set room X & Y
            room_template.x = i;
            room_template.y = j;
@@ -30,13 +45,6 @@ World.prototype.generateMap = function(number_of_rooms) {
        }
            this.layout.push(container);
     }
-
-/*    // Gives each room object a world object to reference
-    for (var i=0; i<this.layout.length; i++) {
-        for (var j=0; j<this.layout.length; j++) {
-            this.layout[i][j].world = this;
-        }
-    }*/
 
     // Add random entities and items to map
     // 5 monsters
@@ -89,8 +97,8 @@ World.prototype.getRoomByLocation = function(x, y) {
 }
 
 World.prototype.getRandomRoom = function() {
-    var x = Math.floor(Math.random() * this.layout.length);
-    var y = Math.floor(Math.random() * this.layout.length);
+    var x = Math.floor(Math.random() * this.getWidth());
+    var y = Math.floor(Math.random() * this.getHeight());
     
     return this.layout[x][y];  
 }
@@ -135,8 +143,8 @@ World.prototype._getAllEntities = function() {
   var en = [];
   var player;
 
-  for (var i=0; i<this.layout.length; i++) {
-      for (var j=0; j<this.layout.length; j++) {
+  for (var i=0; i<this.getWidth(); i++) {
+      for (var j=0; j<this.getHeight(); j++) {
 
           for(var a=0; a<this.layout[i][j].entities.length; a++) {
 

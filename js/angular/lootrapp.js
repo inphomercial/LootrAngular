@@ -21,9 +21,23 @@ var LootrApp = angular.module('LootrApp', ['ui.bootstrap', 'LocalStorageModule']
 LootrApp.controller('LootrController', function ($scope, Lootr, $interval, StorageService) {
 
     $scope.world = new World();
-    $scope.world.generateMap(5);
+    $scope.world.generateMap(5, 2);
 
     $scope.player = $scope.world.findStartingRoom();
+
+    // Used just for UI graphical displays
+    $scope.player_stat_mods = {
+    	atk_mod_pos: null,
+    	atk_mod_neg: null,
+    	def_mod_pos: null,
+    	def_mod_neg: null,
+    	mag_mod_neg: null,
+    	mag_mod_pos: null,
+    	hp_mod_pos: null,
+    	hp_mod_neg: null,
+    	mp_mod_pos: null,
+    	mp_mod_neg: null
+    };
 
     // Lootr
     $scope.Lootr = Lootr;
@@ -52,7 +66,26 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 
     $scope.updateRoom();
 
-	$scope.highlightStat = function( item, mood )
+    $scope.modifyStatMod = function( stat_to_mod, stats, mood ) {
+
+    	var full_variable_pos = stat_to_mod + "_mod_pos";
+    	var full_variable_neg = stat_to_mod + "_mod_neg";
+
+     	if(stats[stat_to_mod] > 0 && !mood) {	     		     		
+     		$scope.player_stat_mods[full_variable_pos] = "+" + stats[stat_to_mod];
+     	}		
+     	else if (stats[stat_to_mod] == 0) {
+			// do nothing
+		}
+		else if (stats[stat_to_mod] > 0 && mood) {			
+			$scope.player_stat_mods[full_variable_neg] = "-" + stats[stat_to_mod];
+		}
+		else if (stats[stat_to_mod] < 0) {			
+			$scope.player_stat_mods[full_variable_neg] = "-" + stats[stat_to_mod];
+		}
+    }
+
+	$scope.highlightStats = function( item, mood )
 	{		
 		if(item.Consumable.$is_consumable){
 			return;
@@ -62,65 +95,26 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 
      	// New STAT STUFF
 		$scope.player[item.slot].highlight = true;
+
 		var stats = item.getStats();
 
-     	if(stats[Lootr.PLAYER_STATS.ATK] > 0 && !mood) {	     		
-     		$scope.player.Atk.mod_pos = "+" + stats.atk;	
-     	}		
-     	else if (stats[Lootr.PLAYER_STATS.ATK] == 0) {
-			// do nothing
-		}
-		else if (stats[Lootr.PLAYER_STATS.ATK] > 0 && mood) {
-			$scope.player.Atk.mod_neg = "-" + stats.atk;
-		}
-		else if (stats[Lootr.PLAYER_STATS.ATK] < 0) {
-			$scope.player.Atk.mod_neg = "-" + stats.atk;
-		}
+		// ATTACK
+		$scope.modifyStatMod(Lootr.PLAYER_STATS.ATK, stats, mood);
 
-		if(stats[Lootr.PLAYER_STATS.DEF] > 0 && !mood) {	     		
-     		$scope.player.Def.mod_pos = "+" + stats.def;	
-     	}	
-     	else if (stats[Lootr.PLAYER_STATS.DEF] == 0) {
-     		// do nothing
-     	}	
-     	else if (stats[Lootr.PLAYER_STATS.DEF] > 0 && mood) {
-			$scope.player.Def.mod_neg = "-" + stats.def;
-		}
-		else if (stats[Lootr.PLAYER_STATS.DEF] < 0) {
-			$scope.player.Def.mod_neg = "-" + stats.def;
-		}
+		// DEFENSE
+		$scope.modifyStatMod(Lootr.PLAYER_STATS.DEF, stats, mood);
 
-		if(stats[Lootr.PLAYER_STATS.MAG] > 0 && !mood) {	     		
-     		$scope.player.Mag.mod_pos = "+" + stats.mag;	
-     	}		
-     	else if (stats[Lootr.PLAYER_STATS.MAG] == 0) {
-     		// do nothing
- 		} else if (stats[Lootr.PLAYER_STATS.MAG] > 0 && mood) {
-			$scope.player.Mag.mod_neg = "-" + stats.mag;
-		} 
-		else if (stats[Lootr.PLAYER_STATS.MAG] < 0) {
-			$scope.player.Mag.mod_neg = "-" + stats.mag;
-		}
-			
-			
+		// MAGIC
+		$scope.modifyStatMod(Lootr.PLAYER_STATS.MAG, stats, mood);
 
-     	// OLD STAT STUFF
-     	/*var sa = item.stat_affected.charAt(0).toUpperCase() + item.stat_affected.slice(1);
-     	var total = item.stat_amount + item.bonus;*/
+		// HITPOINTS
+		$scope.modifyStatMod(Lootr.PLAYER_STATS.HP, stats, mood);
 
-     	/*$scope.player[item.slot].highlight = true;
-
-		if(mood)
-		{
-			$scope.player[sa].mod_neg = "-" + total;
-		}
-		else
-		{
-			$scope.player[sa].mod_pos = "+" + total;
-		}*/
+		// MANA
+		$scope.modifyStatMod(Lootr.PLAYER_STATS.MP, stats, mood);
 	}
 
-	$scope.unHighlightStat = function()
+	$scope.unHighlightStats = function()
 	{
 		$scope.player.SlotBody.highlight = null;
 		$scope.player.SlotHead.highlight = null;
@@ -128,14 +122,21 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 		$scope.player.SlotFinger.highlight = null;
 		$scope.player.SlotFeet.highlight = null;
 
-		$scope.player.Atk.mod_pos = null;
-		$scope.player.Atk.mod_neg = null;
+		$scope.player_stat_mods.atk_mod_pos = null;
+		$scope.player_stat_mods.atk_mod_neg = null;
 
-		$scope.player.Def.mod_pos = null;
-		$scope.player.Def.mod_neg = null;
+		$scope.player_stat_mods.def_mod_pos = null;
+		$scope.player_stat_mods.def_mod_neg = null;
 
-		$scope.player.Mag.mod_pos = null;
-		$scope.player.Mag.mod_neg = null;
+		$scope.player_stat_mods.mag_mod_pos = null;
+		$scope.player_stat_mods.mag_mod_neg = null;
+
+		$scope.player_stat_mods.hp_mod_pos = null;
+		$scope.player_stat_mods.hp_mod_neg = null;
+
+		$scope.player_stat_mods.mp_mod_pos = null;
+		$scope.player_stat_mods.mp_mod_neg = null;
+		
 	}
 
 	$scope.quaffItem = function( consumable ) {
@@ -214,7 +215,7 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
         UI.logSpace();
 
         // Clear highlights
-        $scope.unHighlightStat();
+        $scope.unHighlightStats();
 
         // Always tick work and update room
         //$scope.world.tick();
@@ -236,7 +237,7 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
         UI.logSpace();
 
         // Clear highlight from interactin with item
-        $scope.unhighlightStat();
+        $scope.unhighlightStats();
 
         // Always tick work and update room
         //$scope.world.tick();

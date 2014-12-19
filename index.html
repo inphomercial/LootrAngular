@@ -44,6 +44,8 @@
 				<span id="player_race">Race : {{ player.race }} </span>
 				<br><br>
 				<span>Life :
+					<span id="player_hp_indicator_pos" class="pos"> {{ player_stat_mods.hp_mod_pos }}</span>
+					<span id="player_hp_indicator_neg" class="neg"> {{ player_stat_mods.hp_mod_neg }}</span>
 					<progressbar max="player.Health.$max_hp" style="width: 60%" class="progress-striped active" type="danger" value="player.Health.$hp">
 						<span style="white-space:nowrap;">
 							{{ player.Health.getHp() }} / {{ player.Health.getMaxHp() }}
@@ -52,6 +54,8 @@
 				</span>
 
 				<span>Mana :
+					<span id="player_mp_indicator_pos" class="pos"> {{ player_stat_mods.mp_mod_pos }}</span>
+					<span id="player_mp_indicator_neg" class="neg"> {{ player_stat_mods.mp_mod_neg }}</span>
 					<progressbar max="100" style="width: 60%" class="progress-striped active" type="default" value="100">
 						<span style="white-space:nowrap;">
 							100 / 100
@@ -63,22 +67,22 @@
 				<span>
 					ATK :
 					<span id="player_atk"> {{ player.Atk.getStat() }}</span>
-					<span id="player_atk_indicator_pos" class="pos"> {{ player.Atk.mod_pos }}</span>
-					<span id="player_atk_indicator_neg" class="neg"> {{ player.Atk.mod_neg }}</span>
+					<span class="pos"> {{ player_stat_mods.atk_mod_pos }}</span>
+					<span class="neg"> {{ player_stat_mods.atk_mod_neg }}</span>
 					<br>
 				</span>
 				<span>
 					DEF :
 					<span id="player_def"> {{ player.Def.getStat() }}</span>
-					<span id="player_def_indicator_pos" class="pos"> {{ player.Def.mod_pos }}</span>
-					<span id="player_def_indicator_neg" class="neg"> {{ player.Def.mod_neg }}</span>
+					<span class="pos"> {{ player_stat_mods.def_mod_pos }}</span>
+					<span class="neg"> {{ player_stat_mods.def_mod_neg }}</span>
 					<br>
 				</span>
 				<span>
 					MAG :
 					<span id="player_mag"> {{ player.Mag.getStat() }}</span>
-					<span id="player_mag_indicator_pos" class="pos"> {{ player.Mag.mod_pos }}</span>
-					<span id="player_mag_indicator_neg" class="neg"> {{ player.Mag.mod_neg }}</span>
+					<span class="pos"> {{ player_stat_mods.mag_mod_pos }}</span>
+					<span class="neg"> {{ player_stat_mods.mag_mod_neg }}</span>
 					<br>
 				</span>
 
@@ -107,7 +111,7 @@
 					| -
 					<span ng-repeat="head_slot in player.SlotHead.$item track by $index">
 						<!-- Shows the item button if there is something in the slot -->
-						<div id="player_slot_head" class="btn-group" ng-show="head_slot.name != 'empty'" ng-mouseleave="unHighlightStat()" ng-mouseenter="highlightStat(head_slot, true)">
+						<div id="player_slot_head" class="btn-group" ng-show="head_slot.name != 'empty'" ng-mouseleave="unHighlightStats()" ng-mouseenter="highlightStats(head_slot, true)">
 							<button ng-class="head_slot.color" class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
 								{{ head_slot.name }} <span class="caret"></span>
 							</button>
@@ -138,7 +142,7 @@
 					| -
 					<span ng-repeat="body_slot in player.SlotBody.$item track by $index">
 						<!-- Shows the item button if there is something in the slot -->
-						<div id="player_slot_head" class="btn-group" ng-show="body_slot.name != 'empty'" ng-mouseleave="unHighlightStat()" ng-mouseenter="highlightStat(body_slot, true)">
+						<div id="player_slot_head" class="btn-group" ng-show="body_slot.name != 'empty'" ng-mouseleave="unHighlightStats()" ng-mouseenter="highlightStats(body_slot, true)">
 							<button ng-class="body_slot.color" class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
 								{{ body_slot.name }} <span class="caret"></span>
 							</button>
@@ -169,7 +173,7 @@
 					| -
 					<span ng-repeat="hand_slot in player.SlotHand.$item track by $index">
 						<!-- Shows the item button if there is something in the slot -->
-						<div id="player_slot_head" class="btn-group" ng-show="hand_slot.name != 'empty'" ng-mouseleave="unHighlightStat()" ng-mouseenter="highlightStat(hand_slot, true)">
+						<div id="player_slot_head" class="btn-group" ng-show="hand_slot.name != 'empty'" ng-mouseleave="unHighlightStats()" ng-mouseenter="highlightStats(hand_slot, true)">
 							<button ng-class="hand_slot.color" class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
 								{{ hand_slot.name }} <span class="caret"></span>
 							</button>
@@ -200,7 +204,7 @@
 					| -
 					<span ng-repeat="feet_slot in player.SlotFeet.$item track by $index">
 						<!-- Shows the item button if there is something in the slot -->
-						<div id="player_slot_head" class="btn-group" ng-show="feet_slot.name != 'empty'" ng-mouseleave="unHighlightStat()" ng-mouseenter="highlightStat(feet_slot, true)">
+						<div id="player_slot_head" class="btn-group" ng-show="feet_slot.name != 'empty'" ng-mouseleave="unHighlightStats()" ng-mouseenter="highlightStats(feet_slot, true)">
 							<button ng-class="feet_slot.color" class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
 								{{ feet_slot.name }} <span class="caret"></span>
 							</button>
@@ -230,7 +234,7 @@
 					| -
 					<span ng-repeat="finger_slot in player.SlotFinger.$item track by $index">
 						<!-- Shows the item button if there is something in the slot -->
-						<div id="player_slot_head" class="btn-group" ng-show="finger_slot.name != 'empty'" ng-mouseleave="unHighlightStat()" ng-mouseenter="highlightStat(finger_slot, true)">
+						<div id="player_slot_head" class="btn-group" ng-show="finger_slot.name != 'empty'" ng-mouseleave="unHighlightStats()" ng-mouseenter="highlightStats(finger_slot, true)">
 							<button ng-class="finger_slot.color" class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
 								{{ finger_slot.name }} <span class="caret"></span>
 							</button>
@@ -258,26 +262,11 @@
 
 			</span>
 		</div>
-		<div class="col-xs-3">
+		<div class="col-xs-5">
 			<div id="log"><br></div>
 		</div>
 
 		<div class="col-xs-2" style="padding-left: 0px;">
-			<br>
-			== Actions ==
-			<br>
-			<!-- <button ng&#45;hide="monster_in_room" class="button btn&#45;primary btn&#45;block" ng&#45;click="startTurn(1)">Move</button> -->
-			<!-- <button ng&#45;hide="!monster_in_room" class="button btn&#45;primary btn&#45;block" ng&#45;click="attack();">Attack!!</button> -->
-			<!-- <button ng&#45;hide="!monster_in_room" class="button btn&#45;primary btn&#45;block" ng&#45;click="flee();">Flee</button> -->
-			<button ng-hide="!store_in_room" class="button btn-primary btn-block" ng-click="sell();">Sell Items</button>
-
-			<button ng-disabled="" class="button btn-primary btn-block" ng-click="move('north');">Move North</button>
-			<button ng-disabled="" class="button btn-primary btn-block" ng-click="move('west');">Move West</button>
-			<button ng-disabled="" class="button btn-primary btn-block" ng-click="move('south');">Move South</button>
-			<button ng-disabled="" class="button btn-primary btn-block" ng-click="move('east');">Move East</button>
-
-			<button ng-disabled="" class="button btn-primary btn-block" ng-click="look();">Look in room</button>
-            <br>
 
             Monsters #<br>
             <span ng-repeat="entity in current_room.entities">
@@ -301,13 +290,13 @@
 
             Things #<br>
             <span ng-repeat="entity in current_room.entities">
-                <span ng-show="entity.className == 'Thing'" ng-mouseover="highlightStat(entity)" ng-mouseleave="unHighlightStat()">
+                <span ng-show="entity.className == 'Thing'" ng-mouseover="highlightStats(entity)" ng-mouseleave="unHighlightStats()">
                     <div class="btn-group">
                         <button ng-class="entity.color" class="btn btn-default dropdown-toggle" style="width: 100%" type="button" data-toggle="dropdown">
                             {{ entity.name }} <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu default" role="menu" style="padding: 5px;">
-                            <li ng-show="!inventory.Consumable.$is_consumable" ng-click="pickupItem(entity)" ng-mouseleave="unHighlightStat()">
+                            <li ng-show="!inventory.Consumable.$is_consumable" ng-click="pickupItem(entity)" ng-mouseleave="unHighlightStats()">
                                 <button class="btn btn-default btn-sm" style="width: 100%" type="button">
                                     Pick Up<br>
                                 </button>
@@ -325,12 +314,12 @@
 			<ul class="list-group" style="list-style: none">
 				<li ng-repeat="inventory in player.Inventory.$items track by $index" ng-class="inventory.color">
 
-					<div class="btn-group" ng-mouseenter="highlightStat(inventory)" ng-mouseleave="unHighlightStat()">
+					<div class="btn-group" ng-mouseenter="highlightStats(inventory)" ng-mouseleave="unHighlightStats()">
 					  <button ng-class="inventory.color" class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">
 					      {{ inventory.name }} <span class="caret"></span>
 					  </button>
 					  <ul class="dropdown-menu default" role="menu" style="padding: 5px;">
-					    <li ng-show="!inventory.Consumable.$is_consumable" ng-click="equipItem(inventory)" ng-mousedown="unHighlightStat()">
+					    <li ng-show="!inventory.Consumable.$is_consumable" ng-click="equipItem(inventory)" ng-mousedown="unHighlightStats()">
 					    	<button class="btn btn-default btn-sm" style="width: 100%" type="button">
 								Equip<br>
 							</button>
@@ -360,6 +349,27 @@
 					</div>
 				</li>
 			</ul>
+		</div>
+	</div>
+
+	<div class="row">
+
+		<div class="col-xs-1"></div>
+		<div class="col-xs-5">			
+			== Actions ==
+			<br>
+			<!-- <button ng&#45;hide="monster_in_room" class="button btn&#45;primary btn&#45;block" ng&#45;click="startTurn(1)">Move</button> -->
+			<!-- <button ng&#45;hide="!monster_in_room" class="button btn&#45;primary btn&#45;block" ng&#45;click="attack();">Attack!!</button> -->
+			<!-- <button ng&#45;hide="!monster_in_room" class="button btn&#45;primary btn&#45;block" ng&#45;click="flee();">Flee</button> -->
+			<button ng-hide="!store_in_room" class="button btn-primary btn-block" ng-click="sell();">Sell Items</button>
+
+			<button ng-disabled="" class="button btn-primary btn-block" ng-click="move('north');">Move North</button>
+			<button ng-disabled="" class="button btn-primary btn-block" ng-click="move('west');">Move West</button>
+			<button ng-disabled="" class="button btn-primary btn-block" ng-click="move('south');">Move South</button>
+			<button ng-disabled="" class="button btn-primary btn-block" ng-click="move('east');">Move East</button>
+
+			<button ng-disabled="" class="button btn-primary btn-block" ng-click="look();">Look in room</button>
+            <br>
 		</div>
 	</div>
 

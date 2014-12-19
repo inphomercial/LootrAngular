@@ -33,23 +33,31 @@ var UI = {
 	dimBottomLog: function() {
 		var l = $('#log span').length;
 
-		if(l > 15)
+		if(l > 18)
 		{
-			$("#log span:nth-last-of-type(6)").fadeTo("slow", 0.75);
-			$("#log span:nth-last-of-type(5)").fadeTo("slow", 0.75);
+			$("#log span:nth-last-of-type(6)").fadeTo("fast", 0.70);
+			$("#log span:nth-last-of-type(5)").fadeTo("fast", 0.60);
 
-			$("#log span:nth-last-of-type(4)").fadeTo("slow", 0.50);
-			$("#log span:nth-last-of-type(3)").fadeTo("slow", 0.50);
+			$("#log span:nth-last-of-type(4)").fadeTo("fast", 0.50);
+			$("#log span:nth-last-of-type(3)").fadeTo("fast", 0.40);
 
-			$("#log span:nth-last-of-type(2)").fadeTo("slow", 0.20);
-			$("#log span:nth-last-of-type(1)").fadeTo("slow", 0.20);
+			$("#log span:nth-last-of-type(2)").fadeTo("fast", 0.30);
+			$("#log span:nth-last-of-type(1)").fadeTo("fast", 0.20);
 
 			// Delete last span
 			$("#log span").last().remove();
 
 			// Delete last br
-			$("#log br").last().remove();
+			$("#log br").last().remove();			
+		} 
+
+		if( $('#log br').length > 20 ) {			
+			$("#log br").last().remove();			
 		}
+
+		//var br = $('#log br');
+
+		//br.last().remove();
 	},
 
 	logSpace: function() {

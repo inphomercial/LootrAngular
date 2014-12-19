@@ -326,12 +326,12 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 
 	//$scope.interval = setInterval(function() { $scope.startTurn(1);}, 100000);
 
-	/*$interval(function() {
+	$interval(function() {
 		// Always tick work and update room
         $scope.world.tick();
         $scope.updateRoom();
 	}, 5000);
-*/
+
 	/*$interval(function() {
 		$scope.player.emit('Health.giveDamage', [2]);
 	}, 700);*/

@@ -121,9 +121,12 @@
 										Un-Equip
 									</button>
 							    </li>
-							    <li>Slot : {{ head_slot.type }} </li>
-							    <li>Stat Affected : {{ head_slot.stat_affected }} </li>
-							   	<li>Stats : {{ head_slot.stat_amount }} <span ng-show="head_slot.bonus > 0">[+{{head_slot.bonus}}]</span></li>
+							    <li>Stats ## </li>
+							    <li ng-show="head_slot.atk">~ Atk : {{ head_slot.atk }} <span ng-show="head_slot.bonus > 0">[+{{head_slot.bonus}}]</span></li>
+							    <li ng-show="head_slot.def">~ Def : {{ head_slot.def }} <span ng-show="head_slot.bonus > 0">[+{{head_slot.bonus}}]</span></li>
+							    <li ng-show="head_slot.mag">~ Mag : {{ head_slot.mag }} <span ng-show="head_slot.bonus > 0">[+{{head_slot.bonus}}]</span></li>
+							    <li ng-show="head_slot.hp">~ HP : {{ head_slot.hp }} <span ng-show="head_slot.bonus > 0">[+{{head_slot.bonus}}]</span></li>
+							    <li ng-show="head_slot.mp">~ MP : {{ head_slot.mp }} <span ng-show="head_slot.bonus > 0">[+{{head_slot.bonus}}]</span></li>
 							    <li>Rarity : {{ head_slot.rarity }} </li>
 							    <li style="padding-top: 5px;">{{ head_slot.look }} </li>
 							</ul>
@@ -152,9 +155,12 @@
 										Un-Equip
 									</button>
 							    </li>
-							    <li>Slot : {{ body_slot.type }} </li>
-							    <li>Stat Affected : {{ body_slot.stat_affected }} </li>
-							    <li>Stats : {{ body_slot.stat_amount }} <span ng-show="body_slot.bonus > 0">[+{{finger_slot.bonus}}]</span></li>
+							    <li>Stats ## </li>
+							    <li ng-show="body_slot.atk">~ Atk : {{ body_slot.atk }} <span ng-show="body_slot.bonus > 0">[+{{body_slot.bonus}}]</span></li>
+							    <li ng-show="body_slot.def">~ Def : {{ body_slot.def }} <span ng-show="body_slot.bonus > 0">[+{{body_slot.bonus}}]</span></li>
+							    <li ng-show="body_slot.mag">~ Mag : {{ body_slot.mag }} <span ng-show="body_slot.bonus > 0">[+{{body_slot.bonus}}]</span></li>
+							    <li ng-show="body_slot.hp">~ HP : {{ body_slot.hp }} <span ng-show="body_slot.bonus > 0">[+{{body_slot.bonus}}]</span></li>
+							    <li ng-show="body_slot.mp">~ MP : {{ body_slot.mp }} <span ng-show="body_slot.bonus > 0">[+{{body_slot.bonus}}]</span></li>
 							    <li>Rarity : {{ body_slot.rarity }} </li>
 							    <li style="padding-top: 5px;">{{ body_slot.look }} </li>
 							</ul>
@@ -183,9 +189,12 @@
 										Un-Equip
 									</button>
 							    </li>
-							    <li>Slot : {{ hand_slot.type }} </li>
-							    <li>Stat Affected : {{ hand_slot.stat_affected }} </li>
-							   	<li>Stats : {{ hand_slot.stat_amount }} <span ng-show="hand_slot.bonus > 0">[+{{hand_slot.bonus}}]</span></li>
+							    <li>Stats ## </li>
+							    <li ng-show="hand_slot.atk">~ Atk : {{ hand_slot.atk }} <span ng-show="hand_slot.bonus > 0">[+{{hand_slot.bonus}}]</span></li>
+							    <li ng-show="hand_slot.def">~ Def : {{ hand_slot.def }} <span ng-show="hand_slot.bonus > 0">[+{{hand_slot.bonus}}]</span></li>
+							    <li ng-show="hand_slot.mag">~ Mag : {{ hand_slot.mag }} <span ng-show="hand_slot.bonus > 0">[+{{hand_slot.bonus}}]</span></li>
+							    <li ng-show="hand_slot.hp">~ HP : {{ hand_slot.hp }} <span ng-show="hand_slot.bonus > 0">[+{{hand_slot.bonus}}]</span></li>
+							    <li ng-show="hand_slot.mp">~ MP : {{ hand_slot.mp }} <span ng-show="hand_slot.bonus > 0">[+{{hand_slot.bonus}}]</span></li>
 							    <li>Rarity : {{ hand_slot.rarity }} </li>
 							    <li style="padding-top: 5px;">{{ hand_slot.look }} </li>
 							</ul>
@@ -213,10 +222,13 @@
 							    	<button class="btn btn-default btn-xs" style="width: 100%" type="button">
 										Un-Equip
 									</button>
-							    </li>
-							    <li>Slot : {{ feet_slot.type }} </li>
-							    <li>Stat Affected : {{ feet_slot.stat_affected }} </li>
-							    <li>Stats : {{ feet_slot.stat_amount }} <span ng-show="feet_slot.bonus > 0">[+{{feet_slot.bonus}}]</span></li>
+							    </li>							   
+							    <li>Stats ## </li>
+							    <li ng-show="feet_slot.atk">~ Atk : {{ feet_slot.atk }} <span ng-show="feet_slot.bonus > 0">[+{{feet_slot.bonus}}]</span></li>
+							    <li ng-show="feet_slot.def">~ Def : {{ feet_slot.def }} <span ng-show="feet_slot.bonus > 0">[+{{feet_slot.bonus}}]</span></li>
+							    <li ng-show="feet_slot.mag">~ Mag : {{ feet_slot.mag }} <span ng-show="feet_slot.bonus > 0">[+{{feet_slot.bonus}}]</span></li>
+							    <li ng-show="feet_slot.hp">~ HP : {{ feet_slot.hp }} <span ng-show="feet_slot.bonus > 0">[+{{feet_slot.bonus}}]</span></li>
+							    <li ng-show="feet_slot.mp">~ MP : {{ feet_slot.mp }} <span ng-show="feet_slot.bonus > 0">[+{{feet_slot.bonus}}]</span></li>
 							    <li>Rarity : {{ feet_slot.rarity }} </li>
 							    <li style="padding-top: 5px;">{{ feet_slot.look }} </li>
 							</ul>
@@ -243,18 +255,13 @@
 							    	<button class="btn btn-default btn-xs" style="width: 100%" type="button">
 										Un-Equip
 									</button>
-							    </li>
-							    <li>Slot : {{ finger_slot.type }} </li>
-							    <li>Stat Affected : {{ finger_slot.stat_affected }} </li>
+							    </li>							    
 							    <li>Stats ## </li>
-							    <li ng-show="finger_slot.stats.atk > 0">## Atk : {{ finger_slot.atk }} <span ng-show="finger_slot.bonus > 0">[+{{finger_slot.bonus}}]</span></li>
-							    <li ng-show="finger_slot.stats.def > 0">## Def : {{ finger_slot.def }} <span ng-show="finger_slot.bonus > 0">[+{{finger_slot.bonus}}]</span></li>
-							    <li ng-show="finger_slot.stats.mag > 0">## Mag : {{ finger_slot.mag }} <span ng-show="finger_slot.bonus > 0">[+{{finger_slot.bonus}}]</span></li>
-							    <li ng-show="finger_slot.stats.hp > 0">## HP : {{ finger_slot.hp }} <span ng-show="finger_slot.bonus > 0">[+{{finger_slot.bonus}}]</span></li>
-							    <li ng-show="finger_slot.stats.mp > 0">## MP : {{ finger_slot.mp }} <span ng-show="finger_slot.bonus > 0">[+{{finger_slot.bonus}}]</span></li>
-							    <!-- <li>Mag : {{ finger_slot.stat_amount }} <span ng-show="finger_slot.bonus > 0">[+{{finger_slot.bonus}}]</span></li>
-							    <li>Hp : {{ finger_slot.stat_amount }} <span ng-show="finger_slot.bonus > 0">[+{{finger_slot.bonus}}]</span></li>
-							    <li>MP : {{ finger_slot.stat_amount }} <span ng-show="finger_slot.bonus > 0">[+{{finger_slot.bonus}}]</span></li> -->
+							    <li ng-show="finger_slot.atk">~ Atk : {{ finger_slot.atk }} <span ng-show="finger_slot.bonus > 0">[+{{finger_slot.bonus}}]</span></li>
+							    <li ng-show="finger_slot.def">~ Def : {{ finger_slot.def }} <span ng-show="finger_slot.bonus > 0">[+{{finger_slot.bonus}}]</span></li>
+							    <li ng-show="finger_slot.mag">~ Mag : {{ finger_slot.mag }} <span ng-show="finger_slot.bonus > 0">[+{{finger_slot.bonus}}]</span></li>
+							    <li ng-show="finger_slot.hp">~ HP : {{ finger_slot.hp }} <span ng-show="finger_slot.bonus > 0">[+{{finger_slot.bonus}}]</span></li>
+							    <li ng-show="finger_slot.mp">~ MP : {{ finger_slot.mp }} <span ng-show="finger_slot.bonus > 0">[+{{finger_slot.bonus}}]</span></li>
 							    <li>Rarity : {{ finger_slot.rarity }} </li>
 							    <li style="padding-top: 5px;">{{ finger_slot.look }} </li>
 							</ul>

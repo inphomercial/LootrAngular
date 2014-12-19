@@ -25,6 +25,10 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 
     $scope.player = $scope.world.findStartingRoom();
 
+    // Trying to not have it repeat all messages, only new ones @todo
+    /*$scope.current_room = $scope.world.getRoomByLocation($scope.player.Location.getX(), $scope.player.Location.getY());    
+    $scope.old_room = null;*/
+
     // Used just for UI graphical displays
     $scope.player_stat_mods = {
     	atk_mod_pos: null,
@@ -48,10 +52,10 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
     // If a store is present
     //$scope.store_in_room = false;
 
-    UI.log("You desend a stair way into a dark abyss....", UI.COLORS.ROOM_NORMAL, 2000);
+    UI.log("You desend a stair way into a dark abyss....", UI.COLORS.ROOM_NORMAL, 200);
     UI.logSpace();
 
-    UI.log("You light your torch.", UI.COLORS.ROOM_TREASURE, 10000);
+    UI.log("You light your torch.", UI.COLORS.ROOM_TREASURE, 2000);
     UI.logSpace();
 
 
@@ -60,6 +64,7 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
         // Keep an instance of the current room we are in
         var x = $scope.player.Location.getX();
         var y = $scope.player.Location.getY();
+
         $scope.current_room = $scope.world.getRoomByLocation(x, y);
         $scope.current_room.displayContents();
     }
@@ -155,7 +160,7 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 		console.log("Player is attacking!!");
 
 		$scope.world.tick('attack', monster);
-		$scope.updateRoom();
+		//$scope.updateRoom();
 	}
 
 	$scope.move = function( direction ) {
@@ -329,7 +334,7 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 	$interval(function() {
 		// Always tick work and update room
         $scope.world.tick();
-        $scope.updateRoom();
+       // $scope.updateRoom();
 	}, 5000);
 
 	/*$interval(function() {

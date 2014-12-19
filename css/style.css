@@ -1,3 +1,18 @@
+.log {
+	scrollbar-face-color: #367CD2;
+    scrollbar-shadow-color: #00FFCC;
+    scrollbar-highlight-color: #004033;
+    scrollbar-3dlight-color: #5C5CE6;
+    scrollbar-darkshadow-color: #5A3333;
+    scrollbar-track-color: #9D9DFF;
+    scrollbar-arrow-color: #800000;
+}
+
+/* Let's get this party started */
+.log::-webkit-scrollbar {
+    width: 12px;
+}
+
 
 .room {
 	color: #98785A;

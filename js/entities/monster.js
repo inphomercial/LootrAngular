@@ -36,6 +36,7 @@
 	Monster.prototype = new Entity;
 
 	Monster.prototype.tick = function() {
+		
 		console.log("A " + this.name + " is thinking what to do..");
 
         // Get the current mobs room
@@ -50,6 +51,17 @@
         } else {
         	var dir = this.Movement.generateRandomDirection();
         	this.Movement._moveDirection(dir);	
+        	var new_room = this.world.getRoomByLocation(this.Location.getX(), this.Location.getY());
+
+        	// if new room contains the player, announce Presense
+        	if(new_room.hasEntityType("Player")) {	        	
+        		new_room.emit("Message.send", ["A " + this.name + " enters the room."]);
+	       	} 
+
+	       	// if old room contains the player, announce Leave
+	       	if (current_room.hasEntityType("Player")) {	       		
+	       		new_room.emit("Message.send", ["A " + this.name + " leaves the room."]);
+	       	} 
         }        
 	}
 

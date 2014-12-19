@@ -16,22 +16,17 @@
 
 var body_table = [
 	{
-		name: "Immortal King's Eternal Reign",
+		// Rework these
 		desc: "Next to a pile of bodies, you discover something.",
+		use: "Does nothing..",
+
+		name: "Immortal King's Eternal Reign",		
 		equip: "You heave the armor with all your might onto your body.",
 		unequip: "You peel the armor off your body, painfully.",
-		use: "Does nothing..",
-		
-
-		//stat_amount: 7,
-		//stat_magical_amount : 5,
-
-		// New stat system test
 		atk : 2,
 		def : 2,
 		hp: 100,
 		mp: 25,
-
 		value: 500,
 		slot: Lootr.PLAYER_SLOTS.BODY,
 		type: Lootr.TREASURE_TYPES.BODY,
@@ -44,16 +39,8 @@ var body_table = [
 		equip: "You slip the cool shirt on.",
 		unequip: "You throw the shirt off.",
 		use: "Does nothing..",
-
-		// Old Stat Systaem (Deprecation in the works)
-
-		//stat_amount: 1,
-		//stat_magical_amount : 0,
-
-		// New stat system test
 		atk : 1,
 		def : 1,	
-
 		value: 10,
 		slot: Lootr.PLAYER_SLOTS.BODY,
 		type: Lootr.TREASURE_TYPES.BODY,
@@ -66,13 +53,7 @@ var body_table = [
 		equip: "You throw on the rags.",
 		unequip: "You toss the rags off.",
 		use: "Does nothing..",
-		
-		//stat_amount: 1,
-		//stat_magical_amount : 0,
-
-		// New stat system test		
 		def : 1,			
-
 		value: 10,
 		slot: Lootr.PLAYER_SLOTS.BODY,
 		type: Lootr.TREASURE_TYPES.BODY,
@@ -85,13 +66,8 @@ var body_table = [
 		equip: "You hoist the leather over your shoulders.",
 		unequip: "You throw off the leather.",
 		use: "Does nothing..",		
-		//stat_amount: 2,
-		//stat_magical_amount : 0,
-
-		// New stat system test
 		def : 1,	
 		hp: 10,
-
 		value: 25,
 		slot: Lootr.PLAYER_SLOTS.BODY,
 		type: Lootr.TREASURE_TYPES.BODY,
@@ -104,12 +80,7 @@ var body_table = [
 		equip: "You put on the mail.",
 		unequip: "You take off the mail.",
 		use: "Does nothing..",
-		//stat_amount: 4,
-		//stat_magical_amount : 0,
-
-		// New stat system test	
 		def : 2,		
-
 		value: 70,
 		slot: Lootr.PLAYER_SLOTS.BODY,
 		type: Lootr.TREASURE_TYPES.BODY,

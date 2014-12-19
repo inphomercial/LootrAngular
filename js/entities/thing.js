@@ -29,11 +29,6 @@
 		this[Lootr.PLAYER_STATS.HP]  = args[Lootr.PLAYER_STATS.HP]  || 0;
 		this[Lootr.PLAYER_STATS.MP]  = args[Lootr.PLAYER_STATS.MP]  || 0;
 
-		// Old Stat System (deprecation in the works)
-		this.stat_affected = args.stat_affected;
-		this.stat_amount = args.stat_amount;
-		this.stat_magical_amount  = args.stat_magical_amount;
-
 		this.value = args.value;
 		this.slot = args.slot || "";
 		this.type = args.type;

@@ -10,6 +10,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+
   </head>
   <body ng-controller="LootrController">
 
@@ -278,7 +279,7 @@
 			</span>
 		</div>
 		<div class="col-xs-4">
-			<div id="log"><br></div>
+			<div id="log" style="overflow:scroll; height: 600px;"></div>			
 		</div>
 
 		<div class="col-xs-2" style="padding-left: 0px;">
@@ -449,21 +450,24 @@
     <script src="js/components/consumable.js"></script>
     <script src="js/components/location.js"></script>
     <script src="js/components/movement.js"></script>
+    <script src="js/components/message.js"></script>
 
     <!-- Roll Tables -->
-    <script src="js/roll_tables/monsters_table.js"></script>
-    <script src="js/roll_tables/room_bases_table.js"></script>
-    <script src="js/roll_tables/saves_table.js"></script>
-    <script src="js/roll_tables/traps_table.js"></script>
-    <script src="js/roll_tables/consumables_table.js"></script>
-    <script src="js/roll_tables/golds_table.js"></script>
-    <script src="js/roll_tables/head_slot_table.js"></script>
-    <script src="js/roll_tables/body_slot_table.js"></script>
-    <script src="js/roll_tables/feet_slot_table.js"></script>
-    <script src="js/roll_tables/finger_slot_table.js"></script>
-    <script src="js/roll_tables/hand_slot_table.js"></script>
-    <script src="js/roll_tables/race_table.js"></script>
-    <script src="js/roll_tables/name_table.js"></script>
+    <script src="js/roll_tables/actors/monsters_table.js"></script>
+    <script src="js/roll_tables/actors/race_table.js"></script>
+    <script src="js/roll_tables/events/room_bases_table.js"></script>
+    <script src="js/roll_tables/events/saves_table.js"></script>
+    <script src="js/roll_tables/events/traps_table.js"></script>
+    <script src="js/roll_tables/items/consumables_table.js"></script>
+    <script src="js/roll_tables/items/golds_table.js"></script>
+    <script src="js/roll_tables/items/head_slot_table.js"></script>
+    <script src="js/roll_tables/items/body_slot_table.js"></script>
+    <script src="js/roll_tables/items/feet_slot_table.js"></script>
+    <script src="js/roll_tables/items/finger_slot_table.js"></script>
+    <script src="js/roll_tables/items/hand_slot_table.js"></script>
+    
+    <!-- Name Tables -->
+    <script src="js/roll_tables/names/name_table.js"></script>
 
 	<!-- Entities -->
 	<script src="js/entities/base/entity.js"></script>
@@ -475,6 +479,7 @@
 	<script>
 		window.onload = function ()
 		{
+			$(".nano").nanoScroller();
 			//var world = new World();
 			/* game_state = Lootr.GAME_STATES.RUNNING;
 			/*

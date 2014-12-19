@@ -116,6 +116,9 @@
         if( action == Lootr.DIRECTIONS.NORTH || action == Lootr.DIRECTIONS.SOUTH || action == Lootr.DIRECTIONS.WEST || action == Lootr.DIRECTIONS.EAST) {
             // Update entities Location
             this.Movement._moveDirection(action);
+
+            var current_room = this.world.getRoomByLocation(this.Location.getX(), this.Location.getY());
+            current_room.emit("Message.send", [this.name + " enters " + current_room.enter_desc]);
         }
 
         // Player is attacking

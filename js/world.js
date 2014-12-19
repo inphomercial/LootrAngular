@@ -48,7 +48,7 @@ World.prototype.generateMap = function(number_of_rooms_x, number_of_rooms_y) {
 
     // Add random entities and items to map
     // 5 monsters
-    for(var i=0; i<1; i++) {
+    for(var i=0; i<5; i++) {
         
         // check if MobBag is empty
         if(MobBag.isBagEmpty())

@@ -27,7 +27,7 @@ var UI = {
 		var element = $("<span class='" + type + "'>" + text + "</span>").hide().delay(delay).fadeIn(time);
 		$('#log').prepend(element);
 
-		UI.dimBottomLog();
+		//UI.dimBottomLog();
 	},
 
 	dimBottomLog: function() {

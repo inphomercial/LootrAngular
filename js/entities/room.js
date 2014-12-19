@@ -27,6 +27,9 @@
         }
         this.component('Location', { x: args.x, y: args.y });
 
+        // Messaging 
+        this.component('Message');
+
         // this.randomizeExits();
 	}
 
@@ -142,7 +145,7 @@
 
         for(var i=0; i<=this.entities.length; i++) {
             if(this.entities[i] instanceof Lootr.entities.Player) {
-                UI.log(this.entities[i].getDescription()); //@todo have a player.visualDesc based on health percentages for better descriptions
+                UI.log(this.entities[i].getDescription() + this.standing_desc); //@todo have a player.visualDesc based on health percentages for better descriptions
                 UI.logSpace();
             }
 

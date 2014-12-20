@@ -32,6 +32,27 @@
 			return complete_item;
 		},
 
+		generateByName: function ( name, type ) {
+
+			var table_name = type + "_table";
+			var template;
+
+			for(var i = 0; i<window[table_name].length; i++) {
+				if(window[table_name][i].id == name) {
+					template = window[table_name][i];
+				}
+			}
+
+			if(template) {
+				var item = new Lootr.entities.Thing(template);
+
+				return item;	
+			} else {
+				throw new Error("Item not found in list");
+			}		
+			
+		},
+
 		_buildLocalLootTable: function() {
 
 			// Build local array based on all loot tables

@@ -35,26 +35,40 @@ BattleEngine.prototype.fight = function() {
 				// Apply damage
 				this.foe.Health._giveDamage(remaining);
 
-				// Display hit message
-				UI.logSpace();
-				UI.log(this.attacker.getRandomAttackMessage() + " for [" + remaining + "]", UI.COLORS.FIGHT);
-				//UI.log(this.attacker.name + " hits " + this.foe.name + " for [" + remaining + "]", UI.COLORS.FIGHT);
-				UI.logSpace();
+				if(this.attacker.className == "Monster") {
+					// Display hit message
+					UI.logSpace();
+					UI.log(this.attacker.getRandomAttackMessage() + " for [" + remaining + "]", UI.COLORS.FIGHT);
+					//UI.log(this.attacker.name + " hits " + this.foe.name + " for [" + remaining + "]", UI.COLORS.FIGHT);
+					UI.logSpace();
+				} else {
+					UI.logSpace();
+					UI.log("You hit the " + this.foe.name + " for [" + remaining + "]", UI.COLORS.FIGHT);					
+					UI.logSpace();
+				}
+				
 			}
 			else
 			{
 				// Display hit but no damage message
 				UI.logSpace();
-				UI.log(this.attacker.name + "'s hit didnt even phase the " + this.foe.name, UI.COLORS.FIGHT);
+				UI.log(this.attacker.name + "'s hit didnt even phase " + this.foe.name, UI.COLORS.FIGHT);
 				UI.logSpace();
 			}
 		}
 		else
 		{
-			// Display missed message
-			UI.logSpace();
-			UI.log(this.attacker.name + " misses its attack!", UI.COLORS.FIGHT);
-			UI.logSpace();
+			if(this.attacker.className == "Monster") {
+				// Display missed message
+				UI.logSpace();
+				UI.log(this.attacker.name + " misses its attack!", UI.COLORS.FIGHT);
+				UI.logSpace();	
+			} else {
+				UI.logSpace();
+				UI.log("You miss your attack!", UI.COLORS.FIGHT);
+				UI.logSpace();	
+			}
+			
 		}
 
 		UI.logDebug("++++++++++++++++");
@@ -67,6 +81,8 @@ BattleEngine.prototype.fight = function() {
 			UI.logSpace();
 			UI.log(this.foe.death_message, UI.COLORS.FIGHT);
 			UI.logSpace();
+
+			this.foe.emit("Corpseable.create");
 
 			if(this.attacker.has('Level')) {
 				this.attacker.emit("Level.giveExp", [this.foe.exp]);	

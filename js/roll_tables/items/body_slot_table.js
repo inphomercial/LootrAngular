@@ -21,6 +21,7 @@ var body_table = [
 		desc: "Next to a pile of bodies, you discover something.",
 		use: "Does nothing..",
 
+		id: "IMMORTAL_KINGS_ETERNAL_REIGN",
 		name: "Immortal King's Eternal Reign",		
 		equip: "You heave the armor with all your might onto your body.",
 		unequip: "You peel the armor off your body, painfully.",
@@ -35,6 +36,7 @@ var body_table = [
 		color : Lootr.ITEM_RARITY_COLORS.SET
 	},
 	{
+		id: "PLAIN_SHIRT",
 		name: "Plain shirt",
 		desc: "Next to a pile of bodies, you discover something.",
 		equip: "You slip the cool shirt on.",
@@ -49,6 +51,7 @@ var body_table = [
 		color : Lootr.ITEM_RARITY_COLORS.COMMON
 	},
 	{
+		id: "CLOTH",
 		name: "Cloth",
 		desc: "An old rag lays here.",
 		equip: "You throw on the rags.",
@@ -62,6 +65,7 @@ var body_table = [
 		color : Lootr.ITEM_RARITY_COLORS.COMMON
 	},
 	{
+		id: "TANNED_LEATHER_SKIN",
 		name: "Tanned Leather skin",
 		desc: "You find a foul smelling animal skin.",
 		equip: "You hoist the leather over your shoulders.",
@@ -76,6 +80,7 @@ var body_table = [
 		color : Lootr.ITEM_RARITY_COLORS.COMMON
 	},
 	{
+		id: "BANDED_MAIL",
 		name: "Banded Mail",
 		desc: "You see a stack of material on the ground.",
 		equip: "You put on the mail.",

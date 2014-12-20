@@ -1,4 +1,9 @@
 // Event Monster
+
+// Monster Template
+// * corpseable true/false (default true)
+
+
 var event_monster = [
 	{
 		desc: "Smoke emits from the corner of the room",
@@ -48,6 +53,7 @@ var event_monster = [
 		spd: 4,
 		level: 2,
 		moveable: true,
+		corpseable: false,
 		attack_messages : [
 			"You take a hard blow",
 			"You get slamed"
@@ -66,6 +72,7 @@ var event_monster = [
 		spd: 2,
 		level: 1,
 		moveable: true,
+		corpseable: false,
 		attack_messages : [
 			"The Beast Bites you hard",
 			"You are gnawed on"

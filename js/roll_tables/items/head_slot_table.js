@@ -1,6 +1,7 @@
 // Head Slot Table
 var head_table = [
 	{
+		id: "CAP",
 		name: "Cap",
 		desc: "You find a little leather cap.",
 		equip: "You throw on the cap.",
@@ -19,6 +20,7 @@ var head_table = [
 		color : Lootr.ITEM_RARITY_COLORS.COMMON
 	},
 	{
+		id: "GREAT_HELM",
 		name: "Great Helm",
 		desc: "You find a intimidating piece of armor.",
 		equip: "Your vision disappears for a second while you fit into the helm.",

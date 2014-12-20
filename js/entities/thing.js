@@ -38,11 +38,13 @@
 		this.total_amount = args.total_amount || "";
 		this.bonus = args.bonus || "";
 
-		this.component('Consumable', { is_consumable: args.is_consumable, consume_amount: args.consume_amount, sips: args.sips } || false);
-		// Used for consumables
-		this.stat_amount = args.stat_amount || 0;
+		this.component('Consumable',
+			((args.is_consumable && args.consume_amount && args.sips) != undefined)
+				? { is_consumable: args.is_consumable, consume_amount: args.consume_amount, sips: args.sips}
+				: { is_consumable: false, consume_amount: undefined, sips: undefined} );
 
-		this.component('Equipable', { isEquipable: args.isEquipable })
+		//this.component('Consumable', { consumable: args.is_consumable, consume_amount: args.consume_amount, sips: args.sips } || false);
+		this.component('Equipable', { equipable: args.isEquipable })
 	}
 
 	Thing.prototype = new Entity;

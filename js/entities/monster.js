@@ -19,6 +19,7 @@
 
 		this.component('Location', { x: args.x, y: args.y });
 		this.component('Movement', { moveable: args.moveable });
+		this.component('Corpseable', { corpseable: args.corpseable });
 
 		this.desc = args.desc;
 		this.name = args.name;

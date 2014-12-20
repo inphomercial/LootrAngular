@@ -1,6 +1,7 @@
 // Hand Slot Table
 var hand_table = [
 	{
+		id: "SILVER_SWORD",
 		name: "Silver Sword",
 		desc: "In the darkened room, you see a chest in the corner.",
 		equip: "You take the sword into your hand.",
@@ -21,6 +22,7 @@ var hand_table = [
 		/*mod_amount: 4,*/
 	},
 	{
+		id: "SKULL_MACE",
 		name: "Skull Mace",
 		desc: "Leaning against the wall, a skull tied to a club lies.",
 		equip: "You put the powerful mace in your hands.",

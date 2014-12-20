@@ -92,7 +92,11 @@ LootrApp.controller('LootrController', function ($scope, Lootr, $interval, Stora
 
 	$scope.highlightStats = function( item, mood )
 	{		
-		if(item.Consumable.$is_consumable){
+		if(item.Consumable.isConsumable()){
+			return;
+		}
+
+		if(!item.Equipable.isEquipable()) {
 			return;
 		}
 

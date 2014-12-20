@@ -1,6 +1,6 @@
 /**
  * gives entities the ability to carry gold
- * @class Gold
+ * @class Consumable
  * @extends Component
  * @param {Entity} entity
  * @param {Object} args

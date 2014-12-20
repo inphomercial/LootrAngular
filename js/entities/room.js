@@ -46,8 +46,7 @@
     // Add entity object to entities array
 	Room.prototype.addEntity = function(entity) {
 
-        console.log("Added to room");
-        console.log(entity);
+        UI.logDebug("Added entity to room", entity);
 
         this.entities.push(entity);
 	}

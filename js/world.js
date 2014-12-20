@@ -131,6 +131,7 @@ World.prototype.findStartingRoom = function() {
 // Main game loop
 World.prototype.tick = function(action, entity) {
 
+    console.log("i'm ticking");
     var entities = this._getAllEntities();
 
     for (var i = 0; i < entities.length; i++) {

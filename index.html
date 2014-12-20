@@ -9,6 +9,7 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
   </head>
@@ -376,20 +377,17 @@
 	<div class="row">
 
 		<div class="col-xs-1"></div>
-		<div class="col-xs-5">			
+		<div class="col-xs-2">			
 			== Actions ==
-			<br>
-			<!-- <button ng&#45;hide="monster_in_room" class="button btn&#45;primary btn&#45;block" ng&#45;click="startTurn(1)">Move</button> -->
-			<!-- <button ng&#45;hide="!monster_in_room" class="button btn&#45;primary btn&#45;block" ng&#45;click="attack();">Attack!!</button> -->
-			<!-- <button ng&#45;hide="!monster_in_room" class="button btn&#45;primary btn&#45;block" ng&#45;click="flee();">Flee</button> -->
+			<br>			
 			<button ng-hide="!store_in_room" class="button btn-primary btn-block" ng-click="sell();">Sell Items</button>
-
-			<button ng-disabled="" class="button btn-primary btn-block" ng-click="move('north');">Move North</button>
-			<button ng-disabled="" class="button btn-primary btn-block" ng-click="move('west');">Move West</button>
-			<button ng-disabled="" class="button btn-primary btn-block" ng-click="move('south');">Move South</button>
-			<button ng-disabled="" class="button btn-primary btn-block" ng-click="move('east');">Move East</button>
-
-			<button ng-disabled="" class="button btn-primary btn-block" ng-click="look();">Look in room</button>
+			
+			<button style="width: 50px; margin-left: 35%;" class="button btn-primary btn-block" ng-click="move('north');"><i class="fa fa-arrow-up"></i></button>
+			<button style="width: 50px; float: left;" class="button btn-primary btn-block" ng-click="move('west');"><i class="fa fa-arrow-left"></i></button>
+			<button style="width: 50px; float: left; margin-left: 15px;" class="button btn-primary btn-block" ng-click="look();"><i class="fa fa-eye"></i></button>
+			<button style="width: 50px; float: right;" class="button btn-primary btn-block" ng-click="move('east');"><i class="fa fa-arrow-right"></i></button>
+			<button style="width: 50px; margin-left:35%" class="button btn-primary btn-block" ng-click="move('south');"><i class="fa fa-arrow-down"></i></button>
+			
             <br>
 		</div>
 	</div>
@@ -487,12 +485,23 @@
 	<script>
 		window.onload = function ()
 		{
-			$(".nano").nanoScroller();
-			//var world = new World();
-			/* game_state = Lootr.GAME_STATES.RUNNING;
-			/*
-			$("#game_state").text(game_state);
-			$("#game_version").text(Lootr.VERSION);*/
+			$(document).keydown(function(event) {
+				if(event.keyCode == 87) {
+					window.scope.move('north');
+				}
+
+				if(event.keyCode == 65) {
+					window.scope.move('west');
+				}
+								
+				if(event.keyCode == 83) {
+					window.scope.move('south');
+				}
+
+				if(event.keyCode == 68) {
+					window.scope.move('east');
+				}
+			})
 		};
 	</script>
 
